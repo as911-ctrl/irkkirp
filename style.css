@@ -1,0 +1,1176 @@
+@import url('https://googleapis.com');
+
+html { scroll-behavior: smooth; }
+body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0f19; color: #f8fafc; overflow-x: hidden; }
+
+/* ШАПКА */
+.glass-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 20px 5%; /* Сделали шапку чуть выше и весомее */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99999;
+    
+    background: rgba(11, 15, 25, 0.45) !important;
+    backdrop-filter: blur(25px) !important;
+    -webkit-backdrop-filter: blur(25px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+    
+    /* ДОБАВЛЯЕМ ПАФОСНОЕ ОТСВЕЧИВАНИЕ: мягкое терракотовое свечение сзади шапки */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 
+                0 -20px 100px rgba(225, 29, 72, 0.12) inset !important;
+}
+
+/* ЛОГОТИП: centr kirpicha */
+.logo {
+    font-size: 30px !important; /* ТУТ УВЕЛИЧИЛИ! Буквы станут массивными и пафосными */
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase;
+    margin: 0 !important;
+    line-height: 1.1 !important; /* Поджимаем межстрочный интервал для плотности */
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.1), 
+                 0 0 40px rgba(225, 29, 72, 0.2) !important;
+}
+.logo span {
+    color: #e11d48 !important; /* Насыщенный кирпичный клинкер */
+    font-weight: 300 !important; /* Контраст толщины букв */
+    margin-left: 4px;
+}
+/* ------------------------------------------------------
+   ЛОГОТИП С АНИМИРОВАННЫМ СЛОВОМ "ИРКУТСК"
+------------------------------------------------------ */
+.logo-container {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 10px !important; /* Уменьшили зазор до 10px, чтобы текст встал вплотную к зданию */
+    text-decoration: none !important;
+    position: relative !important;
+}
+
+.logo {
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase;
+    margin: 0 !important;
+}
+.logo span {
+    color: #a23131 !important;
+    font-weight: 300 !important;
+    margin-left: 4px;
+}
+
+/* Новое пафосное слово ИРКУТСК под названием */
+.logo-city {
+    font-size: 12px !important; /* ТУТ УВЕЛИЧИЛИ! */
+    font-weight: 800 !important;
+    letter-spacing: 7px !important; /* Еще сильнее раздвигаем буквы для пафоса */
+    text-transform: uppercase;
+    margin-top: 6px !important; /* Чуть отодвинули вниз от главного названия */
+    margin-left: 2px !important;
+    
+    background: linear-gradient(90deg, #ffffff, #e11d48, #ffffff);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shineCity 4s linear infinite !important;
+}
+
+/* Анимация движения перелива для города */
+@keyframes shineCity {
+    0% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+    100% { background-position: 0% center; }
+}
+/* ======================================================
+   ВЫРАВНИВАНИЕ И АНИМАЦИЯ ВАШЕГО НОВОГО ЛОГОТИПА
+====================================================== */
+
+/* Ставим иконку здания и текст в один ровный горизонтальный ряд */
+.logo-container {
+    display: flex !important;
+    flex-direction: row !important; /* Строго в линию */
+    align-items: center !important; /* Выравнивание по центру по вертикали */
+    gap: 14px !important;           /* Красивый зазор между графикой и текстом */
+    text-decoration: none !important;
+}
+/* ДОБАВЛЯЕМ РОСКОШНЫЙ ПРОСВЕТ (СВЕЧЕНИЕ) СЗАДИ ЛОГОТИПА */
+.logo-container::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 30px !important;
+    transform: translate(-50%, -50%) !important;
+    width: 80px !important;  /* Размер светового пятна */
+    height: 80px !important;
+    border-radius: 50% !important;
+    
+    /* Красивый мягкий красно-белый перелив на фоне */
+    background: radial-gradient(circle, rgba(225, 29, 72, 0.4) 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%) !important;
+    
+    filter: blur(15px) !important; /* Сильное размытие для мягкости просвета */
+    z-index: 1 !important;
+    pointer-events: none !important;
+}
+
+/* Настройки для вашей картинки здания */
+.header-logo-img {
+    width: auto !important;
+    height: 80px !important; /* Слегка скорректировали высоту для баланса */
+    object-fit: contain !important;
+    position: relative !important;
+    z-index: 2 !important; /* Вытаскиваем поверх просвета */
+    
+    /* Дополнительное контурное свечение самого здания */
+    filter: drop-shadow(0 0 8px rgba(225, 29, 72, 0.5)) !important;
+    transition: all 0.4s ease !important;
+}
+
+/* Эффект интерактива: при наведении мышки здание аккуратно пружинит вверх */
+.logo-container:hover .header-logo-img {
+    transform: translateY(-2px) scale(1.03);
+    filter: drop-shadow(0 0 15px rgba(225, 29, 72, 0.6)) !important; /* Свечение вспыхивает ярче */
+}
+
+/* Блок, который держит название "Центр Кирпича" и "Иркутск" в два ряда */
+.logo-text-block {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    position: relative !important;
+    z-index: 2 !important;
+}
+/* НАВИГАЦИЯ: Минимализм и стиль */
+.nav-menu a {
+    color: rgba(255, 255, 255, 0.7) !important; /* Сделали буквы ярче */
+    text-decoration: none !important;
+    font-weight: 600 !important;
+    font-size: 13px !important; /* Увеличили размер шрифта */
+    letter-spacing: 1px !important;
+    margin: 0 20px !important; /* Расширили расстояние между разделами */
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+.nav-menu a:hover {
+    color: #e11d48 !important; /* При наведении пункт загорается цветом кирпича */
+    text-shadow: 0 0 15px rgba(225, 29, 72, 0.6) !important;
+}
+
+
+/* ПРАВЫЙ БЛОК: Контакты и кнопка */
+.header-contacts {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+/* ТЕЛЕФОН: Теперь он горит неоновым белым и идеально читается */
+.phone-link {
+    color: #ffffff !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+    font-size: 16px !important; /* Чуть крупнее */
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+.phone-link:hover {
+    color: #e11d48 !important;
+}
+
+/* КНОПКА В ШАПКЕ*/
+.cta-btn {
+    padding: 12px 26px !important;
+    border: none !important; 
+    border-radius: 8px !important; 
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    text-decoration: none !important;
+    color: #ffffff !important;
+    
+    background: linear-gradient(135deg, #8b2626 0%, #5c2c26 100%) !important;
+    box-shadow: 0 4px 15px rgba(92, 44, 38, 0.3) !important; 
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.cta-btn:hover {
+    background: linear-gradient(135deg, #a23131 0%, #6e352d 100%) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(92, 44, 38, 0.5) !important; 
+}
+.cta-btn:active {
+    transform: translateY(0);
+}
+/* КИНО-БАННЕР */
+.hero-cinema {
+    position: relative;
+    width: 100%;
+    height: 100vh !important; 
+    min-height: 650px !important;
+    display: flex;
+    align-items: center;
+    padding: 0 8%;
+    box-sizing: border-box;
+    overflow: hidden;
+    background-color: #0b0f19 !important;
+    
+    /* 2. МАГИЯ CSS: Рисуем геометрию кирпичной кладки и швов чистыми линиями */
+    background-image: 
+        linear-gradient(90deg, rgba(248, 250, 252, 0.03) 1px, transparent 1px), /* Вертикальные швы */
+        linear-gradient(rgba(248, 250, 252, 0.03) 1px, transparent 1px),        /* Горизонтальные швы */
+        linear-gradient(135deg, rgba(139, 38, 38, 0.12) 0%, rgba(92, 44, 38, 0.15) 50%, rgba(11, 15, 25, 0.9) 100%) !important; /* Наш красно-коричневый перелив */
+    
+    /* Задаем пропорции кирпича в сетке (длина и высота) */
+    background-size: 120px 45px, 120px 45px, 100% 100% !important;
+    
+    /* Запускаем постоянное пафосное "дыхание" и перелив света по кирпичной стене */
+    animation: brickFlash 12s ease-in-out infinite alternate !important;
+}
+
+/* Скрываем старый контейнер видео раз и навсегда, чтобы не ломал верстку */
+.video-bg-container {
+    display: none !important;
+}
+
+/* АНИМАЦИЯ: Живой перелив флэш-обжига по швам и граням */
+@keyframes brickFlash {
+    0% {
+        background-position: 0px 0px, 0px 0px, 0% 50%;
+        filter: contrast(1);
+    }
+    50% {
+        /* Слегка смещаем швы для создания эффекта кирпичной перевязки (вразбежку) */
+        background-position: 60px 0px, 0px 22px, 50% 100%;
+        filter: contrast(1.1) brightness(1.1); /* Стена начинает дорого "играть" на свету */
+    }
+    100% {
+        background-position: 0px 0px, 0px 0px, 100% 50%;
+        filter: contrast(1);
+    }
+}
+
+.hero-overlay-content {
+     font-size: 16px !important;
+    line-height: 1.7 !important; /* Делаем комфортное расстояние между строками */
+    color: #e2e8f0 !important;   /* Чуть-чуть приподняли яркость букв, чтобы регионы круто читались */
+    margin-top: 20px !important;
+    margin-bottom: 45px !important; /* Удобный зазор до наших новых клинкерных кнопок */
+    max-width: 680px !important;  /* Ограничиваем ширину, чтобы строчки ложились красивым блоком */
+    text-align: left !important;
+}
+
+/* Адаптивность под мобильные телефоны */
+@media (max-width: 768px) {
+    .hero-overlay-content {
+        font-size: 14px !important;
+        line-height: 1.6 !important;
+        margin-bottom: 35px !important;
+    }
+}
+/*РЕДИЗАЙН ГЛАВНЫХ КНОПОК ПОД СТИЛЬ КИРПИЧА
+====================================================== */
+
+/* Кнопка 1: "Смотреть продукцию" (Матовый премиальный терракот) */
+.btn-gradient {
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 16px 36px !important;
+    height: 54px !important;
+    box-sizing: border-box !important;
+    border: none !important;
+    border-radius: 8px !important;
+    
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+
+    /* СЛОЖНЫЙ ГРАДИЕНТ: перелив от благородного темно-терракотового 
+       через кофейно-коричневый к антрацитово-серому угольному нагару */
+    background: linear-gradient(135deg, #8b2626 0%, #5c2c26 50%, #2e2629 100%) !important;
+    
+    /* Сдержанная глубокая тень вместо яркого неонового свечения */
+    box-shadow: 0 6px 20px rgba(92, 44, 38, 0.4) !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Эффект при наведении: перелив плавно смещается, имитируя игру света на кирпиче */
+.btn-gradient:hover {
+    transform: translateY(-3px) !important;
+    background: linear-gradient(135deg, #a23131 0%, #6e352d 50%, #403438 100%) !important;
+    box-shadow: 0 12px 25px rgba(92, 44, 38, 0.6) !important;
+}
+
+
+/* Кнопка 2: "Рассчитать объем дома" (Добавляем интерактивную подсветку) */
+.btn-outline {
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 16px 36px !important;
+    height: 54px !important;
+    box-sizing: border-box !important;
+    border-radius: 8px !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    
+    /* Убираем обычную рамку, делаем красивый мягкий переливающийся фон */
+    border: none !important;
+    background: linear-gradient(135deg, #2e2629 0%, #5c2c26 50%, #2e2629 100%) !important;
+    background-size: 200% 200% !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+    
+    /* Запускаем постоянную анимацию перелива для кнопки */
+    animation: waveButton 5s ease infinite !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-outline:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 10px 25px rgba(92, 44, 38, 0.4) !important;
+}
+
+/* Анимация волны-перелива на кнопке */
+@keyframes waveButton {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+/* ======================================================
+   УЛЬТРАСОВРЕМЕННЫЙ РЕСТАЙЛИНГ БЛОКА ПРЕИМУЩЕСТВ (BENTO)
+====================================================== */
+.bento-section {
+    padding: 40px 8% !important; /* Уменьшили отступы сверху и снизу с 100px до 40px */
+    background: #0b0f19 !important;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* ЗАГОЛОВОК: Сделали аккуратнее, чтобы не занимал много места */
+.section-title h2 {
+    font-size: 32px !important; /* Уменьшили с 42px до аккуратных 32px */
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    letter-spacing: -0.5px !important;
+    margin-top: 0 !important;
+    margin-bottom: 6px !important; /* Минимальный зазор */
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.05) !important;
+}
+
+/* ПОДЗАГОЛОВОК: Прижали ближе к карточкам */
+.section-title p {
+    font-size: 15px !important; /* Сделали чуть изящнее */
+    font-weight: 600 !important;
+    color: #94a3b8 !important;
+    margin-top: 0 !important;
+    margin-bottom: 30px !important; /* Сократили отступ до карточек в 2 раза */
+}
+
+/* СЕТКА BENTO: Сжали вертикальные зазоры */
+.brick-bento-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px 25px !important; /* Уменьшили зазор между строками до 15px */
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+}
+
+/* ТОНКИЕ КАРТОЧКИ ПЛАШЕЧНОГО ТИПА */
+.bento-card {
+    background: rgba(30, 41, 59, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 16px !important; /* Чуть уменьшили скругление под стать компактности */
+    
+    /* КРИТИЧЕСКИ ВАЖНО: сделали карточки тонкими плашками */
+    padding: 16px 24px !important; /* Уменьшили внутренние отступы карточки в 2 раза */
+    min-height: auto !important; /* Сбрасываем любую лишнюю высоту */
+    box-sizing: border-box !important;
+    
+    display: flex !important;
+    align-items: center !important; /* Элементы строго по центру по вертикали */
+    gap: 18px !important; /* Сблизили иконку и текст */
+    text-align: left !important;
+    
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.3s ease, 
+                box-shadow 0.3s ease !important;
+}
+
+/* Модификатор для широких карточек (1, 4 и 5) */
+.bento-card.bento-wide {
+    grid-column: span 2 !important;
+    width: 100% !important;
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.45), rgba(15, 23, 42, 0.75)) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3) !important;
+}
+
+.bento-card:hover {
+    transform: translateY(-3px) !important; /* Легкое изящное пружинение */
+    background: rgba(30, 41, 59, 0.55) !important;
+    border-color: rgba(225, 29, 72, 0.25) !important;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* КОМПАКТНЫЕ КРУГЛЫЕ ИКОНКИ */
+.bento-icon-circle {
+    width: 44px !important; /* Уменьшили диаметр кружка с 56px до 44px */
+    height: 44px !important;
+    background: linear-gradient(135deg, #8b2626 0%, #5c2c26 100%) !important;
+    box-shadow: 0 4px 10px rgba(92, 44, 38, 0.2) !important;
+    border-radius: 50% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 20px !important; /* Пропорционально уменьшили эмодзи внутри */
+    flex-shrink: 0 !important;
+}
+
+/* Текстовая начинка */
+.bento-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.bento-info h3 {
+    font-size: 16px !important; /* Уменьшили размер заголовка карточки для плотности */
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin-top: 0 !important;
+    margin-bottom: 4px !important; /* Минимальный зазор до описания */
+}
+
+.bento-info p {
+    font-size: 13px !important; /* Текст стал капельку компактнее */
+    line-height: 1.5 !important; /* Плотный аккуратный интервал */
+    color: #cbd5e1 !important;
+    margin: 0 !important;
+}
+
+/* АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ */
+@media (max-width: 992px) {
+    .bento-section { padding: 40px 4% !important; }
+    .brick-bento-grid { grid-template-columns: 1fr !important; gap: 15px !important; }
+    .bento-card.bento-wide { grid-column: span 1 !important; }
+    .bento-card { padding: 20px !important; }
+}
+/* ======================================================
+   ОБНОВЛЕННАЯ СЕТКА КАТАЛОГА НА 4 КАРТОЧКИ В РЯД
+====================================================== */
+
+.premium-catalog-section {
+    padding: 80px 6% !important; /* Немного расширили боковые отступы, чтобы 4 карточки встали свободно */
+    background: #0f172a !important;
+    text-align: center;
+}
+
+/* СЕТКА: Заставляет ровно 4 карточки встать на одну горизонтальную линию */
+.showcase-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important; /* ТУТ ИЗМЕНИЛИ НА 4 КОЛОНКИ */
+    gap: 20px !important; /* Сделали зазоры чуть компактнее (20px вместо 30px) */
+    max-width: 1400px !important; /* Расширили максимальный масштаб до 1400px */
+    margin: 0 auto !important;
+}
+
+/* ОБНОВЛЕННЫЙ СТИЛЬ КАРТОЧКИ ТОВАРА (Компактный премиум-дизайн) */
+.showcase-card {
+    background: rgba(30, 41, 59, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 20px !important; /* Чуть аккуратнее скругление */
+    overflow: hidden !important;
+    text-align: left !important;
+    display: flex !important;
+    flex-direction: column !important;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.4s ease, 
+                box-shadow 0.4s ease !important;
+}
+
+.showcase-card:hover {
+    transform: translateY(-6px) !important;
+    background: rgba(30, 41, 59, 0.5) !important;
+    border-color: rgba(139, 38, 38, 0.3) !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Контейнер под изображение */
+.showcase-img-box {
+    width: 100% !important;
+    height: 160px !important; /* Сделали высоту фото компактнее, чтобы сетка не вытянулась вниз */
+    background: #0b0f19 !important;
+    position: relative !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.brick-texture-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+    background: linear-gradient(135deg, rgba(139, 38, 38, 0.15) 0%, rgba(11, 15, 25, 0.6) 100%) !important;
+    z-index: 1;
+}
+
+.brick-fallback-icon {
+    font-size: 34px !important;
+    z-index: 2;
+    opacity: 0.3;
+}
+
+/* Информационный блок */
+.showcase-info {
+    padding: 22px !important; /* Сделали отступы плотнее под масштаб 4-х колонок */
+    flex-grow: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.showcase-meta {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    color: #64748b !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    display: block !important;
+    margin-bottom: 8px !important;
+}
+
+.showcase-info h3 {
+    font-size: 17px !important; /* Шрифт заголовка чуть изящнее */
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin-top: 0 !important;
+    margin-bottom: 10px !important;
+    line-height: 1.2 !important;
+}
+
+.showcase-info p {
+    font-size: 13px !important; /* Текст стал капельку компактнее, чтобы не было рваных строк */
+    line-height: 1.5 !important;
+    color: #94a3b8 !important;
+    margin: 0 !important;
+}
+
+/* ПАФОСНАЯ КНОПКА ОТКРЫТЬ ВЕСЬ КАТАЛОГ С ПЕРЕЛИВОМ */
+.catalog-action-block {
+    margin-top: 45px !important;
+}
+
+.btn-view-all {
+    display: inline-flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 16px 40px !important;
+    height: 54px !important;
+    box-sizing: border-box !important;
+    border-radius: 8px !important;
+    text-decoration: none !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1.5px !important;
+    color: #ffffff !important;
+    background: linear-gradient(135deg, #8b2626 0%, #5c2c26 50%, #2e2629 100%) !important;
+    background-size: 200% 200% !important;
+    box-shadow: 0 6px 20px rgba(92, 44, 38, 0.3) !important;
+    animation: waveButton 6s ease infinite !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-view-all:hover {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 12px 25px rgba(92, 44, 38, 0.5) !important;
+}
+
+/* АДАПТИВНОСТЬ: На планшетах бьем по 2 карточки, на смартфонах — в 1 колонку */
+@media (max-width: 1200px) {
+    .showcase-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 25px !important; }
+}
+@media (max-width: 650px) {
+    .showcase-grid { grid-template-columns: 1fr !important; }
+}
+/* ======================================================
+   РЕДИЗАЙН ОТЗЫВОВ КЛИЕНТОВ (ПРЕМИУМ СТЕНА ДОВЕРИЯ)
+====================================================== */
+.premium-testimonials-section {
+    padding: 90px 8% !important;
+    text-align: center !important; /* Включаем центрирование для всего блока */
+    
+    /* ГЛЯНЦЕВЫЙ КРАСНЫЙ ПЕРЕЛИВ НА ФОНЕ: 
+       Мягкое свечение дорогого обожженного кирпича по центру секции */
+    background: radial-gradient(circle at center, #2d1316 0%, #11090b 60%, #0b0f19 100%) !important;
+    
+    position: relative;
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Переносим текстовый блок заголовков строго по центру */
+.testimonials-header-block {
+    max-width: 800px !important; /* Немного сузили для красивого баланса по центру */
+    margin: 0 auto 55px auto !important;
+    text-align: center !important; /* Текст встаёт строго по центру */
+}
+
+.testimonials-header-block h2 {
+    font-size: 38px !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    letter-spacing: -0.5px !important;
+    margin: 0 0 12px 0 !important;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.testimonials-header-block p {
+    font-size: 16px !important;
+    color: #94a3b8 !important; /* Сделали подзаголовок чуть светлее и читабельнее */
+    font-weight: 500 !important;
+    margin: 0 !important;
+}
+/* СЕТКА: Ровно 3 колонки на ПК для идеального распределения 6 отзывов */
+.reviews-bento-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important; /* 3 колонки */
+    gap: 30px !important;
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+}
+
+/* ДИЗАЙН КАРТОЧКИ ОТЗЫВА (Glassmorphism) */
+.review-brick-card {
+    background: rgba(30, 41, 59, 0.25) !important;
+    border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    border-radius: 24px !important;
+    padding: 35px 30px !important;
+    text-align: left !important; /* Текст внутри отзыва читается слева направо */
+    
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    min-height: 260px !important;
+    box-sizing: border-box !important;
+    
+    /* Добавляем глянец на карточки за счет стеклянного блюра */
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+    
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.4s ease, 
+                box-shadow 0.4s ease !important;
+}
+
+/* Эффект при наведении на глянцевом фоне */
+.review-brick-card:hover {
+    transform: translateY(-6px) !important;
+    background: rgba(30, 41, 59, 0.45) !important;
+    border-color: rgba(225, 29, 72, 0.3) !important; /* Клинкерная грань загорается ярче */
+    box-shadow: 0 20px 45px rgba(225, 29, 72, 0.1) !important; /* Мягкий красный отблеск под карточкой */
+}
+
+/* Золотые премиальные звезды */
+.stars-gold {
+    color: #fbbf24 !important;
+    font-size: 16px !important;
+    margin-bottom: 15px !important;
+    letter-spacing: 2px !important;
+}
+
+/* Текст отзыва */
+.review-brick-text {
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    color: #94a3b8 !important; /* Мягкий читабельный цвет текста */
+    margin: 0 0 25px 0 !important;
+    flex-grow: 1 !important; /* Выталкивает автора вниз */
+}
+
+/* БЛОК АВТОРА */
+.reviewer-brick-info {
+    display: flex !important;
+    align-items: center !important;
+    gap: 15px !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.05) !important; /* Изящная разделительная линия */
+    padding-top: 15px !important;
+}
+
+/* ПАФОСНЫЕ КРУГЛЫЕ АВАТАРКИ */
+.avatar-circle {
+    width: 46px !important;
+    height: 46px !important;
+    
+    /* Наш фирменный благородный красно-коричневый градиент флэш-обжига */
+    background: linear-gradient(135deg, #8b2626 0%, #5c2c26 100%) !important;
+    box-shadow: 0 4px 12px rgba(92, 44, 38, 0.2) !important;
+    
+    border-radius: 50% !important; /* Идеальный круг */
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 20px !important;
+    flex-shrink: 0 !important;
+}
+
+.reviewer-brick-meta h4 {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    color: #ffffff !important;
+    margin: 0 !important;
+}
+
+.reviewer-brick-meta span {
+    font-size: 12px !important;
+    color: #64748b !important;
+    display: block !important;
+    margin-top: 2px !important;
+}
+
+/* АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
+@media (max-width: 992px) {
+    .reviews-bento-grid {
+        grid-template-columns: repeat(2, 1fr) !important; /* На планшетах по 2 в ряд */
+    }
+}
+@media (max-width: 650px) {
+    .reviews-bento-grid {
+        grid-template-columns: 1fr !important; /* На смартфонах в один столбик */
+        gap: 20px !important;
+    }
+    .review-brick-card {
+        padding: 25px 20px !important;
+    }
+    .testimonials-header-block h2 { font-size: 30px !important; }
+}
+
+/* ======================================================
+  ФОРМЫ ЗАПИСИ 
+====================================================== */
+
+.booking-section {
+    /* ИСПРАВЛЕНИЕ: увеличили верхний отступ со 100px до 150px, чтобы форма отлепилась от верхней линии */
+    padding: 150px 8% 110px 8% !important;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    
+    /* ЭФФЕКТ СВЕТЯЩЕГОСЯ КЛИНКЕРНОГО ЛЬДА (ИГРА СВЕТА НА ЗАДНЕМ ФОНЕ) */
+    background: radial-gradient(circle at 50% 30%, #4a1519 0%, #1c0a0c 45%, #070a12 100%) !important;
+    box-shadow: 0 -15px 50px rgba(0, 0, 0, 0.4);
+}
+/* ДОБАВЛЯЕМ СВЕТОВЫЕ ПРОСВЕТЫ НА ЗАДНИЙ ФОН ДЛЯ ЭФФЕКТА ИГРЫ ЛЬДА */
+.booking-section::before {
+    content: "";
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(ellipse at center, rgba(225, 29, 72, 0.12) 0%, transparent 70%);
+    filter: blur(50px);
+    z-index: 1;
+    pointer-events: none;
+    /* Бесконечная пульсация заднего света, имитирующая игру пламени в толще льда */
+    animation: iceGlow 8s ease-in-out infinite alternate;
+}
+
+@keyframes iceGlow {
+    0% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.9); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+.booking-section h2, 
+.booking-subtitle {
+    position: relative;
+    z-index: 5;
+}
+.booking-section h2 {
+    font-size: 34px !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    letter-spacing: -0.5px !important;
+    margin-bottom: 12px !important;
+}
+
+.booking-subtitle {
+    font-size: 16px !important;
+    color: #94a3b8 !important;
+    margin-bottom: 50px !important; /* Увеличили зазор до самой карточки */
+}
+/* ГЛАВНЫЙ БЕНТО-БОКС ФОРМЫ (Glassmorphism) */
+.premium-booking {
+    /* ЖЕСТКОЕ ИСПРАВЛЕНИЕ: принудительно двигаем саму карточку вниз от верхнего края */
+    margin: 80px auto 0 auto !important; 
+    
+    position: relative;
+    z-index: 10;
+    max-width: 450px !important;
+    background: rgba(15, 23, 42, 0.45) !important; 
+    backdrop-filter: blur(30px) !important;
+    -webkit-backdrop-filter: blur(30px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 24px !important;
+    padding: 45px 35px !important;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5) !important;
+}
+
+
+.booking-field {
+    width: 100% !important;
+    margin-bottom: 22px !important;
+    position: relative !important;
+}
+
+/* ПОЛЯ ВВОДА */
+.premium-booking input, 
+.premium-booking select {
+    width: 100% !important;
+    height: 54px !important;
+    box-sizing: border-box !important;
+    padding-left: 20px !important;
+    padding-right: 45px !important;
+    background: rgba(30, 41, 59, 0.5) !important; /* Полупрозрачный графит */
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 12px !important;
+    color: #ffffff !important;
+    outline: none !important;
+    font-size: 15px !important;
+    transition: all 0.3s ease !important;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.premium-booking input:focus, 
+.premium-booking select:focus {
+    background: rgba(15, 23, 42, 0.8) !important;
+    border-color: #e11d48 !important;
+    box-shadow: 0 0 0 4px rgba(225, 29, 72, 0.2) !important;
+}
+
+.premium-booking input::placeholder { color: #64748b !important; }
+
+/* СТРЕЛОЧКА ▼ */
+.booking-field.with-arrow::after {
+    content: "▼" !important;
+    font-size: 11px !important;
+    color: #94a3b8 !important;
+    position: absolute !important;
+    right: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    pointer-events: none !important;
+    z-index: 15;
+}
+
+/* ------------------------------------------------------
+   СУПЕР-КРУТАЯ КНОПКА С ШОКОЛАДНО-КЛИНКЕРНЫМ ПЕРЕЛИВОМ
+====================================================== */
+.booking-submit {
+    /* ПРИНУДИТЕЛЬНО возвращаем кнопке ее законные размеры и блочный режим */
+    display: block !important;
+    width: 100% !important;
+    height: 56px !important;
+    
+    border: none !important;
+    border-radius: 12px !important;
+    font-size: 15px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    color: #ffffff !important;
+    cursor: pointer !important;
+    
+    /* НАМЕРТВО ЗАПИРАЕМ БЛИКИ внутри кнопки, чтобы они не вылетали полосами на экран */
+    position: relative !important;
+    overflow: hidden !important; 
+    box-sizing: border-box !important;
+    
+    /* ЗЕРКАЛЬНЫЙ КЛИНКЕРНЫЙ ГРАДИЕНТ (Глубокий шоколадно-коричневый перелив обжига) */
+    background: linear-gradient(135deg, 
+        #2a1012 0%, 
+        #52211b 25%, 
+        #a63228 50%, 
+        #421518 75%, 
+        #1c0a0c 100%) !important;
+    background-size: 300% 300% !important;
+    
+    /* Внутренняя и внешняя пафосная ледяная подсветка */
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15) inset,
+                0 4px 0 rgba(255, 255, 255, 0.1) inset,
+                0 8px 30px rgba(166, 50, 40, 0.45) !important;
+    
+    animation: liquidWater 4s ease-in-out infinite alternate !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    margin-top: 15px !important;
+}
+
+/* ИСПРАВЛЕНИЕ БЕГУЩЕГО БЛИКА: теперь он привязан СТРОГО к кнопке */
+.booking-submit::before {
+    content: "" !important;
+    position: absolute !important;
+    top: -50% !important;
+    left: -150% !important;
+    width: 60% !important;
+    height: 200% !important;
+    
+    /* Яркий глянцевый отблеск воды */
+    background: linear-gradient(
+        90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.4) 30%, 
+        rgba(255, 255, 255, 0.7) 50%, 
+        rgba(255, 255, 255, 0.4) 70%, 
+        transparent 100%) !important;
+        
+    transform: skewX(-35deg) !important;
+    animation: mirrorGlint 3.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite !important;
+    z-index: 5 !important;
+}
+
+/* Интерактивный отклик при наведении мыши */
+.booking-submit:hover {
+    transform: translateY(-3px) scale(1.02) !important;
+    filter: brightness(1.2) contrast(1.1) !important;
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3) inset,
+                0 15px 35px rgba(166, 50, 40, 0.7) !important;
+}
+
+/* Анимации движения */
+@keyframes mirrorGlint {
+    0% { left: -150%; }
+    40% { left: 150%; }
+    100% { left: 150%; }
+}
+
+@keyframes liquidWater {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+/* КОНТАКТЫ И ФУТЕР */
+.contacts-section {
+    padding: 90px 8% !important;
+    background: #0b0f19 !important;
+    text-align: center !important;
+}
+
+.contacts-section h2 {
+    font-size: 34px !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    letter-spacing: -0.5px !important;
+    margin-top: 0 !important;
+    margin-bottom: 55px !important; /* Отступ до сетки контактов */
+}
+
+/* СЕТКА: Выстраивает 4 элемента ровными блоками по 2 в ряд */
+.premium-contacts-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 35px 60px !important; /* Увеличили горизонтальный зазор для пафоса */
+    max-width: 1000px !important; /* Сузили рамки, чтобы блоки прижались друг к другу по центру */
+    margin: 0 auto !important; /* Магия центрирования на экране */
+    justify-content: center !important;
+}
+
+.contact-brick-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 20px !important;
+    text-align: left !important;
+    
+    /* Дополнительное центрирование самих элементов внутри ячеек */
+    justify-content: flex-start !important; 
+    background: rgba(255, 255, 255, 0.01) !important; /* Легкая матовая подложка */
+    padding: 10px 15px !important;
+    border-radius: 14px !important;
+}
+
+.contact-brick-item:hover {
+    transform: translateY(-2px) !important; /* При наведении плашка изящно пружинит вверх */
+}
+
+
+/* КРУГЛЫЕ КЛИНКЕРНЫЕ ПОДЛОЖКИ ПОД ИКОНКИ */
+.brick-icon-circle {
+    width: 52px !important;
+    height: 52px !important;
+    
+    /* Тот самый благородный красно-коричневый градиент флэш-обжига */
+    background: linear-gradient(135deg, #8b2626 0%, #5c2c26 100%) !important;
+    box-shadow: 0 6px 15px rgba(92, 44, 38, 0.25) !important;
+    
+    border-radius: 50% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    font-size: 22px !important;
+    flex-shrink: 0 !important;
+}
+
+/* Текстовый блок внутри контакта */
+.contact-meta-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-meta-text h4 {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: #64748b !important; /* Мягкий серо-синий заголовок */
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    margin: 0 0 4px 0 !important;
+}
+
+.contact-meta-text span,
+.contact-link-val {
+    font-size: 18px !important; /* Сделали адрес, телефон и почту КРУПНЫМИ и читабельными */
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    text-decoration: none !important;
+    line-height: 1.4 !important;
+    transition: color 0.3s ease !important;
+}
+
+/* Ссылки телефона и почты при наведении красиво подсвечиваются */
+.contact-link-val:hover {
+    color: #e11d48 !important; /* Загораются цветом кирпичного пламени */
+}
+/* ======================================================
+   СТИЛИЗАЦИЯ РЕЖИМА РАБОТЫ И ИНТЕРАКТИВНОЙ КАРТЫ
+====================================================== */
+
+/* Стиль строчки режима работы внутри контактов */
+.work-time-badge {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #64748b !important; /* Утонченный серо-синий цвет текста */
+    margin: 6px 0 0 0 !important; /* Небольшой зазор сверху от адреса */
+    letter-spacing: 0.3px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+/* КОНТЕЙНЕР ДЛЯ КАРТЫ (Делаем его широкоформатным и пафосным) */
+.premium-map-container {
+    max-width: 1000px !important; /* Ширина идеально совпадает с нашей сеткой контактов */
+    margin: 60px auto 0 auto !important; /* Отодвинули карту вниз от контактов на 60px */
+    
+    /* Эффект глянцевого ледяного бокса вокруг карты */
+    background: rgba(30, 41, 59, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 24px !important; /* Красивые мягкие круглые углы */
+    padding: 10px !important; /* Внутренний отступ создает эффект стеклянной рамки */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4) !important;
+    overflow: hidden !important;
+    
+    transition: all 0.4s ease !important;
+}
+
+/* Настройки самого фрейма карты */
+.premium-map-container iframe {
+    width: 100% !important; /* НАМЕРТВО растягиваем по горизонтали */
+    height: 450px !important; /* Пафосная комфортная высота */
+    display: block !important;
+    border: none !important;
+    border-radius: 16px !important; /* Скругляем углы самой карте */
+    
+    /* Сохраняем наш крутой ночной фильтр, который мы настраивали */
+    filter: grayscale(0.6) brightness(0.7) contrast(1.1) !important;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+
+/* Интерактивный эффект: когда клиент наводит мышку на карту, */
+/* она плавно возвращает свои сочные цвета, чтобы удобно было искать улицы! */
+.premium-map-container:hover iframe {
+    filter: grayscale(0) brightness(1) contrast(1) !important;
+}
+
+.premium-map-container:hover {
+    border-color: rgba(225, 29, 72, 0.2) !important; /* Клинкерная грань рамки слегка подсвечивается */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5) !important;
+}
+
+/*(PREMIUM FOOTER)*/
+
+.site-footer {
+    /* Делаем фон подвала глубоким, благородным, темнее основного фона */
+    background: #060910 !important; 
+    padding: 35px 8% !important;
+    text-align: center !important;
+    position: relative !important;
+    
+    /* РОСКОШНАЯ ЛИННЯ-РАЗДЕЛИТЕЛЬ: Тонкая светящаяся грань, имитирующая стык стекла */
+    border-top: 1px solid rgba(255, 255, 255, 0.06) !important; 
+    
+    /* Легкий красно-коричневый отблеск обжига на самом низу страницы */
+    box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5),
+                0 20px 80px rgba(225, 29, 72, 0.04) inset !important;
+}
+
+/* Контейнер для выравнивания содержимого футера */
+.footer-container {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Центрируем копирайт строго по центру */
+    justify-content: center !important;
+}
+
+.site-footer p {
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    color: rgba(255, 255, 255, 0.8) !important; /* Белый пафосный цвет вместо блеклого серого */
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important; /* Все буквы заглавные под стиль бренда */
+    margin: 0 0 6px 0 !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+.site-footer span {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    color: #64748b !important; /* Мягкая благородная подпись профессии */
+    letter-spacing: 0.5px !important;
+    display: block !important;
+}
+
+/* АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ ТЕЛЕФОНОВ */
+@media (max-width: 768px) {
+    .premium-contacts-grid {
+        grid-template-columns: 1fr !important; /* В один столбик на смартфонах */
+        gap: 25px !important;
+    }
+    .contact-brick-item {
+        gap: 15px !important;
+    }
+    .contact-meta-text span, .contact-link-val {
+        font-size: 15px !important;
+    }
+}
+@media (max-width: 992px) {
+    .bento-grid { grid-template-columns: 1fr; }
+    .bento-large, .bento-medium { grid-column: span 1; }
+    .bento-flex-content { flex-direction: column; align-items: flex-start; }
+    .hero-cinema h1 { font-size: 38px; }
+}
