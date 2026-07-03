@@ -57,3 +57,44 @@ document.addEventListener("DOMContentLoaded", () => {
         brickQuantity.addEventListener('input', calculateCost);
     }
 });
+
+// ======================================================
+//   ИНТЕРБУРГСКИЙ 3D-ПАРАЛЛАКС И ХОВЕР-ЭФФЕКТЫ
+// ======================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+    const heroSection = document.querySelector('.hero-cinema');
+    const premiumHouse = document.querySelector('.premium-house-img');
+
+    // Проверяем, что элементы первого экрана существуют и мы не на телефоне
+    if (heroSection && premiumHouse && window.innerWidth > 768) {
+        
+        heroSection.addEventListener('mousemove', (e) => {
+            // Находим координаты курсора мыши на первом экране
+            const width = heroSection.offsetWidth;
+            const height = heroSection.offsetHeight;
+            const mouseX = e.clientX - (heroSection.offsetLeft + width / 2);
+            const mouseY = e.clientY - (heroSection.offsetTop + height / 2);
+
+            // 1. МИКРО-ПАРАЛЛАКС ЗАДНЕГО ФОНА (Сетка швов смещается за мышкой)
+            const bgMoveX = (mouseX / width) * 15; // Максимальный сдвиг 15px
+            const bgMoveY = (mouseY / height) * 15;
+            heroSection.style.backgroundPosition = `${bgMoveX}px ${bgMoveY}px, ${bgMoveX}px ${bgMoveY}px, center center`;
+
+            // 2. 3D-ОТКЛИК БОЛЬШОГО КИРПИЧНОГО ДОМА (Особняк плавно поворачивается лицом к курсору)
+            const houseRotateX = -(mouseY / height) * 10; // Наклон до 10 градусов
+            const houseRotateY = (mouseX / width) * 12;
+            
+            // Объединяем парение в воздухе со слежением за мышкой
+            premiumHouse.style.transform = `rotateX(${houseRotateX}deg) rotateY(${houseRotateY}deg) translateY(-6px)`;
+            premiumHouse.style.transition = "transform 0.1s ease-out";
+        });
+
+        // Когда мышка улетает с первого экрана — возвращаем дом в идеальное исходное состояние
+        heroSection.addEventListener('mouseleave', () => {
+            heroSection.style.backgroundPosition = "0px 0px, 0px 0px, center center";
+            premiumHouse.style.transform = "rotateX(0deg) rotateY(0deg) translateY(0px)";
+            premiumHouse.style.transition = "transform 0.6s ease";
+        });
+    }
+});

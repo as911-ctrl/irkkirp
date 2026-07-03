@@ -202,19 +202,32 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     padding: 0 8%;
     box-sizing: border-box;
     overflow: hidden;
-    background-color: #0b0f19 !important;
     
-    /* 2. МАГИЯ CSS: Рисуем геометрию кирпичной кладки и швов чистыми линиями */
+    /* БАЗОВЫЙ ЦВЕТ: Глубокий антрацит элитного клинкера */
+    background-color: #080b12 !important;
+    
+    /* СЛОЖНАЯ МАТЕМАТИКА 3D-ШВОВ:
+       Сочетаем светлые фаски, глубокие тени под каждым кирпичом и благородный магматический перелив */
     background-image: 
-        linear-gradient(90deg, rgba(248, 250, 252, 0.03) 1px, transparent 1px), /* Вертикальные швы */
-        linear-gradient(rgba(248, 250, 252, 0.03) 1px, transparent 1px),        /* Горизонтальные швы */
-        linear-gradient(135deg, rgba(139, 38, 38, 0.12) 0%, rgba(92, 44, 38, 0.15) 50%, rgba(11, 15, 25, 0.9) 100%) !important; /* Наш красно-коричневый перелив */
+        /* 1. Светлый блик сверху шва (создает эффект объемной выпуклости раствора) */
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        
+        /* 2. Глубокая тень снизу и справа от каждого кирпича (выталкивает кирпич вперед в 3D) */
+        linear-gradient(90deg, transparent 119px, rgba(0, 0, 0, 0.6) 120px),
+        linear-gradient(transparent 44px, rgba(0, 0, 0, 0.6) 45px),
+        
+        /* 3. Фирменный красно-коричневый перелив обжига с нагаром */
+        linear-gradient(135deg, rgba(139, 38, 38, 0.15) 0%, rgba(92, 44, 38, 0.18) 50%, rgba(8, 11, 18, 0.95) 100%) !important;
     
-    /* Задаем пропорции кирпича в сетке (длина и высота) */
-    background-size: 120px 45px, 120px 45px, 100% 100% !important;
+    /* Жестко задаем классические пропорции клинкерного кирпича в сетке */
+    background-size: 120px 45px, 120px 45px, 120px 45px, 120px 45px, 100% 100% !important;
     
-    /* Запускаем постоянное пафосное "дыхание" и перелив света по кирпичной стене */
-    animation: brickFlash 12s ease-in-out infinite alternate !important;
+    /* Запускаем наше пафосное "дыхание" фона, которое теперь завязано на 3D-смещение */
+    animation: brickFlash3D 12s ease-in-out infinite alternate !important;
+    
+    /* Добавляем плавность для нашего интерактивного параллакса за мышкой */
+    transition: background-position 0.1s ease-out !important;
 }
 
 /* Скрываем старый контейнер видео раз и навсегда, чтобы не ломал верстку */
@@ -223,19 +236,19 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
 }
 
 /* АНИМАЦИЯ: Живой перелив флэш-обжига по швам и граням */
-@keyframes brickFlash {
-    0% {
-        background-position: 0px 0px, 0px 0px, 0% 50%;
-        filter: contrast(1);
+@keyframes brickFlash3D {
+    0% { 
+        background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 0% 50%; 
+        filter: contrast(1) brightness(1); 
     }
-    50% {
-        /* Слегка смещаем швы для создания эффекта кирпичной перевязки (вразбежку) */
-        background-position: 60px 0px, 0px 22px, 50% 100%;
-        filter: contrast(1.1) brightness(1.1); /* Стена начинает дорого "играть" на свету */
+    50% { 
+        /* Имитируем кирпичную перевязку (смещение швов вразбежку наполовину кирпича — 60px и 22px) */
+        background-position: 60px 0px, 0px 22px, 60px 0px, 0px 22px, 50% 100%; 
+        filter: contrast(1.12) brightness(1.08); /* Кирпичная стена начинает дорого "играть" тенями */
     }
-    100% {
-        background-position: 0px 0px, 0px 0px, 100% 50%;
-        filter: contrast(1);
+    100% { 
+        background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 100% 50%; 
+        filter: contrast(1) brightness(1); 
     }
 }
 
@@ -1605,4 +1618,85 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
 .calc-send-btn:hover {
     transform: translateY(-2px) !important;
     box-shadow: 0 8px 25px rgba(92, 44, 38, 0.5) !important;
+}
+
+
+/* ======================================================
+   🔥 ПРЕМИУМ-АНИМАЦИИ, СВЕЧЕНИЯ И ПАРАЛЛАКС
+====================================================== */
+
+/* 1. ПЛАВНОЕ ПОЯВЛЕНИЕ ЭЛЕМЕНТОВ ПРИ ЗАГРУЗКЕ САЙТА */
+.hero-text-side {
+    opacity: 0;
+    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards !important;
+}
+
+/* Особняк проявляется чуть позже с пафосной задержкой */
+.hero-image-side {
+    opacity: 0;
+    animation: fadeInUp 1.4s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards !important;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px); /* Элементы мягко поднимаются снизу вверх */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 2. КРАСИВОЕ ЖИВОЕ СВЕЧЕНИЕ ВОКРУГ ГЛАВНЫХ КНОПОК */
+.btn-gradient, .btn-view-all, .booking-submit {
+    position: relative;
+    z-index: 1;
+}
+
+/* Создаем скрытый неоновый ободок вокруг кнопок */
+.btn-gradient::after, .btn-view-all::after {
+    content: "" !important;
+    position: absolute !important;
+    inset: -2px !important;
+    border-radius: 8px !important;
+    background: linear-gradient(135deg, #e11d48, #8b2626, #5c2c26) !important;
+    z-index: -1 !important;
+    opacity: 0;
+    filter: blur(8px) !important; /* Мягкое неоновое размытие */
+    transition: opacity 0.4s ease !important;
+}
+
+/* При наведении мышки кнопка плавно зажигается изнутри */
+.btn-gradient:hover::after, .btn-view-all:hover::after {
+    opacity: 1 !important;
+}
+
+/* 3. МИКРОАНИМАЦИИ КАРТОЧЕК БРЕНДОВ АССОРТИМЕНТА */
+.showcase-card {
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                border-color 0.4s ease, 
+                box-shadow 0.5s ease !important;
+}
+
+/* При наведении карточка дорого приподнимается, а тень имитирует 3D объем */
+.showcase-card:hover {
+    transform: translateY(-8px) scale(1.02) !important; /* Легкое увеличение */
+    border-color: rgba(225, 29, 72, 0.3) !important; /* Грани клинкера вспыхивают */
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 
+                0 0 20px rgba(185, 28, 28, 0.15) !important; /* Мягкий кирпичный отсвет под ней */
+}
+
+/* Плавный зум картинки внутри кирпичной карточки при наведении */
+.showcase-card:hover .brick-fallback-icon {
+    transform: scale(1.15);
+    opacity: 0.5;
+    transition: all 0.4s ease !important;
+}
+.brick-fallback-icon { transition: all 0.4s ease !important; }
+
+/* 4. УПРАВЛЕНИЕ НЕБОЛЬШИМ ПАРАЛЛАКСОМ ФОНА В CSS */
+.hero-cinema {
+    /* Добавляем плавность смещения фоновой сетки швов */
+    transition: background-position 0.1s ease-out !important;
 }
