@@ -1,3 +1,20 @@
+  /* БРОНЯ ОТ БОКОВОГО СКРОЛЛА И ВЫЛЕТА КОНТЕНТА */
+
+html, body {
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important; /* НАМЕРТВО срезает любые вылеты элементов вбок на телефонах */
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
+}
+
+/* Страхуем все элементы сайта, чтобы они правильно считали свою ширину */
+*, *:before, *:after {
+    box-sizing: border-box !important;
+}
+
+
 @import url('https://googleapis.com');
 
 html { scroll-behavior: smooth; }
@@ -10,20 +27,15 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     left: 0;
     width: 100%;
     box-sizing: border-box;
-    padding: 20px 5%; /* Сделали шапку чуть выше и весомее */
+    padding: 16px 6% !important; /* Идеальная высота шапки */
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 99999;
-    
-    background: rgba(11, 15, 25, 0.45) !important;
+    background: rgba(11, 15, 25, 0.5) !important;
     backdrop-filter: blur(25px) !important;
     -webkit-backdrop-filter: blur(25px) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-    
-    /* ДОБАВЛЯЕМ ПАФОСНОЕ ОТСВЕЧИВАНИЕ: мягкое терракотовое свечение сзади шапки */
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), 
-                0 -20px 100px rgba(225, 29, 72, 0.12) inset !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
 }
 
 /* ЛОГОТИП: centr kirpicha */
@@ -43,14 +55,12 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     font-weight: 300 !important; /* Контраст толщины букв */
     margin-left: 4px;
 }
-/* ------------------------------------------------------
-   ЛОГОТИП С АНИМИРОВАННЫМ СЛОВОМ "ИРКУТСК"
------------------------------------------------------- */
+/* ЛОГОТИП С АНИМИРОВАННЫМ СЛОВОМ "ИРКУТСК"*/
 .logo-container {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    gap: 10px !important; /* Уменьшили зазор до 10px, чтобы текст встал вплотную к зданию */
+    gap: 12px !important; /* Текст вплотную к картинке */
     text-decoration: none !important;
     position: relative !important;
 }
@@ -69,13 +79,13 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     margin-left: 4px;
 }
 
-/* Новое пафосное слово ИРКУТСК под названием */
+/* слово ИРКУТСК под названием */
 .logo-city {
-    font-size: 12px !important; /* ТУТ УВЕЛИЧИЛИ! */
+    font-size: 12px !important; 
     font-weight: 800 !important;
-    letter-spacing: 7px !important; /* Еще сильнее раздвигаем буквы для пафоса */
+    letter-spacing: 7px !important; 
     text-transform: uppercase;
-    margin-top: 6px !important; /* Чуть отодвинули вниз от главного названия */
+    margin-top: 6px !important; 
     margin-left: 2px !important;
     
     background: linear-gradient(90deg, #ffffff, #e11d48, #ffffff);
@@ -91,54 +101,31 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     50% { background-position: 100% center; }
     100% { background-position: 0% center; }
 }
-/* ======================================================
-   ВЫРАВНИВАНИЕ И АНИМАЦИЯ ВАШЕГО НОВОГО ЛОГОТИПА
-====================================================== */
 
-/* Ставим иконку здания и текст в один ровный горизонтальный ряд */
-.logo-container {
-    display: flex !important;
-    flex-direction: row !important; /* Строго в линию */
-    align-items: center !important; /* Выравнивание по центру по вертикали */
-    gap: 14px !important;           /* Красивый зазор между графикой и текстом */
-    text-decoration: none !important;
-}
-/* ДОБАВЛЯЕМ РОСКОШНЫЙ ПРОСВЕТ (СВЕЧЕНИЕ) СЗАДИ ЛОГОТИПА */
-.logo-container::before {
-    content: "" !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 30px !important;
-    transform: translate(-50%, -50%) !important;
-    width: 80px !important;  /* Размер светового пятна */
-    height: 80px !important;
-    border-radius: 50% !important;
-    
-    /* Красивый мягкий красно-белый перелив на фоне */
-    background: radial-gradient(circle, rgba(225, 29, 72, 0.4) 0%, rgba(255, 255, 255, 0.1) 50%, transparent 100%) !important;
-    
-    filter: blur(15px) !important; /* Сильное размытие для мягкости просвета */
-    z-index: 1 !important;
-    pointer-events: none !important;
-}
-
-/* Настройки для вашей картинки здания */
+/* Настройки logotip здания */
 .header-logo-img {
+    height: 64px !important; /* Наш крупный премиальный размер */
     width: auto !important;
-    height: 80px !important; /* Слегка скорректировали высоту для баланса */
-    object-fit: contain !important;
     position: relative !important;
-    z-index: 2 !important; /* Вытаскиваем поверх просвета */
+    z-index: 2 !important;
+    margin: 0 !important;
     
-    /* Дополнительное контурное свечение самого здания */
-    filter: drop-shadow(0 0 8px rgba(225, 29, 72, 0.5)) !important;
-    transition: all 0.4s ease !important;
+    /* МАГИЯ ИДЕАЛЬНОГО ЦЕНТРИРОВАНИЯ: */
+    /* Накладываем три слоя тени строго по контуру здания: бело-красное ядро и мягкий клинкерный ореол */
+    filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.6))
+            drop-shadow(0 0 15px rgba(225, 29, 72, 0.8))
+            drop-shadow(0 0 35px rgba(139, 38, 38, 0.4)) !important;
+            
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
+
 
 /* Эффект интерактива: при наведении мышки здание аккуратно пружинит вверх */
 .logo-container:hover .header-logo-img {
-    transform: translateY(-2px) scale(1.03);
-    filter: drop-shadow(0 0 15px rgba(225, 29, 72, 0.6)) !important; /* Свечение вспыхивает ярче */
+    transform: scale(1.03) translateY(-1px) !important;
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.8))
+            drop-shadow(0 0 25px rgba(225, 29, 72, 0.95))
+            drop-shadow(0 0 50px rgba(139, 38, 38, 0.6)) !important;
 }
 
 /* Блок, который держит название "Центр Кирпича" и "Иркутск" в два ряда */
@@ -260,13 +247,14 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
 }
 
 .hero-overlay-content {
-     font-size: 16px !important;
-    line-height: 1.7 !important; /* Делаем комфортное расстояние между строками */
-    color: #e2e8f0 !important;   /* Чуть-чуть приподняли яркость букв, чтобы регионы круто читались */
-    margin-top: 20px !important;
-    margin-bottom: 45px !important; /* Удобный зазор до наших новых клинкерных кнопок */
-    max-width: 680px !important;  /* Ограничиваем ширину, чтобы строчки ложились красивым блоком */
-    text-align: left !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 1400px !important;
+    margin: 80px auto 0 auto !important; /* Увеличили зазор от шапки */
+    gap: 40px !important;
 }
 
 /* Адаптивность под мобильные телефоны */
@@ -277,6 +265,102 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
         margin-bottom: 35px !important;
     }
 }
+
+/* ======================================================
+   ВСТРОЕННЫЙ ПРЕМИУМ-ДОМ С КЛИНКЕРНЫМ ОТСВЕЧИВАНИЕМ
+====================================================== */
+
+/* Делаем контент первого экрана гибкой сеткой из двух колонок */
+.hero-overlay-content {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
+    max-width: 1400px !important;
+    margin: 80px auto 0 auto !important; /* Увеличили зазор от шапки */
+    gap: 40px !important;
+}
+
+/* Левая текстовая часть занимает 55% ширины */
+.hero-text-side {
+    flex: 0 0 45% !important;
+    max-width: 45% !important;
+    text-align: left !important;
+    position: relative;
+    z-index: 15;
+}
+
+/* Правая часть с домом  */
+.hero-image-side {
+    flex: 0 0 60% !important; /* УВЕЛИЧИЛИ! Колонку сделали шире */
+    max-width: 60% !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    position: relative !important;
+}
+
+/* МАГИЯ СВЕЧЕНИЯ: Зажигаем пафосный красный просвет за домом */
+.hero-image-side::before {
+    content: "" !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 550px !important; /* Огромное облако свечения */
+    height: 400px !important;
+    background: radial-gradient(ellipse at center, rgba(225, 29, 72, 0.35) 0%, rgba(139, 38, 38, 0.12) 50%, transparent 70%) !important;
+    filter: blur(50px) !important;
+    z-index: 1 !important;
+}
+
+/* НАСТРОЙКИ КАРТИНКИ ДОМА С АНИМАЦИЕЙ ПАРЕНИЯ */
+.premium-house-img {
+    display: block !important;
+    width: 100% !important; /* Занимает все новые 55% пространства, становясь огромным */
+    max-width: 650px !important; /* Увеличили лимит до 650px под большой экран */
+    height: auto !important;
+    object-fit: contain !important;
+    position: relative !important;
+    z-index: 5 !important;
+    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6)) !important;
+    animation: houseFloat 6s ease-in-out infinite alternate !important;
+
+}
+/* Анимация парения дома (эффект Webflow) */
+@keyframes houseFloat {
+    0% {
+        transform: translateY(0px);
+    }
+    100% {
+        transform: translateY(-12px); /* Дом плавно приподнимается на 12 пикселей */
+    }
+}
+
+/* АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ: На мобилках дом аккуратно уйдет под текст */
+@media (max-width: 992px) {
+    .hero-overlay-content {
+        flex-direction: column !important;
+        text-align: center !important;
+        margin-top: 100px !important;
+    }
+    .hero-text-side, .hero-image-side {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+    }
+    .hero-text-side {
+        order: 1; /* Текст будет первым */
+    }
+    .hero-image-side {
+        order: 2; /* Дом встанет под кнопками */
+        margin-top: 40px;
+    }
+    .premium-house-img {
+        max-height: 250px;
+    }
+}
+
 /*РЕДИЗАЙН ГЛАВНЫХ КНОПОК ПОД СТИЛЬ КИРПИЧА
 ====================================================== */
 
@@ -1155,22 +1239,248 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     display: block !important;
 }
 
-/* АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ ТЕЛЕФОНОВ */
+/* ======================================================
+   ЖЕСТКАЯ АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ ТЕЛЕФОНОВ (ДО 768px)
+====================================================== */
 @media (max-width: 768px) {
-    .premium-contacts-grid {
-        grid-template-columns: 1fr !important; /* В один столбик на смартфонах */
-        gap: 25px !important;
+    
+    /* 1. ПОЛНАЯ ПЕРЕСТРОЙКА ШАПКИ НА ТЕЛЕФОНЕ */
+    .glass-header {
+        padding: 12px 4% !important; /* Делаем шапку более узкой */
+        flex-direction: row !important;
+        justify-content: space-between !important;
     }
-    .contact-brick-item {
-        gap: 15px !important;
+
+    /* Скрываем длинное текстовое меню на смартфонах, чтобы оно не делало кашу */
+    .nav-menu {
+        display: none !important; 
     }
-    .contact-meta-text span, .contact-link-val {
-        font-size: 15px !important;
+
+    /* Уменьшаем картинку здания в шапке, чтобы она не давила на экран */
+    .header-logo-img {
+        height: 38px !important; 
+    }
+
+    /* Делаем шрифт "ЦЕНТР КИРПИЧА" аккуратным под размер экрана */
+    .logo {
+        font-size: 18px !important;
+    }
+    
+    .logo-city {
+        font-size: 9px !important;
+        letter-spacing: 3px !important;
+    }
+     .phone-link {
+        display: none !important;
+    }
+    .cta-btn {
+        padding: 10px 18px !important; /* Делаем кнопку чуть компактнее на мобилках */
+        font-size: 11px !important;
+    }
+
+    /* 2. ПЕРЕСТРОЙКА ПЕРВОГО ЭКРАНА В ОДИН СТОЛБИК */
+    .hero-overlay-content {
+        flex-direction: column !important; /* Выстраиваем всё сверху вниз */
+        text-align: center !important;
+        margin-top: 90px !important; /* Зазор, чтобы текст не залез ПОД шапку */
+        gap: 30px !important;
+    }
+
+    /* Текст на мобильном занимает 100% ширины */
+    .hero-text-side {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        text-align: center !important; /* Центрируем заголовки для красоты */
+    }
+
+    .hero-overlay-content h1 {
+        font-size: 28px !important; /* Уменьшаем главный заголовок, чтобы он не разрывал экран */
+        line-height: 1.2 !important;
+    }
+
+    .hero-description {
+        font-size: 14px !important;
+        text-align: center !important;
+        margin-bottom: 30px !important;
+    }
+
+    /* Кнопки на мобильном встают друг под другом во всю ширину */
+    .hero-buttons {
+        flex-direction: column !important;
+        gap: 12px !important;
+        width: 100% !important;
+    }
+
+    .btn-gradient, .btn-outline {
+        width: 100% !important; /* Кнопки растягиваются на весь экран смартфона, по ним удобно кликать */
+        box-sizing: border-box !important;
+        height: 50px !important;
+        padding: 0 !important;
+    }
+
+    /* 3. ОПРЕДЕЛЯЕМ ПРАВИЛЬНОЕ МЕСТО ДЛЯ ДОМА */
+    .hero-image-side {
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        margin-top: 10px !important;
+    }
+
+    /* Сжимаем красную подсветку сзади дома под мобильный масштаб */
+    .hero-image-side::before {
+        width: 280px !important;
+        height: 200px !important;
+    }
+
+    /* Дом аккуратно встает внизу под кнопками, не ломая верстку */
+    .premium-house-img {
+        max-width: 100% !important;
+        width: 100% !important;
+        height: auto !important;
     }
 }
-@media (max-width: 992px) {
-    .bento-grid { grid-template-columns: 1fr; }
-    .bento-large, .bento-medium { grid-column: span 1; }
-    .bento-flex-content { flex-direction: column; align-items: flex-start; }
-    .hero-cinema h1 { font-size: 38px; }
+/* ======================================================
+   СТИЛИ ВСПЛЫВАЮЩЕГО МОДАНЕЛЬНОГО КАЛЬКУЛЯТОРА
+====================================================== */
+
+/* Фоновая подложка на весь экран (затемнение и размытие) */
+.calculator-modal {
+    position: fixed !important;
+    inset: 0 !important;
+    background: rgba(11, 15, 25, 0.7) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    z-index: 999999 !important; /* Поверх абсолютно всего на сайте */
+    
+    /* Изначально скрываем окно */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease !important;
+}
+
+/* Класс, который будет добавляться через JS для плавного появления */
+.calculator-modal.active {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+/* Главный бокс калькулятора (Ice Glass) */
+.calc-box-content {
+    background: rgba(15, 23, 42, 0.85) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 24px !important;
+    width: 100% !important;
+    max-width: 460px !important;
+    padding: 40px 35px !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8) !important;
+    transform: scale(0.9);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.calculator-modal.active .calc-box-content {
+    transform: scale(1) !important;
+}
+
+/* Кнопка закрытия крестик */
+.close-calc-btn {
+    position: absolute !important;
+    top: 20px !important;
+    right: 20px !important;
+    background: transparent !important;
+    border: none !important;
+    color: #64748b !important;
+    font-size: 28px !important;
+    cursor: pointer !important;
+    transition: color 0.2s ease !important;
+}
+.close-calc-btn:hover { color: #ffffff !important; }
+
+.calc-box-content h3 {
+    font-size: 24px !important;
+    font-weight: 800 !important;
+    color: #ffffff !important;
+    margin: 0 0 8px 0 !important;
+}
+.calc-subtitle {
+    font-size: 14px !important;
+    color: #64748b !important;
+    margin: 0 0 30px 0 !important;
+    line-height: 1.4 !important;
+}
+
+.calc-field {
+    margin-bottom: 20px !important;
+    text-align: left !important;
+}
+.calc-field label {
+    display: block !important;
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    color: #94a3b8 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    margin-bottom: 8px !important;
+}
+.calc-field input, .calc-field select {
+    width: 100% !important;
+    height: 52px !important;
+    box-sizing: border-box !important;
+    padding: 0 15px !important;
+    background: #1e293b !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-radius: 12px !important;
+    color: #ffffff !important;
+    outline: none !important;
+    font-size: 15px !important;
+}
+.calc-field input:focus, .calc-field select:focus {
+    border-color: #e11d48 !important;
+}
+
+/* БЛОК ИТОГОВОЙ СУММЫ */
+.calc-total-block {
+    background: rgba(11, 15, 25, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    border-radius: 16px !important;
+    padding: 20px !important;
+    margin: 25px 0 !important;
+    text-align: center !important;
+}
+.calc-total-block span {
+    font-size: 13px !important;
+    color: #64748b !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+}
+.total-sum-val {
+    font-size: 32px !important;
+    font-weight: 800 !important;
+    color: #e11d48 !important; /* Сумма горит ярким клинкерным огнем */
+    margin-top: 5px !important;
+    text-shadow: 0 0 20px rgba(225, 29, 72, 0.2) !important;
+}
+
+/* КНОПКА ОТПРАВКИ В КАЛЬКУЛЯТОРЕ */
+.calc-send-btn {
+    width: 100% !important;
+    height: 54px !important;
+    border: none !important;
+    border-radius: 12px !important;
+    font-size: 14px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    color: #ffffff !important;
+    background: linear-gradient(135deg, #8b2626 0%, #5c2c26 100%) !important;
+    box-shadow: 0 4px 15px rgba(92, 44, 38, 0.3) !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+}
+.calc-send-btn:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 25px rgba(92, 44, 38, 0.5) !important;
 }
