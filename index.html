@@ -33,24 +33,32 @@
         <a href="#booking" class="cta-btn">Заказать расчет</a>
     </div>
 </header>
-    <section class="hero-cinema">
-    <div class="video-bg-container">
-        <!-- Ссылка на качественное зацикленное видео. Оно проигрывается автоматически и без звука -->
-        <video autoplay loop muted playsinline poster="img/brick-fallback.jpg">
-            <source src="https://mixkit.co" type="video/mp4">
-        </video>
-    </div>
+    <!-- ГЛАВНЫЙ ЭКРАН С ДОМОМ И НЕОНОВОЙ ПОДСВЕТКОЙ -->
+<section class="hero-cinema">
     <div class="hero-overlay-content">
-        <h1>Архитектурный кирпич для исключительных проектов</h1>
-        <p>Официальный дилер ведущих заводов России и Европы в Иркутской области, 
-        Республике Бурятия и Забайкальском крае. Поставки клинкера, ригеля 
-        и баварской кладки напрямую с производства.</p>
-        <div class="hero-buttons">
-            <a href="#catalog" class="btn-gradient">Смотреть продукцию</a>
-            <a href="#booking" class="btn-outline">Рассчитать объем дома</a>
+        
+        <!-- Левая колонка с текстом и кнопками -->
+        <div class="hero-text-side">
+            <h1>Профессиональный кирпич для любых архитектурных задач</h1>
+            <p class="hero-description">
+               Официальный дилер ведущих заводов в Иркутской области, Бурятии и Забайкалье. 
+               Поставки сертифицированного кирпича для высотных домов, загородных резиденций, 
+               заборов, гаражей, бань и специализированного печного клинкера напрямую с производства.
+            </p>
+            <div class="hero-buttons">
+               <a href="#catalog" class="btn-gradient">Смотреть продукцию</a>
+               <a href="#" class="btn-outline" id="open-calc-trigger">Рассчитать расход и смету</a>
+            </div>
         </div>
+
+        <!-- ПРАВАЯ КОЛОНКА: Наш пафосный PNG дом с подсветкой -->
+        <div class="hero-image-side">
+            <img src="img/hero-house.png" alt="Премиальный кирпичный дом" class="premium-house-img">
+        </div>
+
     </div>
 </section>
+
 
     <!-- 2. ИННОВАЦИОННАЯ СЕТКА BENTO (О компании и складах) -->
     <section class="bento-section" id="advantages">
@@ -355,5 +363,44 @@
         <span>Премиальные фасады и клинкер</span>
     </div>
 </footer>
+<!-- ИНТАКТИВНОЕ ОКНО СМАРТ-КАЛЬКУЛЯТОРА -->
+<div class="calculator-modal" id="calcModal">
+    <div class="calc-box-content">
+        <!-- Кнопка закрытия окна -->
+        <button class="close-calc-btn" id="closeCalc">&times;</button>
+        
+        <h3>Расчет стоимости материала</h3>
+        <p class="calc-subtitle">Выберите наименование кирпича и укажите необходимый объем</p>
+        
+        <div class="calc-form">
+            <!-- 1. Выбор наименования (с заложенными ценами) -->
+            <div class="calc-field">
+                <label>Выберите кирпич:</label>
+                <select id="brickSelect">
+                    <option value="0" disabled selected>-- Выберите вариант --</option>
+                    <option value="85">Recke Brickerei Модформат (85 ₽/шт)</option>
+                    <option value="38">Старооскольский кирпич (38 ₽/шт)</option>
+                    <option value="42">Железногорский Ригель 500 (42 ₽/шт)</option>
+                    <option value="95">Элитный клинкер Roben (95 ₽/шт)</option>
+                </select>
+            </div>
+            
+            <!-- 2. Ввод количества -->
+            <div class="calc-field">
+                <label>Количество (в штуках):</label>
+                <input type="number" id="brickQuantity" placeholder="Например: 5000" min="1">
+            </div>
+            
+            <!-- 3. КРУПНЫЙ ПАФОСНЫЙ ВЫВОД СУММЫ -->
+            <div class="calc-total-block">
+                <span>Предварительная стоимость:</span>
+                <div class="total-sum-val" id="totalSum">0 ₽</div>
+            </div>
+            
+            <button type="button" class="calc-send-btn">Зафиксировать цену и смету</button>
+        </div>
+    </div>
+</div>
+ <script src="script.js"></script>
 </body>
 </html>
