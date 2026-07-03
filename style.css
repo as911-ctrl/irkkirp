@@ -1441,6 +1441,26 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
         margin-top: 2px !important;
         display: block !important;
     }
+    /* Делаем свечение сзади дома мягким и кирпично-красным */
+    .hero-image-side::before {
+        width: 320px !important; /* Оптимальный мобильный размер */
+        height: 250px !important;
+        
+        /* ПОЛНОСТЬЮ убрали белый центр: теперь это мягкий, дорогой, 
+           рассеянный терракотово-красный градиент печи обжига */
+        background: radial-gradient(circle, 
+            rgba(185, 28, 28, 0.45) 0%,     /* Насыщенный кирпично-красный в центре */
+            rgba(127, 29, 29, 0.15) 50%,    /* Теплый бордовый ореол */
+            transparent 80%) !important;
+            
+        filter: blur(40px) !important; /* Сильное размытие для идеальной мягкости */
+    }
+
+    /* Корректируем контурную тень самого особняка на телефонах */
+    .premium-house-img {
+        filter: drop-shadow(0 0 12px rgba(185, 28, 28, 0.35)) 
+                drop-shadow(0 20px 40px rgba(0, 0, 0, 0.8)) !important;
+    }
 }
 /*СТИЛИ ВСПЛЫВАЮЩЕГО МОДАНЕЛЬНОГО КАЛЬКУЛЯТОРА*/
 
