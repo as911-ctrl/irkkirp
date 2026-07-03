@@ -1,22 +1,15 @@
   /* БРОНЯ ОТ БОКОВОГО СКРОЛЛА И ВЫЛЕТА КОНТЕНТА */
-
 html, body {
     width: 100% !important;
     max-width: 100% !important;
-    overflow-x: hidden !important; /* НАМЕРТВО срезает любые вылеты элементов вбок на телефонах */
+    overflow-x: hidden !important; 
     margin: 0 !important;
     padding: 0 !important;
     box-sizing: border-box !important;
 }
-
-/* Страхуем все элементы сайта, чтобы они правильно считали свою ширину */
 *, *:before, *:after {
     box-sizing: border-box !important;
 }
-
-
-@import url('https://googleapis.com');
-
 html { scroll-behavior: smooth; }
 body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0f19; color: #f8fafc; overflow-x: hidden; }
 
@@ -198,7 +191,7 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
 .cta-btn:active {
     transform: translateY(0);
 }
-/* КИНО-БАННЕР */
+/* инженерный фон */
 .hero-cinema {
     position: relative;
     width: 100%;
@@ -257,20 +250,8 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     gap: 40px !important;
 }
 
-/* Адаптивность под мобильные телефоны */
-@media (max-width: 768px) {
-    .hero-overlay-content {
-        font-size: 14px !important;
-        line-height: 1.6 !important;
-        margin-bottom: 35px !important;
-    }
-}
+/*ВСТРОЕННЫЙ ПРЕМИУМ-ДОМ С КЛИНКЕРНЫМ ОТСВЕЧИВАНИЕМ */
 
-/* ======================================================
-   ВСТРОЕННЫЙ ПРЕМИУМ-ДОМ С КЛИНКЕРНЫМ ОТСВЕЧИВАНИЕМ
-====================================================== */
-
-/* Делаем контент первого экрана гибкой сеткой из двух колонок */
 .hero-overlay-content {
     display: flex !important;
     flex-direction: row !important;
@@ -308,26 +289,37 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     top: 50% !important;
     left: 50% !important;
     transform: translate(-50%, -50%) !important;
-    width: 550px !important; /* Огромное облако свечения */
-    height: 400px !important;
-    background: radial-gradient(ellipse at center, rgba(225, 29, 72, 0.35) 0%, rgba(139, 38, 38, 0.12) 50%, transparent 70%) !important;
-    filter: blur(50px) !important;
+    width: 700px !important; 
+    height: 550px !important; 
+    
+    /* ИСПРАВЛЕНО: Заменили кислотный неон на глубокий терракотово-магматический перелив печи обжига */
+    background: radial-gradient(circle, 
+        rgba(255, 255, 255, 0.7) 0%,     /* Белый центр прожектора оставляем для блеска */
+        rgba(185, 28, 28, 0.55) 25%,     /* Глубокий, насыщенный кирпично-красный цвет */
+        rgba(127, 29, 29, 0.25) 55%,     /* Теплый темно-бордовый ореол затухания */
+        transparent 75%) !important;
+        
+    filter: blur(45px) !important; 
     z-index: 1 !important;
+    pointer-events: none !important;
 }
-
 /* НАСТРОЙКИ КАРТИНКИ ДОМА С АНИМАЦИЕЙ ПАРЕНИЯ */
 .premium-house-img {
     display: block !important;
-    width: 100% !important; /* Занимает все новые 55% пространства, становясь огромным */
-    max-width: 650px !important; /* Увеличили лимит до 650px под большой экран */
+    width: 100% !important;
+    max-width: 650px !important;
     height: auto !important;
     object-fit: contain !important;
     position: relative !important;
     z-index: 5 !important;
-    filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.6)) !important;
+    
+    /* ИСПРАВЛЕНО: Тень вокруг дома теперь тоже горит благородным терракотовым огнем */
+    filter: drop-shadow(0 0 20px rgba(185, 28, 28, 0.45)) 
+            drop-shadow(0 30px 60px rgba(0, 0, 0, 0.85)) !important;
+            
     animation: houseFloat 6s ease-in-out infinite alternate !important;
-
 }
+
 /* Анимация парения дома (эффект Webflow) */
 @keyframes houseFloat {
     0% {
@@ -338,33 +330,9 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     }
 }
 
-/* АДАПТИВНОСТЬ ДЛЯ СМАРТФОНОВ: На мобилках дом аккуратно уйдет под текст */
-@media (max-width: 992px) {
-    .hero-overlay-content {
-        flex-direction: column !important;
-        text-align: center !important;
-        margin-top: 100px !important;
-    }
-    .hero-text-side, .hero-image-side {
-        flex: 0 0 100% !important;
-        max-width: 100% !important;
-    }
-    .hero-text-side {
-        order: 1; /* Текст будет первым */
-    }
-    .hero-image-side {
-        order: 2; /* Дом встанет под кнопками */
-        margin-top: 40px;
-    }
-    .premium-house-img {
-        max-height: 250px;
-    }
-}
+/*РЕДИЗАЙН ГЛАВНЫХ КНОПОК ПОД СТИЛЬ КИРПИЧА */
 
-/*РЕДИЗАЙН ГЛАВНЫХ КНОПОК ПОД СТИЛЬ КИРПИЧА
-====================================================== */
-
-/* Кнопка 1: "Смотреть продукцию" (Матовый премиальный терракот) */
+/* Кнопка 1: "Смотреть продукцию" */
 .btn-gradient {
     display: inline-flex !important;
     justify-content: center !important;
@@ -399,8 +367,7 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     box-shadow: 0 12px 25px rgba(92, 44, 38, 0.6) !important;
 }
 
-
-/* Кнопка 2: "Рассчитать объем дома" (Добавляем интерактивную подсветку) */
+/* Кнопка 2: "Рассчитать объем дома"*/
 .btn-outline {
     display: inline-flex !important;
     justify-content: center !important;
@@ -439,9 +406,7 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
-/* ======================================================
-   УЛЬТРАСОВРЕМЕННЫЙ РЕСТАЙЛИНГ БЛОКА ПРЕИМУЩЕСТВ (BENTO)
-====================================================== */
+/*УЛЬТРАСОВРЕМЕННЫЙ РЕСТАЙЛИНГ БЛОКА ПРЕИМУЩЕСТВ (BENTO)*/
 .bento-section {
     padding: 40px 8% !important; /* Уменьшили отступы сверху и снизу с 100px до 40px */
     background: #0b0f19 !important;
@@ -549,16 +514,7 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     margin: 0 !important;
 }
 
-/* АДАПТИВНОСТЬ ДЛЯ ТЕЛЕФОНОВ */
-@media (max-width: 992px) {
-    .bento-section { padding: 40px 4% !important; }
-    .brick-bento-grid { grid-template-columns: 1fr !important; gap: 15px !important; }
-    .bento-card.bento-wide { grid-column: span 1 !important; }
-    .bento-card { padding: 20px !important; }
-}
-/* ======================================================
-   ОБНОВЛЕННАЯ СЕТКА КАТАЛОГА НА 4 КАРТОЧКИ В РЯД
-====================================================== */
+/* ОБНОВЛЕННАЯ СЕТКА КАТАЛОГА НА 4 КАРТОЧКИ В РЯД */
 
 .premium-catalog-section {
     padding: 80px 6% !important; /* Немного расширили боковые отступы, чтобы 4 карточки встали свободно */
@@ -654,7 +610,7 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     margin: 0 !important;
 }
 
-/* ПАФОСНАЯ КНОПКА ОТКРЫТЬ ВЕСЬ КАТАЛОГ С ПЕРЕЛИВОМ */
+/*КНОПКА ОТКРЫТЬ ВЕСЬ КАТАЛОГ С ПЕРЕЛИВОМ */
 .catalog-action-block {
     margin-top: 45px !important;
 }
@@ -685,16 +641,7 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     box-shadow: 0 12px 25px rgba(92, 44, 38, 0.5) !important;
 }
 
-/* АДАПТИВНОСТЬ: На планшетах бьем по 2 карточки, на смартфонах — в 1 колонку */
-@media (max-width: 1200px) {
-    .showcase-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 25px !important; }
-}
-@media (max-width: 650px) {
-    .showcase-grid { grid-template-columns: 1fr !important; }
-}
-/* ======================================================
-   РЕДИЗАЙН ОТЗЫВОВ КЛИЕНТОВ (ПРЕМИУМ СТЕНА ДОВЕРИЯ)
-====================================================== */
+/*РЕДИЗАЙН ОТЗЫВОВ КЛИЕНТОВ*/
 .premium-testimonials-section {
     padding: 90px 8% !important;
     text-align: center !important; /* Включаем центрирование для всего блока */
@@ -826,26 +773,7 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     margin-top: 2px !important;
 }
 
-/* АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ УСТРОЙСТВ */
-@media (max-width: 992px) {
-    .reviews-bento-grid {
-        grid-template-columns: repeat(2, 1fr) !important; /* На планшетах по 2 в ряд */
-    }
-}
-@media (max-width: 650px) {
-    .reviews-bento-grid {
-        grid-template-columns: 1fr !important; /* На смартфонах в один столбик */
-        gap: 20px !important;
-    }
-    .review-brick-card {
-        padding: 25px 20px !important;
-    }
-    .testimonials-header-block h2 { font-size: 30px !important; }
-}
-
-/* ======================================================
-  ФОРМЫ ЗАПИСИ 
-====================================================== */
+/*ФОРМЫ ЗАПИСИ */
 
 .booking-section {
     /* ИСПРАВЛЕНИЕ: увеличили верхний отступ со 100px до 150px, чтобы форма отлепилась от верхней линии */
@@ -963,11 +891,8 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     z-index: 15;
 }
 
-/* ------------------------------------------------------
-   СУПЕР-КРУТАЯ КНОПКА С ШОКОЛАДНО-КЛИНКЕРНЫМ ПЕРЕЛИВОМ
-====================================================== */
+/*КНОПКА С ШОКОЛАДНО-КЛИНКЕРНЫМ ПЕРЕЛИВОМ*/
 .booking-submit {
-    /* ПРИНУДИТЕЛЬНО возвращаем кнопке ее законные размеры и блочный режим */
     display: block !important;
     width: 100% !important;
     height: 56px !important;
@@ -1137,9 +1062,7 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
 .contact-link-val:hover {
     color: #e11d48 !important; /* Загораются цветом кирпичного пламени */
 }
-/* ======================================================
-   СТИЛИЗАЦИЯ РЕЖИМА РАБОТЫ И ИНТЕРАКТИВНОЙ КАРТЫ
-====================================================== */
+/*СТИЛИЗАЦИЯ РЕЖИМА РАБОТЫ И ИНТЕРАКТИВНОЙ КАРТЫ */
 
 /* Стиль строчки режима работы внутри контактов */
 .work-time-badge {
@@ -1239,108 +1162,287 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     display: block !important;
 }
 
-/* ======================================================
-   ЖЕСТКАЯ АДАПТИВНОСТЬ ДЛЯ МОБИЛЬНЫХ ТЕЛЕФОНОВ (ДО 768px)
-====================================================== */
+/*ФИНАЛЬНЫЙ ОДНОСТРОЧНЫЙ МОБИЛЬНЫЙ МАКЕТ ШАПКИ*/
 @media (max-width: 768px) {
     
-    /* 1. ПОЛНАЯ ПЕРЕСТРОЙКА ШАПКИ НА ТЕЛЕФОНЕ */
+    /* ВОЗВРАЩАЕМ УЗКУЮ ШАПКУ В ОДИН РЯД */
     .glass-header {
-        padding: 12px 4% !important; /* Делаем шапку более узкой */
-        flex-direction: row !important;
-        justify-content: space-between !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 10px 4% !important; /* Очень тонкая и изящная шапка */
+        
+        display: flex !important;
+        flex-direction: row !important; /* СТРОГО в один горизонтальный ряд */
+        justify-content: space-between !important; /* Логотип строго слева, кнопка строго справа */
+        align-items: center !important;
+        gap: 10px !important;
+        background: rgba(11, 15, 25, 0.75) !important;
+        backdrop-filter: blur(25px) !important;
     }
 
-    /* Скрываем длинное текстовое меню на смартфонах, чтобы оно не делало кашу */
-    .nav-menu {
+    /* Намертво прячем ненужные элементы */
+    .nav-menu, .phone-link, header nav, .glass-header nav {
         display: none !important; 
     }
 
-    /* Уменьшаем картинку здания в шапке, чтобы она не давила на экран */
-    .header-logo-img {
-        height: 38px !important; 
+    /* Сближаем иконку и название */
+    .logo-container {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        gap: 8px !important; /* Прижали текст вплотную к иконке */
+        width: auto !important; /* Убираем растяжение */
     }
 
-    /* Делаем шрифт "ЦЕНТР КИРПИЧА" аккуратным под размер экрана */
+    /* Маленькая аккуратная иконка здания */
+    .header-logo-img {
+        height: 34px !important; 
+        width: auto !important;
+    }
+
+    /* Текст "ЦЕНТР КИРПИЧА" на телефонах */
     .logo {
-        font-size: 18px !important;
+        font-size: 15px !important; /* Идеальный размер, чтобы не толкать кнопку */
+        font-weight: 800 !important;
+        letter-spacing: 0.5px !important;
+        white-space: nowrap !important;
     }
     
     .logo-city {
-        font-size: 9px !important;
-        letter-spacing: 3px !important;
+        font-size: 8px !important;
+        letter-spacing: 1.5px !important;
+        margin-top: 1px !important;
     }
-     .phone-link {
+
+    /* СКРЫВАЕМ ДЛИННЫЙ ТЕКСТ НА КНОПКЕ ДЛЯ МОБИЛЬНЫХ */
+    .cta-btn .desktop-text {
         display: none !important;
     }
-    .cta-btn {
-        padding: 10px 18px !important; /* Делаем кнопку чуть компактнее на мобилках */
+
+    /* МАГИЯ МАРКЕТИНГА: превращаем кнопку в компактную пафосную плашку "РАСЧЕТ" */
+    .cta-btn::before {
+        content: "РАСЧЕТ" !important; /* Новое короткое слово, которое влезет везде */
         font-size: 11px !important;
+        font-weight: 700 !important;
+        letter-spacing: 1px !important;
+        color: #ffffff !important;
     }
 
-    /* 2. ПЕРЕСТРОЙКА ПЕРВОГО ЭКРАНА В ОДИН СТОЛБИК */
+    /* ИЗЯЩНАЯ КОМПАКТНАЯ КНОПКА СПРАВА */
+    .cta-btn {
+        display: inline-flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        
+        width: auto !important; /* Больше не растягивается */
+        height: 36px !important; /* Тонкая пафосная кнопка */
+        padding: 0 16px !important; /* Аккуратные боковые отступы */
+        margin: 0 !important;
+        flex-shrink: 0 !important; /* Защита от сдавливания */
+        border-radius: 6px !important;
+    }
+
+    /* КОРРЕКЦИЯ ПЕРВОГО ЭКРАНА ПОД ТОНКУЮ ШАПКУ */
     .hero-overlay-content {
-        flex-direction: column !important; /* Выстраиваем всё сверху вниз */
+        flex-direction: column !important;
         text-align: center !important;
-        margin-top: 90px !important; /* Зазор, чтобы текст не залез ПОД шапку */
-        gap: 30px !important;
+        margin-top: 100px !important; /* Вернули аккуратный зазор */
+        gap: 25px !important;
     }
+    .hero-text-side { flex: 0 0 100% !important; max-width: 100% !important; text-align: center !important; }
+    .hero-overlay-content h1 { font-size: 26px !important; line-height: 1.2 !important; }
+    .hero-description { font-size: 13px !important; text-align: center !important; margin-bottom: 25px !important; }
+    .hero-buttons { flex-direction: column !important; gap: 10px !important; width: 100% !important; }
+    .btn-gradient, .btn-outline { width: 100% !important; box-sizing: border-box !important; height: 48px !important; padding: 0 !important; }
+    .hero-image-side { flex: 0 0 100% !important; max-width: 100% !important; margin-top: 5px !important; }
+    .premium-house-img { max-width: 90% !important; width: 90% !important; height: auto !important; }
 
-    /* Текст на мобильном занимает 100% ширины */
-    .hero-text-side {
-        flex: 0 0 100% !important;
+    /* КОНТАКТЫ В ОДИН СТОЛБИК */
+    .premium-contacts-grid { grid-template-columns: 1fr !important; gap: 14px !important; padding: 0 !important; width: 100% !important; }
+    .contact-brick-item { width: 100% !important; box-sizing: border-box !important; padding: 16px 20px !important; background: rgba(30, 41, 59, 0.2) !important; border: 1px solid rgba(255, 255, 255, 0.04) !important; border-radius: 14px !important; display: flex !important; flex-direction: row !important; align-items: center !important; gap: 15px !important; }
+    .brick-icon-circle { width: 44px !important; height: 44px !important; font-size: 18px !important; flex-shrink: 0 !important; }
+    .contact-meta-text { text-align: left !important; }
+    .contact-meta-text h4 { font-size: 12px !important; margin-bottom: 2px !important; }
+    .contact-meta-text span, .contact-link-val { font-size: 14px !important; line-height: 1.4 !important; white-space: normal !important; }
+
+    /* 1. НАМЕРТВО переключаем сетку преимуществ в один ровный столбик */
+    .brick-bento-grid {
+        display: flex !important;
+        flex-direction: column !important; /* Все карточки встают друг под друга */
+        gap: 16px !important; /* Удобный и аккуратный мобильный зазор */
+        width: 100% !important;
         max-width: 100% !important;
-        text-align: center !important; /* Центрируем заголовки для красоты */
+        padding: 0 10px !important; /* Легкие отступы по краям экрана телефона */
     }
 
-    .hero-overlay-content h1 {
-        font-size: 28px !important; /* Уменьшаем главный заголовок, чтобы он не разрывал экран */
+    /* 2. ДЕЛАЕМ ВСЕ КАРТОЧКИ ОДИНАКОВО ШИРОКИМИ ПЛАШКАМИ */
+    .bento-card, 
+    .bento-card.bento-wide {
+        grid-column: span 1 !important; /* Сбрасываем старую сетку ПК версии */
+        width: 100% !important;
+        box-sizing: border-box !important;
+        
+        /* Выстраиваем элементы внутри карточки горизонтально: иконка слева, текст справа */
+        display: flex !important;
+        flex-direction: row !important; 
+        align-items: center !important; /* Выравнивание строго по центру по вертикали */
+        gap: 16px !important; /* Зазор между круглой иконкой и текстом */
+        
+        padding: 20px 18px !important; /* Оптимальные мобильные отступы внутри */
+        border-radius: 16px !important;
+    }
+
+    /* 3. ЗАЩИЩАЕМ КРУГЛЫЕ ИКОНКИ ОТ СДАВЛИВАНИЯ */
+    .bento-icon-circle {
+        width: 44px !important; /* Компактный размер для смартфона */
+        height: 44px !important;
+        font-size: 20px !important;
+        flex-shrink: 0 !important; /* КРИТИЧЕСКИ ВАЖНО: кружок больше никогда не сожмется и не станет овалом */
+    }
+
+    /* 4. РАСПРЯМЛЯЕМ ТЕКСТ */
+    .bento-info {
+        display: flex !important;
+        flex-direction: column !important;
+        text-align: left !important; /* Читабельный левый край для мобильных */
+    }
+
+    .bento-info h3 {
+        font-size: 17px !important; /* Четкий и аккуратный мобильный заголовок */
+        margin-top: 0 !important;
+        margin-bottom: 4px !important;
+    }
+
+    .bento-info p {
+        font-size: 13px !important; /* Компактный мобильный текст */
+        line-height: 1.5 !important; /* Плотный удобный интервал */
+        color: #cbd5e1 !important;
+    }
+ .showcase-grid {
+        grid-template-columns: 1fr !important; /* Больше никаких 4-х сжатых колонок на телефонах! */
+        gap: 20px !important; /* Удобный мобильный зазор между карточками */
+        padding: 0 10px !important; /* Легкие отступы от краев экрана смартфона */
+        width: 100% !important;
+    }
+
+    /* 2. Делаем саму карточку товара свободной */
+    .showcase-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        border-radius: 20px !important;
+    }
+
+    /* Корректируем высоту темной заглушки под картинку, чтобы она не была гигантской */
+    .showcase-img-box {
+        height: 180px !important;
+    }
+
+    /* 3. Распрямляем текстовый блок внутри кирпича */
+    .showcase-info {
+        padding: 25px 20px !important; /* Удобные внутренние отступы для пальцев */
+        text-align: left !important; /* Читабельный левый край */
+    }
+
+    .showcase-meta {
+        font-size: 11px !important;
+        letter-spacing: 0.5px !important;
+        margin-bottom: 6px !important;
+    }
+
+    /* Названия брендов (Recke, Старый Оскол) больше не будут обрезаться */
+    .showcase-info h3 {
+        font-size: 20px !important; /* Крупный пафосный размер названия */
+        margin-top: 0 !important;
+        margin-bottom: 10px !important;
+        line-height: 1.3 !important;
+    }
+
+    /* Описание характеристик кирпича */
+    .showcase-info p {
+        font-size: 14px !important; /* Отличный мобильный размер текста */
+        line-height: 1.6 !important;
+        color: #94a3b8 !important;
+    }
+
+        /* ======================================================
+       ОТЗЫВ НА СМАРТФОНАХ (СТРОГО В СТОЛБИК)
+    ====================================================== */
+
+    /* 1. Намертво переключаем сетку отзывов в 1 колонку */
+    .reviews-bento-grid {
+        grid-template-columns: 1fr !important; /* Больше никаких 2-х или 3-х сжатых колонок на телефонах! */
+        gap: 16px !important; /* Удобный мобильный зазор между карточками отзывов */
+        padding: 0 10px !important; /* Легкие отступы от краев экрана смартфона */
+        width: 100% !important;
+    }
+
+    /* 2. Делаем плашку отзыва свободной и широкой */
+    .review-brick-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 30px 20px !important; /* Отличные мобильные отступы внутри карточки */
+        border-radius: 20px !important;
+        min-height: auto !important; /* Сбрасываем жесткую высоту ПК версии */
+        
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: space-between !important;
+    }
+
+    /* Золотые звезды */
+    .stars-gold {
+        font-size: 14px !important;
+        margin-bottom: 12px !important;
+    }
+
+    /* Распрямляем текст самого отзыва */
+    .review-brick-text {
+        font-size: 14px !important; /* Читабельный мобильный размер */
+        line-height: 1.6 !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* Блок автора внизу */
+    .reviewer-brick-info {
+        display: flex !important;
+        flex-direction: row !important; /* Кружок и имя строго в один горизонтальный ряд */
+        align-items: center !important;
+        gap: 14px !important;
+        padding-top: 14px !important;
+    }
+
+    /* Защищаем круглые клинкерные аватарки от сдавливания */
+    .avatar-circle {
+        width: 44px !important;
+        height: 44px !important;
+        font-size: 18px !important;
+        flex-shrink: 0 !important; /* Намертво запрещаем кружку сжиматься и превращаться в овал */
+    }
+
+    /* Имя автора и компания */
+    .reviewer-brick-meta {
+        text-align: left !important; /* Выравнивание строго по левому краю */
+    }
+
+    .reviewer-brick-meta h4 {
+        font-size: 15px !important; /* Имена (Руслан, Игорь Валентинович) теперь полностью влезут */
+        font-weight: 700 !important;
+        margin: 0 !important;
         line-height: 1.2 !important;
     }
 
-    .hero-description {
-        font-size: 14px !important;
-        text-align: center !important;
-        margin-bottom: 30px !important;
-    }
-
-    /* Кнопки на мобильном встают друг под другом во всю ширину */
-    .hero-buttons {
-        flex-direction: column !important;
-        gap: 12px !important;
-        width: 100% !important;
-    }
-
-    .btn-gradient, .btn-outline {
-        width: 100% !important; /* Кнопки растягиваются на весь экран смартфона, по ним удобно кликать */
-        box-sizing: border-box !important;
-        height: 50px !important;
-        padding: 0 !important;
-    }
-
-    /* 3. ОПРЕДЕЛЯЕМ ПРАВИЛЬНОЕ МЕСТО ДЛЯ ДОМА */
-    .hero-image-side {
-        flex: 0 0 100% !important;
-        max-width: 100% !important;
-        margin-top: 10px !important;
-    }
-
-    /* Сжимаем красную подсветку сзади дома под мобильный масштаб */
-    .hero-image-side::before {
-        width: 280px !important;
-        height: 200px !important;
-    }
-
-    /* Дом аккуратно встает внизу под кнопками, не ломая верстку */
-    .premium-house-img {
-        max-width: 100% !important;
-        width: 100% !important;
-        height: auto !important;
+    .reviewer-brick-meta span {
+        font-size: 12px !important;
+        margin-top: 2px !important;
+        display: block !important;
     }
 }
-/* ======================================================
-   СТИЛИ ВСПЛЫВАЮЩЕГО МОДАНЕЛЬНОГО КАЛЬКУЛЯТОРА
-====================================================== */
+/*СТИЛИ ВСПЛЫВАЮЩЕГО МОДАНЕЛЬНОГО КАЛЬКУЛЯТОРА*/
 
 /* Фоновая подложка на весь экран (затемнение и размытие) */
 .calculator-modal {
