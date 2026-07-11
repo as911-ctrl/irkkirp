@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карточка товара | Центр Кирпича</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <header class="glass-header">
+        <div class="header-main-row">
+            <a href="index.html" class="logo-container">
+                <img src="img/logo-icon.png" alt="Центр Кирпича" class="header-logo-img">
+                <div class="logo-text-block">
+                    <div class="logo">ЦЕНТР<span>КИРПИЧА</span></div>
+                    <div class="logo-city">Иркутск</div>
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <!-- СЕКЦИЯ СТРАНИЦЫ ТОВАРА (Клик мимо карточки возвращает в каталог) -->
+    <section class="product-page-wrapper" id="productPageOverlay">
+        
+        <div class="product-container-ice" id="productCardBody">
+            
+            <!-- Левая колонка: РЕАЛЬНОЕ АВТО-ФОТО ТОВАРА -->
+            <div class="product-visual-side">
+        <div class="product-main-photo-box">
+        <div class="brick-texture-overlay"></div>
+        
+        <!-- ИСПРАВЛЕНО: Убедитесь, что тут стоит именно этот тег id="prodImg" -->
+        <img src="" alt="" id="prodImg" class="product-page-real-photo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+        <span class="product-fallback-big-icon" style="display:none;">🧱</span>
+      </div>
+     </div>
+
+            <!-- Правая колонка: Полные параметры и характеристики -->
+            <div class="product-details-side">
+                <span class="product-page-meta" id="prodMeta">Загрузка...</span>
+                <h1 id="prodTitle">Загрузка наименования...</h1>
+                
+                <!-- ДОБАВИЛИ ВЫВОД ЦЕНЫ ВНУТРЬ КАРТОЧКИ -->
+                <div class="catalog-brick-price-tag" id="prodPrice" style="font-size: 26px !important; margin: 10px 0 20px 0 !important;">0 ₽</div>
+                
+                <p class="product-page-desc" id="prodDesc">Загрузка описания...</p>
+
+                <!-- ОФИЦИАЛЬНАЯ ТАБЛИЦА ТЕХПАСПОРТА ЗАВОДА -->
+                <div class="product-specs-table">
+                    <div class="table-row"><span>Размер, мм</span> <strong id="prodSize">—</strong></div>
+                    <div class="table-row"><span>Формат кирпича</span> <strong id="prodFormat">—</strong></div>
+                    <div class="table-row"><span>Морозостойкость, F</span> <strong id="prodFrost">—</strong></div>
+                    <div class="table-row"><span>Водопоглощение, %</span> <strong id="prodWater">—</strong></div>
+                    <div class="table-row"><span>Поверхность лицевая</span> <strong id="prodSurface">—</strong></div>
+                    <div class="table-row"><span>Производитель</span> <strong id="prodBrand">Завод-партнер</strong></div>
+                </div>
+
+                <a href="javascript:void(0);" class="product-order-submit" id="product-lead-trigger">РАССЧИТАТЬ СМЕТУ</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- СВЯЗЬ С БАЗОЙ ДАННЫХ И СИНХРОНИЗАЦИЯ -->
+    <script src="script.js"></script>
+   <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Читаем ID кирпича из ссылки браузера
+            const urlParams = new URLSearchParams(window.location.search);
+            const productId = parseInt(urlParams.get('id'));
+
+            // Ищем этот конкретный кирпич в нашей общей базе данных
+            const currentProduct = BRICKS_DATABASE.find(item => item.id === productId);
+
+            if (currentProduct) {
+                // Магически заполняем всю таблицу техпаспорта данными из базы
+                document.getElementById('prodMeta').textContent = currentProduct.meta;
+                document.getElementById('prodTitle').textContent = currentProduct.title;
+                document.getElementById('prodPrice').textContent = currentProduct.price;
+                document.getElementById('prodDesc').textContent = currentProduct.desc;
+                document.getElementById('prodSize').textContent = currentProduct.size;
+                document.getElementById('prodFormat').textContent = currentProduct.format;
+                document.getElementById('prodFrost').textContent = currentProduct.frost;
+                document.getElementById('prodWater').textContent = currentProduct.water;
+                document.getElementById('prodSurface').textContent = currentProduct.surface;
+                
+                // Находим тег prodImg и передаем ему путь к нашей PNG картинке
+                const imgElement = document.getElementById('prodImg');
+                if (imgElement && currentProduct.img) {
+                    imgElement.src = currentProduct.img;
+                    imgElement.alt = currentProduct.title;
+                    imgElement.style.display = 'block'; // Включаем показ фото
+                }
+
+                document.title = currentProduct.title + " | Центр Кирпича";
+            }
+
+            // ЖЕЛЕЗОБЕТОННЫЙ КЛИК МИМО КАРТОЧКИ ДЛЯ ЗАКРЫТИЯ СБОКУ
+            const overlay = document.getElementById('productPageOverlay');
+            if (overlay) {
+                overlay.addEventListener('click', (e) => {
+                    // Любой клик по темной матовой области вокруг карточки возвращает нас в каталог
+                    if (e.target === overlay || e.target.classList.contains('product-page-wrapper')) {
+                        window.location.href = 'catalog.html'; 
+                    }
+                });
+            }
+
+            // Кнопка быстрой фиксации заявки на этот кирпич
+           const orderBtn = document.getElementById('productOrderBtn');
+              if (orderBtn) {
+              orderBtn.addEventListener('click', () => {
+        // 1. JavaScript намертво записывает в память браузера название именно этого кирпича
+               localStorage.setItem('selectedBrick', currentProduct ? currentProduct.title : '');
+        
+        // 2. Перенаправляем человека на главную страницу, сразу прокручивая экран к форме заказа
+                window.location.href = 'index.html#booking';
+        });
+         }
+        });
+    </script>
+    <button type="button" id="scrollUpBtn" style="position: fixed; right: 30px; bottom: 30px; width: 45px; height: 45px; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.1); color: #ffffff; font-size: 18px; font-weight: bold; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 9999; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);" onmouseover="this.style.background='rgba(225, 29, 72, 0.2)'; this.style.borderColor='#e11d48'; this.style.color='#e11d48';" onmouseout="this.style.background='rgba(15, 23, 42, 0.6)'; this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.color='#ffffff';">↑</button>
+</body>
+</html>

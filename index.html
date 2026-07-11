@@ -4,34 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Центр Кирпича — Элитный облицовочный кирпич и клинкер</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=777">
 </head>
-<body>
+<body id="index-page">
 
-    <!-- СТЕКЛЯННАЯ PREMIUM-ШАПКА -->
+    <!--ШАПКА -->
     <header class="glass-header">
-    <a href="#" class="logo-container">
-    <!-- Подключаем вашу присланную картинку здания -->
+    <a href="index.html" class="logo-container" style="text-decoration: none !important;">
     <img src="img/logo-icon.png" alt="Центр Кирпича" class="header-logo-img">
-    
-    <!-- Текстовый блок названия и города -->
     <div class="logo-text-block">
         <div class="logo">ЦЕНТР<span>КИРПИЧА</span></div>
         <div class="logo-city">Иркутск</div>
     </div>
 </a>
-    <nav class="nav-menu">
-        <a href="#about">О компании</a>
-        <a href="#catalog">Популярные бренды</a>
-        <a href="#advantages">Преимущества</a>
-        <a href="#info">Информация</a> <!-- ДОБАВИЛИ ЭТОТ ПУНКТ -->
-        <a href="#testimonials">Отзывы</a>
-        <a href="#contacts">Контакты</a>
-    </nav>
+  <nav class="header-nav">
+    <ul class="header-nav-menu">
+        <li><a href="catalog.html">Каталог</a></li>
+        <li><a href="production.html">Производители</a></li>
+        <li><a href="objects.html">Наши проекты</a></li>
+        <li><a href="info.html">ПОКУПАТЕЛЯМ</a></li>
+        <li><a href="about.html">О компании</a></li>
+        <li><a href="contacts.html">Контакты</a></li>
+    </ul>
+</nav>
     <div class="header-contacts">
-        <a href="tel:+73952707087" class="phone-link">+7 (3952) 707-087</a>
-        <a href="#booking" class="cta-btn"><span class="desktop-text">Заказать расчет</span></a>
-    </div>
+        <a href="tel:+73952707087" class="phone-link">📞 +7 (3952) 707-087</a>
+        </div>
 </header>
     <!-- ГЛАВНЫЙ ЭКРАН С ДОМОМ И НЕОНОВОЙ ПОДСВЕТКОЙ -->
 <section class="hero-cinema">
@@ -46,14 +44,15 @@
                заборов, гаражей, бань и специализированного печного клинкера напрямую с производства.
             </p>
             <div class="hero-buttons">
-               <a href="#catalog" class="btn-gradient">Смотреть продукцию</a>
-               <a href="#" class="btn-outline" id="open-calc-trigger">Рассчитать расход и смету</a>
-            </div>
+               <a href="#catalog" class="btn-gradient">ВЫБРАТЬ КИРПИЧ</a>
+               <a href="javascript:void(0);" class="btn-outline" id="open-calc-trigger">КАЛЬКУЛЯТОР СТОИМОСТИ</a>
+        </div>
+
         </div>
 
         <!-- ПРАВАЯ КОЛОНКА: Наш пафосный PNG дом с подсветкой -->
         <div class="hero-image-side">
-            <img src="img/hero-house.png" alt="Премиальный кирпичный дом" class="premium-house-img">
+          <img src="img/hero-house.png" alt="Премиальный кирпичный дом" class="premium-house-img">
         </div>
 
     </div>
@@ -124,71 +123,15 @@
         <h2>Премиальный ассортимент</h2>
         <p>Выбор лучших архитекторов и застройщиков Иркутска, Улан-Удэ и Читы</p>
     </div>
-    
-    <!-- Изолированная сетка, которая выстроит ровно 4 карточки в один ряд -->
-    <div class="showcase-grid">
-        
-        <!-- Карточка 1 -->
-        <div class="showcase-card">
-            <div class="showcase-img-box">
-                <div class="brick-texture-overlay"></div>
-                <span class="brick-fallback-icon">🧱</span>
-            </div>
-            <div class="showcase-info">
-                <span class="showcase-meta">Антрацит • М-150 • Германия/РФ</span>
-                <h3>Recke Brickerei Модформат</h3>
-                <p>Стильный, утонченный формат. Клинкерное качество создает уникальный благородный перелив фасада.</p>
-            </div>
-        </div>
-
-        <!-- Карточка 2 -->
-        <div class="showcase-card">
-            <div class="showcase-img-box">
-                <div class="brick-texture-overlay"></div>
-                <span class="brick-fallback-icon">🧱</span>
-            </div>
-            <div class="showcase-info">
-                <span class="showcase-meta">Флэш-обжиг • М-200 • Старый Оскол</span>
-                <h3>Старооскольский кирпич</h3>
-                <p>Проверен временем. Лучший облицовочный кирпич, эталон долговечности коттеджного строительства.</p>
-            </div>
-        </div>
-
-        <!-- Карточка 3 -->
-        <div class="showcase-card">
-            <div class="showcase-img-box">
-                <div class="brick-texture-overlay"></div>
-                <span class="brick-fallback-icon">🧱</span>
-            </div>
-            <div class="showcase-info">
-                <span class="showcase-meta">Баварская кладка • М-150 • ЖКЗ</span>
-                <h3>Железногорский Ригель 500</h3>
-                <p>Уникальный длинный формат 500х85х45 мм. Неповторимый дизайн современного европейского дома.</p>
-            </div>
-        </div>
-
-        <!-- НОВАЯ Карточка 4 (Сбалансировала ряд до 4-х штук) -->
-        <div class="showcase-card">
-            <div class="showcase-img-box">
-                <div class="brick-texture-overlay"></div>
-                <span class="brick-fallback-icon">🧱</span>
-            </div>
-            <div class="showcase-info">
-                <span class="showcase-meta">Клинкер • М-300 • Европа</span>
-                <h3>Элитный клинкер Roben</h3>
-                <p>Истинный европейский клинкер экстра-прочности. Обладает практически нулевым водопоглощением и идеальной фактурой.</p>
-            </div>
-        </div>
-
-    </div>
-
+          <!-- Контейнер пустой! JavaScript сам заполнит его товарами из базы данных -->
+<div class="showcase-grid" id="catalogRenderBox"></div>
     <!-- Кнопка под общий стиль клинкерного обжига -->
     <div class="catalog-action-block">
-        <a href="#booking" class="btn-view-all">Открыть весь каталог</a>
+        <a href="catalog.html" class="btn-view-all">Открыть весь каталог</a>
     </div>
 </section>
 
-    <!-- 4. ОТЗЫВЫ КЛИЕНТОВ И СТРОИТЕЛЕЙ (С аватарками) -->
+    <!-- 4. ОТЗЫВЫ КЛИЕНТОВ И СТРОИТЕЛЕЙ -->
    <section class="premium-testimonials-section" id="testimonials">
     <!-- Выравниваем заголовок по левому краю под общий стиль сайта -->
     <div class="testimonials-header-block">
@@ -197,9 +140,9 @@
     </div>
     
     <!-- Сетка, которая выстроит 6 премиум-карточек по 3 в ряд -->
-    <div class="reviews-bento-grid">
+    <class class="reviews-bento-grid">
         
-        <!-- Отзыв 1 -->
+          <!-- Отзыв 1 -->
         <div class="review-brick-card">
             <div class="stars-gold">★★★★★</div>
             <p class="review-brick-text">«Заказывал баварскую кладку "Пятый Элемент". Кирпич пришел идеальный, ни одного скола благодаря бережной доставке Центра Кирпича. Зимнее хранение реально бесплатное, забрал на объект в мае.»</p>
@@ -237,53 +180,49 @@
                 </div>
             </div>
         </div>
-
-        <!-- Отзыв 4 -->
-        <div class="review-brick-card">
-            <div class="stars-gold">★★★★★</div>
-            <p class="review-brick-text">«Лучшие цены на клинкер в Иркутске. Проверил лично 4 компании, здесь условия вне конкуренции за счет прямой логистики с заводов. Шоу-рум в ЖК "Затон" шикарный, помогли выбрать фактуру.»</p>
-            <div class="reviewer-brick-info">
-                <div class="avatar-circle">📊</div>
-                <div class="reviewer-brick-meta">
-                    <h4>Алексей</h4>
-                    <span>Инвестор (Строительство в Ангарске)</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Отзыв 5 -->
-        <div class="review-brick-card">
-            <div class="stars-gold">★★★★★</div>
-            <p class="review-brick-text">«Срочно потребовался ригельный кирпич длинного формата. Оперативно организовали доставку манипулятором прямо в Улан-Удэ. Всё разгрузили бережно, углы целые. Будем сотрудничать дальше!»</p>
-            <div class="reviewer-brick-info">
-                <div class="avatar-circle">🚛</div>
-                <div class="reviewer-brick-meta">
-                    <h4>Баир</h4>
-                    <span>ООО "БайкалИнвестСтрой"</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Отзыв 6 -->
-        <div class="review-brick-card">
-            <div class="stars-gold">★★★★★</div>
-            <p class="review-brick-text">«Очень доволен подходом. Менеджер вел объект от первого звонка до финальной разгрузки поддонов. Помогли рассчитать объем с точностью до штуки, сэкономил кучу денег на запасе.»</p>
-            <div class="reviewer-brick-info">
-                <div class="avatar-circle">🧔</div>
-                <div class="reviewer-brick-meta">
-                    <h4>Михаил</h4>
-                    <span>Индивидуальный застройщик</span>
-                </div>
-            </div>
-        </div>
-        
     </div>
+        </class>
+
+         <!-- КНОПКА-МОСТ НА СТРАНИЦУ НАШИХ ПРОЕКТОВ -->
+          <div class="reviews-action-block">
+    <a href="objects.html" class="reviews-btn-all">Открыть все проекты и отзывы</a>
+</div>
+
+
 </section>
 
+    <!-- 5. КОМПАКТНАЯ ФОРМА ЗАПИСИ  -->
+  <div class="custom-form-header">
+    <h2>ПОЛУЧИТЬ ИНДИВИДУАЛЬНЫЙ РАСЧЕТ</h2>
+    <p>«Оставьте заявку, и менеджер подготовит смету под ваш объект за 10 минут».</p>
+</div>
 
-    <!-- 5. КОМПАКТНАЯ ПРЕМИУМ-ФОРМА ЗАПИСИ (С ТГ-БОТОМ В БУДУЩЕМ) -->
-    <div class="premium-booking">
-    <form>
+<div class="premium-booking">
+    <form id="lead-main-form">
+        
+        <!-- 1. Название кирпича -->
+        <div class="booking-field">
+            <input type="text" id="lead-brick-select" placeholder="Выбранный кирпич" readonly class="lead-readonly-input">
+        </div>
+
+        <!-- 2. Объём: Площадь или Штуки -->
+        <div id="lead-quantity-display" class="lead-summary-block">
+            <span id="lead-quantity-title">Количество:</span>
+            <span id="lead-quantity-value">0 шт.</span>
+        </div>
+
+        <!-- 3. Строка для вывода штук под площадью -->
+        <div id="lead-pcs-display" class="lead-summary-block">
+            <span>Количество:</span>
+            <span id="lead-pcs-value">0 шт.</span>
+        </div>
+
+        <!-- 4. Сумма расчета -->
+        <div id="lead-sum-display" class="lead-summary-block">
+            Предварительная стоимость: <span id="lead-final-price">0 ₽</span>
+        </div>
+
+        <!-- ПОЛЯ КОНТАКТОВ КЛИЕНТА -->
         <div class="booking-field">
             <input type="text" placeholder="Ваше ФИО" required>
         </div>
@@ -291,18 +230,18 @@
             <input type="tel" placeholder="Номер телефона" required>
         </div>
         
-        <!-- ДОБАВИЛИ КЛАСС with-arrow СЮДА -->
-        <div class="booking-field with-arrow">
-            <select required>
-                <option value="" disabled selected>Какой кирпич интересует?</option>
-                <option value="recke">Recke Brickerei</option>
-                <option value="oskol">Старооскольский кирпич</option>
-                <option value="zheleznogorsk">Железногорский ригель</option>
-            </select>
-        </div>
-        
-        <button type="submit" class="booking-submit">Получить смету</button>
+        <button type="submit" id="lead-submit-btn" class="booking-submit">Отправить Менеджеру</button>
     </form>
+</div>
+<!-- ==========================================================================
+     💎 ЛЮКСОВОЕ ВСПЛЫВАЮЩЕЕ ОКНО УСПЕХА 
+========================================================================== -->
+<div id="premium-success-modal" class="premium-success-overlay">
+    <div class="premium-success-box">
+        <div class="success-icon-circle">✓</div>
+        <h3>РАСЧЁТ УСПЕШНО ОТПРАВЛЕН!</h3>
+        <p>Ваша смета уже улетела на почту. Менеджер Центра Кирпича свяжется с вами в течение 10–15 минут для подтверждения деталей.</p>
+    </div>
 </div>
     <!-- 6. КОНТАКТЫ (Иркутск и Улан-Удэ) -->
    <section id="contacts" class="contacts-section">
@@ -343,64 +282,81 @@
             <span class="brick-icon-circle">✉️</span>
             <div class="contact-meta-text">
                 <h4>Электронная почта</h4>
-                <a href="mailto:info@centrk.ru" class="contact-link-val">info@centrk.ru</a>
+                <a href="mailto:inna@centrk.ru" class="contact-link-val">inna@centrk.ru</a>
             </div>
         </div>
 
     </div>
 
-    <!-- ВСТРАИВАЕМ БОЛЬШУЮ СОВРЕМЕННУЮ КАРТУ (Яндекс.Карты) -->
-    <!-- Мы используем официальный конструктор карт. Контент автоматически подстроится -->
-    <div class="premium-map-container">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39050.24744568739!2d104.25102955981808!3d52.286228932725244!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5da83b4fd4a5a10b%3A0xeed301889867f6ac!2zMTMwINCa0LLQsNGA0YLQsNC7!5e0!3m2!1sru!2skr!4v1782823237252!5m2!1sru!2skr"></iframe> 
+    <!-- ВСТРАИВАЕМ  КАРТУ (Яндекс.Карты) -->
+        <div class="premium-map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d428.2566614101224!2d103.86741506241015!3d52.61326247835599!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d07765bc2cdf8e1%3A0xd0d9dc0d78c5f801!2z0YPQuy4g0J3QsNCx0LXRgNC10LbQvdCw0Y8sIDIxLCDQndCw0LHQtdGA0LXQttC90YvQuSwg0JjRgNC60YPRgtGB0LrQsNGPINC-0LHQuy4sINCg0L7RgdGB0LjRjywgNjY1ODUy!5e0!3m2!1sru!2skr!4v1783583004036!5m2!1sru!2skr"></iframe>
     </div>
+
+     <div class="showcase-grid" id="catalogRenderBox"></div>
+          <div class="catalog-action-block">
+        <a href="contacts.html" class="btn-view-all">Подробная информация →</a>
 </section>
 
 <!-- (ФУТЕР) -->
-<footer class="site-footer">
-    <div class="footer-container">
-        <p>© 2026 ООО "Центр Кирпича"</p>
-        <span>Премиальные фасады и клинкер</span>
-    </div>
+<footer class="main-footer">
+    <div class="footer-row">
+        
+        <div class="footer-left">
+            <a href="index.html" class="logo-container">
+                <div class="logo">ЦЕНТР<span>КИРПИЧА</span></div>
+            </a>
+            <span class="footer-copyright">© 2026. Все права защищены</span>
+        </div>
 </footer>
 <!-- ИНТАКТИВНОЕ ОКНО СМАРТ-КАЛЬКУЛЯТОРА -->
 <div class="calculator-modal" id="calcModal">
-    <div class="calc-box-content">
-        <!-- Кнопка закрытия окна -->
+    <div class="calc-box-content" id="calcModalBody">
         <button class="close-calc-btn" id="closeCalc">&times;</button>
         
-        <h3>Расчет стоимости материала</h3>
-        <p class="calc-subtitle">Выберите наименование кирпича и укажите необходимый объем</p>
+        <h3 id="calcModalTitle">Рассчитать стоимость кирпича</h3>
+        <p class="calc-subtitle" id="calcModalSubtitle">Укажите объем кирпича для расчета стоимости</p>
         
-        <div class="calc-form">
-            <!-- 1. Выбор наименования (с заложенными ценами) -->
-            <div class="calc-field">
-                <label>Выберите кирпич:</label>
-                <select id="brickSelect">
-                    <option value="0" disabled selected>-- Выберите вариант --</option>
-                    <option value="85">Recke Brickerei Модформат (85 ₽/шт)</option>
-                    <option value="38">Старооскольский кирпич (38 ₽/шт)</option>
-                    <option value="42">Железногорский Ригель 500 (42 ₽/шт)</option>
-                    <option value="95">Элитный клинкер Roben (95 ₽/шт)</option>
+        <!-- ТУМБЛЕР ВЫБОРА РЕЖИМА РАСЧЕТА -->
+        <div class="calc-mode-switcher" style="display: flex; justify-content: center; gap: 10px; margin: 20px 0; background: rgba(255,255,255,0.03); padding: 6px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.05);">
+            <button type="button" id="modeBtnPcs" class="mode-switch-btn active" style="flex: 1; padding: 10px; border: none; border-radius: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all 0.3s; background: #e11d48; color: #ffffff;">В штуках</button>
+            <button type="button" id="modeBtnSqm" class="mode-switch-btn" style="flex: 1; padding: 10px; border: none; border-radius: 8px; font-size: 12px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: all 0.3s; background: transparent; color: #64748b;">В кв. м.</button>
+        </div>
+
+        <!-- Контейнер выбора кирпича -->
+        <div class="calc-field" id="calcSelectContainer">
+            <label for="brickSelect">Выберите кирпич из каталога:</label>
+            <div class="booking-field with-arrow">
+                <select id="brickSelect" required>
+                    <!-- 🔥 ИСПРАВЛЕНО: Этот пункт удерживает твой дизайн и стили CSS, пока страница загружается -->
+                    <option value="" disabled selected hidden>— Нажмите, чтобы выбрать кирпич —</option>
                 </select>
             </div>
-            
-            <!-- 2. Ввод количества -->
-            <div class="calc-field">
-                <label>Количество (в штуках):</label>
-                <input type="number" id="brickQuantity" placeholder="Например: 5000" min="1">
-            </div>
-            
-            <!-- 3. КРУПНЫЙ ПАФОСНЫЙ ВЫВОД СУММЫ -->
-            <div class="calc-total-block">
-                <span>Предварительная стоимость:</span>
-                <div class="total-sum-val" id="totalSum">0 ₽</div>
-            </div>
-            
-            <button type="button" class="calc-send-btn">Зафиксировать цену и смету</button>
         </div>
+
+        <!-- Поле ввода объема -->
+        <div class="calc-field">
+            <label id="calcInputLabel" for="brickQuantity">Укажите объем заказа (в штуках):</label>
+            <input type="number" id="brickQuantity" placeholder="Например: 3000">
+        </div>
+
+        <div class="calc-total-block">
+            <!-- Строка базовой цены -->
+            <div style="font-size: 13px; color: #94a3b8; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; letter-spacing: 0.5px;">
+                Фиксированная цена: <span style="color: #ffffff; font-size: 15px; font-weight: 800;" id="calcBasePriceTag"></span>
+            </div>
+            <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.05); margin: 0 0 12px 0;">
+            <span>Предварительная стоимость:</span>
+            <div class="total-sum-val" id="totalSum">0 ₽</div>
+        </div>
+
+        <button class="calc-send-btn" id="calcSubmitBtn">Получить предварительный расчет</button>
     </div>
 </div>
+
  <script src="script.js"></script>
+
+ <button type="button" id="scrollUpBtn" style="position: fixed; right: 30px; bottom: 30px; width: 45px; height: 45px; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.1); color: #ffffff; font-size: 18px; font-weight: bold; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 9999; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);" onmouseover="this.style.background='rgba(225, 29, 72, 0.2)'; this.style.borderColor='#e11d48'; this.style.color='#e11d48';" onmouseout="this.style.background='rgba(15, 23, 42, 0.6)'; this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.color='#ffffff';">↑</button>
+
 </body>
 </html>
