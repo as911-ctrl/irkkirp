@@ -1338,13 +1338,9 @@ BRICKS_DATABASE.forEach(brick => {
     });
 });
 // ======================================================
-//   3. ЧИСТЫЙ ИЗОЛИРОВАННЫЙ ДВИЖОК ПОИСКА И ФИЛЬТРАЦИИ
+//   3.ДВИЖОК ПОИСКА И ФИЛЬТРАЦИИ
 // ======================================================
 document.addEventListener("DOMContentLoaded", () => {
-    
-    // Мгновенный запуск витрины карточек
-    renderCatalogCards(BRICKS_DATABASE);
-
     const searchInput = document.getElementById('catalogSearchInput');
     const clearSearchBtn = document.getElementById('clearSearchBtn');
     const filterButtons = document.querySelectorAll('.filter-tag-btn');
@@ -1602,7 +1598,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ==========================================================================
-//  УМНАЯ КНОПКА "НАВЕРХ" С ПЛАВНЫМ СКРОЛЛОМ (БЕЗ КОСТЫЛЕЙ)
+//  УМНАЯ КНОПКА "НАВЕРХ" С ПЛАВНЫМ СКРОЛЛОМ 
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
     const scrollUpBtn = document.getElementById("scrollUpBtn");
@@ -1632,7 +1628,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==========================================================================
-// 🚀 НАМЕРТВО ОЖИВЛЯЕМ КНОПКУ АЮРА: ОТПРАВКА ЧЕКА НА СЕРВЕР В SEND.PHP
+// 🚀 НАМЕРТВО ОЖИВЛЯЕМ КНОПКУ: ОТПРАВКА ЧЕКА НА СЕРВЕР В SEND.PHP
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
     const leadForm = document.getElementById("lead-main-form");
@@ -1653,9 +1649,8 @@ document.addEventListener("DOMContentLoaded", () => {
             const totalPrice = document.getElementById("lead-final-price")?.textContent || "0 ₽";
 
             // Сбор контактов (ФИО и телефон берутся строго из твоей формы по порядку)
-            const inputFields = leadForm.querySelectorAll("input[placeholder]");
-            const clientName = inputFields[1]?.value || "Не указано";
-            const clientPhone = inputFields[2]?.value || "Не указано";
+            const clientName = document.getElementById("lead-client-name")?.value || "Не указано";
+            const clientPhone = document.getElementById("lead-client-phone")?.value || "Не указано";
 
             // Проверяем, горела ли строчка штук на экране
             const pcsBlock = document.getElementById("lead-pcs-display");
@@ -1715,4 +1710,35 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
+});
+
+// ==========================================================================
+// 🍔ЗАПУСК БУРГЕРА 
+// ==========================================================================
+document.addEventListener("DOMContentLoaded", () => {
+
+    const burgerBtn = document.querySelector(".burger-menu-btn");
+    const navMenu = document.querySelector(".header-nav-menu");
+
+    if (burgerBtn && navMenu) {
+
+        burgerBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            navMenu.classList.toggle("active");
+        });
+
+        document.addEventListener("click", function (e) {
+            if (!navMenu.contains(e.target) && !burgerBtn.contains(e.target)) {
+                navMenu.classList.remove("active");
+            }
+        });
+
+        navMenu.querySelectorAll("a").forEach(link => {
+            link.addEventListener("click", () => {
+                navMenu.classList.remove("active");
+            });
+        });
+
+    }
+
 });
