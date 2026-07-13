@@ -1,942 +1,10 @@
-// ======================================================
-//   1. ЦЕНТРАЛЬНАЯ БАЗА ДАННЫХ КАТАЛОГА (МАССИВ WEBP)
-// ======================================================
-const BRICKS_DATABASE = [
-    {
-        id: 1,
-        category: "recke",
-        meta: "Клинкер • М175-М200 • Формат HALB",
-        title: "КИРПИЧ RECKE HALB 5-31-00-3-13",
-        price: "цена 82 руб 35 коп",
-        desc: "Высококачественный клинкерный кирпич с утолщенной стенкой 20 мм и изящной фаской.",
-        size: "250х85х40 мм",
-        format: "HALB (Половинка)",
-        frost: "75 циклов",
-        water: "5-6%",
-        surface: "фактурный",
-        img: "img/recke-1.webp"
-    },
-    {
-        id: 2,
-        category: "recke",
-        meta: "Клинкер • М175-М200 • Формат HALB",
-        title: "КИРПИЧ RECKE HALB 5-31-00-3-43",
-        price: "цена 82 руб 35 коп",
-        desc: "Облицовочный клинкер благородного темного обжига. Идеальное водопоглощение и надежность.",
-        size: "250х85х40 мм",
-        format: "HALB (Половинка)",
-        frost: "75 циклов",
-        water: "5-6%",
-        surface: "фактурный",
-        img: "img/recke-2.webp"
-    },
-    {
-        id: 3,
-        category: "recke",
-        meta: "Клинкер • М175-М200 • Формат HALB",
-        title: "КИРПИЧ RECKE HALB 2-11-00-3-13",
-        price: "цена 82 руб 35 коп",
-        desc: "Элитный клинкерный кирпич серого оттенка. Ряды в поддоне проложены защитной бумагой.",
-        size: "250х85х40 мм",
-        format: "HALB (Половинка)",
-        frost: "300 циклов",
-        water: "до 2.0%",
-        surface: "фактурный",
-        img: "img/recke-3.webp"
-    },
-    {
-        id: 4,
-        category: "recke",
-        meta: "Клинкер • М175-М200 • Формат HALB",
-        title: "КИРПИЧ RECKE HALB 5-41-00-3-43",
-        price: "цена 82 руб 35 коп",
-        desc: "Эксклюзивный фактурный кирпич. Соответствует самым строгим требованиям ГОСТ 530-2012.",
-        size: "250х85х40 мм",
-        format: "HALB (Половинка)",
-        frost: "75 циклов",
-        water: "5-6%",
-        surface: "фактурный",
-        img: "img/recke-4.webp"
-    },
-    {
-        id: 5,
-        category: "recke",
-        meta: "Клинкер • М175-М200 • 0.8 НФ",
-        title: "КИРПИЧ RECKE 0,8 НФ 5-32-00-2 Krator",
-        price: "цена 82 руб 35 коп",
-        desc: "Премиальная серия Krator с уникальным рельефным нагаром. Глянцевая лицевая поверхность.",
-        size: "250х85х65 мм",
-        format: "0.8 NF",
-        frost: "300 циклов",
-        water: "до 2.0%",
-        surface: "глянцевая (Krator)",
-        img: "img/recke-5.webp"
-    },
-    {
-        id: 6,
-        category: "recke",
-        meta: "Клинкер • М175-М200 • 0.8 НФ",
-        title: "КИРПИЧ RECKE 0,8 НФ 5-32-00-0",
-        price: "цена 82 руб 35 коп",
-        desc: "Гладкая лаковая поверхность с глубоким темным переливом флэш-обжига. Пустотность 34-36%.",
-        size: "250х85х65 мм",
-        format: "0.8 NF",
-        frost: "300 циклов",
-        water: "до 1.8%",
-        surface: "глянцевая гладкая",
-        img: "img/recke-6.webp"
-    },
-    {
-        id: 7,
-        category: "recke",
-        meta: "Клинкер • М175-М200 • 1 НФ",
-        title: "КИРПИЧ RECKE 5-32-00 1НФ",
-        price: "цена 82 руб 35 коп",
-        desc: "Классический одинарный формат 1 NF. Удельный вес 2.5 кг, количество штук в поддоне — 480.",
-        size: "250х120х65 мм",
-        format: "1 NF Одинарный",
-        frost: "300 циклов",
-        water: "до 2.0%",
-        surface: "глянцевая гладкая",
-        img: "img/recke-7.webp"
-    },
-    {
-        id: 8,
-        category: "recke",
-        meta: "Клинкер • М175-М200 • 0.7 НФ ЕВРО",
-        title: "КИРПИЧ RECKE 5-32-00 0,7НФ ЕВРО",
-        price: "цена 82 руб 35 коп",
-        desc: "Европейский облегченный формат ЕВРО. Экономичный расход при сохранении абсолютной прочности.",
-        size: "250х85х65 мм",
-        format: "0.7 NF Евро",
-        frost: "300 циклов",
-        water: "до 2.0%",
-        surface: "глянцевая гладкая",
-        img: "img/recke-8.webp"
-    },
-    // --- КАТЕГОРИЯ: MODFORMAT ---
-   {
-        id: 9,
-        category: "modformat",
-        meta: "Лицевой пустотелый • Одинарный",
-        title: "КИРПИЧ MODFORMAT БРЮНЕ",
-        price: "цена 166 руб 91 коп",
-        desc: "Утонченный дизайн коллекции Modformat меняет представление об эстетике фасада.",
-        size: "290х85х50 мм",
-        format: "Модформат",
-        frost: "100 циклов",
-        water: "6-8%",
-        surface: "гладкая ригельная",
-        img: "img/modformat-1.webp"
-    },
-    {
-        id: 10,
-        category: "modformat",
-        meta: "Лицевой пустотелый • Одинарный",
-        title: "КИРПИЧ MODFORMAT ВАРБЕРГ",
-        price: "цена 185 руб 22 коп",
-        desc: "Идеально воплощает самые смелые авторские замыслы и архитектурные эксперименты.",
-        size: "290х85х50 мм",
-        format: "Модформат",
-        frost: "100 циклов",
-        water: "6-8%",
-        surface: "рельефная нагар",
-        img: "img/modformat-2.webp"
-    },
-    {
-        id: 11,
-        category: "modformat",
-        meta: "Лицевой пустотелый • Одинарный",
-        title: "КИРПИЧ MODFORMAT ЛЕКНЕС",
-        price: "цена 140 руб 41 коп",
-        desc: "Эксклюзивный вытянутый формат для создания неповторимого рисунка кирпичной кладки.",
-        size: "290х85х50 мм",
-        format: "Модформат",
-        frost: "100 циклов",
-        water: "6-8%",
-        surface: "гладкая",
-        img: "img/modformat-3.webp"
-    },
-    {
-        id: 12,
-        category: "modformat",
-        meta: "Лицевой пустотелый • Одинарный",
-        title: "КИРПИЧ MODFORMAT БРЕКСТАД",
-        price: "цена 183 руб 38 коп",
-        desc: "Премиальный облицовочный кирпич глубокого темного оттенка с утолщенной стенкой.",
-        size: "290х85х50 мм",
-        format: "Модформат",
-        frost: "100 циклов",
-        water: "6-8%",
-        surface: "фактурная",
-        img: "img/modformat-4.webp"
-    },
-    {
-        id: 13,
-        category: "modformat",
-        meta: "Лицевой пустотелый • Одинарный",
-        title: "КИРПИЧ MODFORMAT МАЛЬМЕ",
-        price: "цена 188 руб 70 коп",
-        desc: "Элитный фасадный материал, устойчивый к суровому сибирскому климату.",
-        size: "290х85х50 мм",
-        format: "Модформат",
-        frost: "100 циклов",
-        water: "6-8%",
-        surface: "гладкая",
-        img: "img/modformat-5.webp"
-    },
-    {
-        id: 14,
-        category: "modformat",
-        meta: "Лицевой пустотелый • Одинарный",
-        title: "КИРПИЧ MODFORMAT МАЛЬМЕ МА",
-        price: "цена 141 руб 70 коп",
-        desc: "Специальная серия с уникальным цветовым переливом лицевой поверхности.",
-        size: "290х85х50 мм",
-        format: "Модформат",
-        frost: "100 циклов",
-        water: "6-8%",
-        surface: "ангобированная",
-        img: "img/modformat-6.webp"
-    },
-    {
-        id: 15,
-        category: "modformat",
-        meta: "Лицевой пустотелый • Одинарный",
-        title: "КИРПИЧ MODFORMAT НАРВИК",
-        price: "цена 183 руб 44 коп",
-        desc: "Светлый благородный оттенок коллекции Нарвик для современной архитектуры.",
-        size: "290х85х50 мм",
-        format: "Модформат",
-        frost: "100 циклов",
-        water: "6-8%",
-        surface: "текстурированная",
-        img: "img/modformat-7.webp"
-    },
-    {
-        id: 16,
-        category: "modformat",
-        meta: "Лицевой пустотелый • Одинарный",
-        title: "КИРПИЧ MODFORMAT ЛЕРУМ",
-        price: "цена 175 руб 06 коп",
-        desc: "Строгий скандинавский стиль. Идеальная геометрия каждой плитки и кирпича.",
-        size: "290х85х50 мм",
-        format: "Модформат",
-        frost: "100 циклов",
-        water: "6-8%",
-        surface: "гладкая",
-        img: "img/modformat-8.webp"
-    },
-    // --- КАТЕГОРИЯ: "железногорский" ---
-    {
-        id: 17,
-        category: "zhelez",
-        meta: "Ригельный • М300 • Элит",
-        title: "КИРПИЧ РИГЕЛЬНЫЙ ЖЕЛЕЗНОГОРСКИЙ БЕЛОСНЕЖНЫЙ",
-        price: "цена 89 руб 89 коп",
-        desc: "Роскошный ригельный кирпич белого цвета. Утолщенная стенка 20 мм с изящной фаской.",
-        size: "310х85х50 мм",
-        format: "Ригель",
-        frost: "100 циклов (F100)",
-        water: "7-8%",
-        surface: "гладкая",
-        img: "img/zhelez-1.webp"
-    },
-    {
-        id: 18,
-        category: "zhelez",
-        meta: "Ригельный • М300 • Элит",
-        title: "КИРПИЧ РИГЕЛЬНЫЙ ЖЕЛЕЗНОГОРСКИЙ КРАФТ",
-        price: "цена 67 руб 17 коп",
-        desc: "Благородная фактура Крафт с уникальным заводским нагаром для стильных фасадов.",
-        size: "310х85х50 мм",
-        format: "Ригель",
-        frost: "100 циклов (F100)",
-        water: "7-8%",
-        surface: "фактурная крафт",
-        img: "img/zhelez-2.webp"
-    },
-    {
-        id: 19,
-        category: "zhelez",
-        meta: "Ригельный • М300 • Элит",
-        title: "КИРПИЧ РИГЕЛЬНЫЙ ЖЕЛЕЗНОГОРСКИЙ СЕРЫЙ СКАЛА",
-        price: "цена 95 руб 86 коп",
-        desc: "Глубокая колотая фактура Скала, имитирующая дикий природный камень. Высочайшая прочность М300.",
-        size: "310х85х50 мм",
-        format: "Ригель",
-        frost: "100 циклов (F100)",
-        water: "7-8%",
-        surface: "колотая скала",
-        img: "img/zhelez-3.webp"
-    },
-    {
-        id: 20,
-        category: "zhelez",
-        meta: "Ригельный • М300 • Элит",
-        title: "КИРПИЧ РИГЕЛЬНЫЙ ЖЕЛЕЗНОГОРСКИЙ СЕРЫЙ",
-        price: "цена 95 руб 86 коп",
-        desc: "Идеально ровная матовая лицевая поверхность серого оттенка. Соответствует ГОСТ 530-2012.",
-        size: "310х85х50 мм",
-        format: "Ригель",
-        frost: "100 циклов (F100)",
-        water: "7-8%",
-        surface: "матовая гладкая",
-        img: "img/zhelez-4.webp"
-    },
-    // --- КАТЕГОРИЯ: "СТАРООСКОЛЬСКИЙ" ---
-    {
-        id: 21,
-        category: "oskol",
-        meta: "Облицовочный • М175-200 • 1 НФ",
-        title: "КИРПИЧ СТАРООСКОЛЬСКИЙ СОЛОМЕННЫЙ 1 НФ",
-        price: "цена 69 руб 75 коп",
-        desc: "Классический одинарный лицевой кирпич приятного соломенного оттенка. Утолщенная стенка 20 мм с фаской.",
-        size: "250х120х65 мм",
-        format: "1 NF Одинарный",
-        frost: "100 циклов",
-        water: "6-7%",
-        surface: "гладкая",
-        img: "img/oskol-1.webp"
-    },
-    {
-        id: 22,
-        category: "oskol",
-        meta: "Облицовочный • М175-200 • 0.7 НФ",
-        title: "КИРПИЧ ЕВРО СТАРООСКОЛЬСКИЙ СОЛОМЕННЫЙ 0,7 НФ",
-        price: "цена 60 руб 50 коп",
-        desc: "Экономичный евроформат. Идеальная геометрия и благородный светлый цвет для облицовки загородных резиденций.",
-        size: "250х85х65 мм",
-        format: "0.7 NF Евро",
-        frost: "100 циклов",
-        water: "6-7%",
-        surface: "гладкая",
-        img: "img/oskol-2.webp"
-    },
-    {
-        id: 23,
-        category: "oskol",
-        meta: "Облицовочный • М175-200 • 1 НФ",
-        title: "КИРПИЧ СТАРООСКОЛЬСКИЙ МИНДАЛЬ АНТИК 1 НФ",
-        price: "цена 69 руб 75 коп",
-        desc: "Эксклюзивная фактурная серия Антик в благородном миндальном исполнении. Глубокий рельеф поверхности.",
-        size: "250х120х65 мм",
-        format: "1 NF Одинарный",
-        frost: "100 циклов",
-        water: "6-7%",
-        surface: "фактурный антик",
-        img: "img/oskol-3.webp"
-    },
-    {
-        id: 24,
-        category: "oskol",
-        meta: "Облицовочный • М175-200 • 1 НФ",
-        title: "КИРПИЧ СТАРООСКОЛЬСКИЙ ДОЛОМИТ БЕЛЫЙ 1 НФ",
-        price: "цена 87 руб 20 коп",
-        desc: "Белоснежный премиальный оттенок Доломит. Идеально ровные ряды в поддоне проложены защитной бумагой.",
-        size: "250х120х65 мм",
-        format: "1 NF Одинарный",
-        frost: "100 циклов",
-        water: "6-7%",
-        surface: "глянцевая гладкая",
-        img: "img/oskol-4.webp"
-    },
-    {
-        id: 25,
-        category: "oskol",
-        meta: "Облицовочный • М175-200 • 0.7 НФ",
-        title: "КИРПИЧ ЕВРО СТАРООСКОЛЬСКИЙ ДОЛОМИТ БЕЛЫЙ 0,7 НФ",
-        price: "цена 75 руб",
-        desc: "Белоснежный евроформат облицовочного кирпича напрямую с завода. Соответствует ГОСТ 530-2012.",
-        size: "250х85х65 мм",
-        format: "0.7 NF Евро",
-        frost: "100 циклов",
-        water: "6-7%",
-        surface: "глянцевая гладкая",
-        img: "img/oskol-5.webp"
-    },
-    {
-        id: 26,
-        category: "oskol",
-        meta: "Облицовочный • М175-200 • 1 НФ",
-        title: "КИРПИЧ СТАРООСКОЛЬСКИЙ БЕЛЫЙ 1 НФ",
-        price: "цена 87 руб",
-        desc: "Чистый белый цвет без посторонних включений. Количество штук в поддоне — 480.",
-        size: "250х120х65 мм",
-        format: "1 NF Одинарный",
-        frost: "100 циклов",
-        water: "6-7%",
-        surface: "гладкая",
-        img: "img/oskol-6.webp"
-    },
-    {
-        id: 27,
-        category: "oskol",
-        meta: "Облицовочный • М175-200 • 0.7 НФ",
-        title: "КИРПИЧ ЕВРО СТАРООСКОЛЬСКИЙ БЕЛЫЙ 0,7 НФ",
-        price: "цена 75 руб",
-        desc: "Европейский облегченный формат в белом цвете. Экономия на логистике и фундаменте.",
-        size: "250х85х65 мм",
-        format: "0.7 NF Евро",
-        frost: "100 циклов",
-        water: "6-7%",
-        surface: "гладкая",
-        img: "img/oskol-7.webp"
-    },
-    {
-        id: 28,
-        category: "oskol",
-        meta: "Облицовочный • М175-200 • 1 НФ",
-        title: "КИРПИЧ СТАРООСКОЛЬСКИЙ КОРИЧНЕВЫЙ 1 НФ",
-        price: "цена 77 руб",
-        desc: "Глубокий шоколадный оттенок для создания контрастных архитектурных элементов фасада.",
-        size: "250х120х65 мм",
-        format: "1 NF Одинарный",
-        frost: "100 циклов",
-        water: "6-7%",
-        surface: "гладкая",
-        img: "img/oskol-8.webp"
-    },
-     // --- КАТЕГОРИЯ: Ригельный 500 ---
-       {
-        id: 29,
-        category: "akbars",
-        meta: "Облицовочный • М150 • Ригель",
-        title: "КИРПИЧ РИГЕЛЬНЫЙ АК БАРС ТУМАН КРАСНЫЙ",
-        price: "цена 193 руб 00 коп",
-        desc: "Эксклюзивный длинный ригельный кирпич красного оттенка Туман. Плотная укладка, соответствие ГОСТ 530-2012.",
-        size: "500х85х45 мм",
-        format: "Ригель длинный",
-        frost: "100 циклов",
-        water: "6-8%",
-        surface: "гладкая ригельная",
-        img: "img/akbars-1.webp"
-    },
-    {
-        id: 30,
-        category: "akbars",
-        meta: "Облицовочный • М150 • Ригель",
-        title: "КИРПИЧ РИГЕЛЬНЫЙ АК БАРС АСТЕРОИД СОДОМА",
-        price: "цена 203 руб 00 коп",
-        desc: "Премиальный ригельный формат в глубоком темном исполнении Астероид. Элитная архитектура фасада.",
-        size: "500х85х45 мм",
-        format: "Ригель длинный",
-        frost: "100 циклов",
-        water: "6-8%",
-        surface: "гладкая ригельная",
-        img: "img/akbars-2.webp"
-    },
-    {
-        id: 31,
-        category: "akbars",
-        meta: "Облицовочный • М150 • Ригель",
-        title: "КИРПИЧ РИГЕЛЬНЫЙ АК БАРС МЕРКУРИЙ КРАСНЫЙ",
-        price: "цена 213 руб 00 коп",
-        desc: "Длинный облицовочный кирпич Меркурий с благородным заводским обжигом. Высочайшие декоративные свойства.",
-        size: "500х85х45 мм",
-        format: "Ригель длинный",
-        frost: "100 циклов",
-        water: "6-8%",
-        surface: "гладкая ригельная",
-        img: "img/akbars-3.webp"
-    },
-    {
-        id: 32,
-        category: "akbars",
-        meta: "Облицовочный • М150 • 1 НФ",
-        title: "КИРПИЧ АК БАРС ШОКОЛАД МАРС 1 НФ",
-        price: "цена 243 руб 00 коп",
-        desc: "Классический одинарный кирпич насыщенного шоколадного цвета. Ряды проложены защитной бумагой.",
-        size: "250х120х65 мм",
-        format: "1 NF Одинарный",
-        frost: "100 циклов",
-        water: "7-9%",
-        surface: "гладкая",
-        img: "img/akbars-4.webp"
-    },
-    {
-        id: 33,
-        category: "akbars",
-        meta: "Облицовочный • М150 • 1 НФ",
-        title: "КИРПИЧ АК БАРС ТУМАН КАНЬОН 1 НФ",
-        price: "цена 76 руб 70 коп",
-        desc: "Фактурная рельефная лицевая поверхность Каньон с красивой игрой теней на фасаде здания.",
-        size: "250х120х65 мм",
-        format: "1 NF Одинарный",
-        frost: "100 циклов",
-        water: "7-9%",
-        surface: "рельефная каньон",
-        img: "img/akbars-5.webp"
-    },
-    {
-        id: 34,
-        category: "akbars",
-        meta: "Облицовочный • М150 • 1 НФ",
-        title: "КИРПИЧ АК БАРС СЕРЫЙ ЛОФТ КОЛОТАЯ ФАСКА",
-        price: "цена 91 руб 00 коп",
-        desc: "Стильное решение в стиле Лофт со специальной колотой фаской, имитирующей ручную обработку.",
-        size: "250х120х65 мм",
-        format: "1 NF Одинарный",
-        frost: "100 циклов",
-        water: "7-9%",
-        surface: "колотая фаска",
-        img: "img/akbars-6.webp"
-    },
-    {
-        id: 35,
-        category: "akbars",
-        meta: "Облицовочный • М150 • 1 НФ",
-        title: "КИРПИЧ АК БАРС ФЛЭШ КОСМО РИФ 1 НФ",
-        price: "цена 76 руб 00 коп",
-        desc: "Серия Космо Риф с выразительным накатом. Эффектный пестрый фасад за счет флэш-обжига.",
-        size: "250х120х65 мм",
-        format: "1 NF Одинарный",
-        frost: "100 циклов",
-        water: "6-8%",
-        surface: "рифленая космо",
-        img: "img/akbars-7.webp"
-    },
-    {
-        id: 36,
-        category: "akbars",
-        meta: "Облицовочный • М150 • 1 НФ",
-        title: "КИРПИЧ АК БАРС ФЛЭШ КОСМО ГЛАДКИЙ 1 НФ",
-        price: "цена 75 руб 00 коп",
-        desc: "Идеально гладкая лаковая поверхность с глубокими переливами флэш-обжига Татарстан.",
-        size: "250х120х65 мм",
-        format: "1 NF Одинарный",
-        frost: "100 циклов",
-        water: "6-8%",
-        surface: "гладкая космо",
-        img: "img/akbars-8.webp"
-    },
-    // --- КАТЕГОРИЯ: "баварская кладка" ---
-     {
-        id: 37,
-        category: "bavar",
-        meta: "Облицовочный • М200 • 1 НФ",
-        title: "КИРПИЧ МЮНХЕН КЛАССИК 1НФ ТЕМНЫЙ ОТТЕНОК",
-        price: "цена 82 руб 20 коп",
-        desc: "Классический одинарный лицевой кирпич с эффектным темным флэш-обжигом от завода Пятый Элемент.",
-        size: "250х120х65 мм",
-        format: "1 NF Одинарный",
-        frost: "100 циклов",
-        water: "6.1 - 8.9%",
-        surface: "гладкая флэш",
-        img: "img/bavar-1.webp"
-    },
-    {
-        id: 38,
-        category: "bavar",
-        meta: "Облицовочный • М200 • 1 НФ",
-        title: "КИРПИЧ РЕГЕНСБУРГ КЛАССИК 1НФ САМАЯ ПЕСТРАЯ ЛИНЕЙКА",
-        price: "цена 82 руб 20 коп",
-        desc: "Максимально выразительный контрастный переход от красного к глубокому графитовому нагару.",
-        size: "250х120х65 мм",
-        format: "1 NF Одинарный",
-        frost: "100 циклов",
-        water: "6.1 - 8.9%",
-        surface: "гладкая флэш",
-        img: "img/bavar-2.webp"
-    },
-    {
-        id: 39,
-        category: "bavar",
-        meta: "Облицовочный • М200 • 0.7 НФ",
-        title: "КИРПИЧ МЮНХЕН КЛАССИК 0,7НФ ТЕМНЫЙ ОТТЕНОК",
-        price: "цена 71 руб 88 коп",
-        desc: "Евроформат облицовочного кирпича в темном баварском исполнении. Экономия веса и объема.",
-        size: "250х85х65 мм",
-        format: "0.7 NF Евро",
-        frost: "100 циклов",
-        water: "6.1 - 8.9%",
-        surface: "гладкая флэш",
-        img: "img/bavar-3.webp"
-    },
-    {
-        id: 40,
-        category: "bavar",
-        meta: "Облицовочный • М200 • 0.7 НФ",
-        title: "КИРПИЧ РЕГЕНСБУРГ КЛАССИК 0,7НФ САМАЯ ПЕСТРАЯ ЛИНЕЙКА",
-        price: "цена 71 руб 88 коп",
-        desc: "Пестрый европейский формат лицевого кирпича напрямую с производства. ГОСТ 530-2012.",
-        size: "250х85х65 мм",
-        format: "0.7 NF Евро",
-        frost: "100 циклов",
-        water: "6.1 - 8.9%",
-        surface: "гладкая флэш",
-        img: "img/bavar-4.webp"
-    },
-    {
-        id: 41,
-        category: "bavar",
-        meta: "Облицовочный • М200 • 0.5 НФ",
-        title: "КИРПИЧ МЮНХЕН КЛАССИК 0,5 НФ ТЕМНЫЙ ОТТЕНОК",
-        price: "цена 61 руб 08 коп",
-        desc: "Узкий формат половинки 0.5 НФ. Идеален для дизайнерской отделки и реставрационных фасадных работ.",
-        size: "250х60х65 мм",
-        format: "0.5 NF Половинка",
-        frost: "100 циклов",
-        water: "6.1 - 8.9%",
-        surface: "гладкая флэш",
-        img: "img/bavar-5.webp"
-    },
-    {
-        id: 42,
-        category: "bavar",
-        meta: "Облицовочный • М200 • 0.5 НФ",
-        title: "КИРПИЧ РЕГЕНСБУРГ КЛАССИК 0,5 НФ САМАЯ ПЕСТРАЯ ЛИНЕЙКА",
-        price: "цена 61 руб 08 коп",
-        desc: "Облегченная половинка с максимальным градиентом пестрых оттенков для неповторимого рисунка кладки.",
-        size: "250х60х65 мм",
-        format: "0.5 NF Половинка",
-        frost: "100 циклов",
-        water: "6.1 - 8.9%",
-        surface: "гладкая флэш",
-        img: "img/bavar-6.webp"
-    },
-    {
-        id: 43,
-        category: "bavar",
-        meta: "Тротуарный • М800 • Брусчатка",
-        title: "БРУСЧАТКА КЛИНКЕРНАЯ МЮНХЕН И РЕГЕНСБУРГ",
-        price: "цена 79 руб 30 коп",
-        desc: "Сверхпрочный клинкер для мощения дорожек и преображения придомовой территории. Морозостойкость 300 циклов.",
-        size: "250х80х52 мм",
-        format: "Тротуарный клинкер",
-        frost: "300 циклов (F300)",
-        water: "до 2.5%",
-        surface: "матовая дорожная",
-        img: "img/bavar-7.webp"
-    },
-    // --- КАТЕГОРИЯ: "Plinfa" ---
-     {
-        id: 44,
-        category: "plinfa",
-        meta: "Ручная формовка • М300 • F200",
-        title: 'КИРПИЧ PLINFA "Twin 3801"',
-        price: "цена 123 руб 99 коп",
-        desc: "Эксклюзивный облицовочный кирпич ручной формовки. Высочайшая морозостойкость 200 циклов.",
-        size: "220х85х55 мм",
-        format: "Ручная формовка",
-        frost: "200 циклов (F200)",
-        water: "до 8%",
-        surface: "фактурная ручная",
-        img: "img/plinfa-1.webp"
-    },
-    {
-        id: 45,
-        category: "plinfa",
-        meta: "Ручная формовка • М300 • F200",
-        title: 'КИРПИЧ PLINFA "Twin 3802"',
-        price: "цена 143 руб 27 коп",
-        desc: "Премиальный фасадный материал ручной работы в благородном тёмном исполнении.",
-        size: "220х85х50 мм",
-        format: "Ручная формовка",
-        frost: "200 циклов (F200)",
-        water: "до 8%",
-        surface: "фактурная ручная",
-        img: "img/plinfa-2.webp"
-    },
-    {
-        id: 46,
-        category: "plinfa",
-        meta: "Ручная формовка • М300 • F200",
-        title: 'КИРПИЧ PLINFA "Twin 3803"',
-        price: "цена 124 руб 75 коп",
-        desc: "Лицевой кирпич ручной формовки с уникальным переливом нагара для элитных усадеб.",
-        size: "220х85х55 мм",
-        format: "Ручная формовка",
-        frost: "200 циклов (F200)",
-        water: "до 8%",
-        surface: "фактурная ручная",
-        img: "img/plinfa-3.webp"
-    },
-    {
-        id: 47,
-        category: "plinfa",
-        meta: "Ручная формовка • М300 • F100",
-        title: 'КИРПИЧ PLINFA "Iron 2715"',
-        price: "цена 125 руб 98 коп",
-        desc: "Полнотелый облицовочный кирпич серии Iron. Железная прочность М300 для вековых фасадов.",
-        size: "270х85х50 мм",
-        format: "Ручная формовка",
-        frost: "100 циклов (F100)",
-        water: "до 7%",
-        surface: "рельефная состаренная",
-        img: "img/plinfa-4.webp"
-    },
-    {
-        id: 48,
-        category: "plinfa",
-        meta: "Ручная формовка • М300 • F100",
-        title: 'КИРПИЧ PLINFA "Iron 2912"',
-        price: "цена 141 руб 56 коп",
-        desc: "Фактурный кирпич ручной работы с глубоким шоколадно-графитовым оттенком.",
-        size: "270х85х50 мм",
-        format: "Ручная формовка",
-        frost: "100 циклов (F100)",
-        water: "до 7%",
-        surface: "рельефная состаренная",
-        img: "img/plinfa-5.webp"
-    },
-    {
-        id: 49,
-        category: "plinfa",
-        meta: "Ручная формовка • М300 • F100",
-        title: 'КИРПИЧ PLINFA "Iron 2922"',
-        price: "цена 154 руб 75 коп",
-        desc: "Элитная ручная формовка серии Iron. Соответствует строгим требованиям ГОСТ 530-2012.",
-        size: "270х85х50 мм",
-        format: "Ручная формовка",
-        frost: "100 циклов (F100)",
-        water: "до 7%",
-        surface: "рельефная состаренная",
-        img: "img/plinfa-6.webp"
-    },
-    {
-        id: 50,
-        category: "plinfa",
-        meta: "Полнотелый • М300 • F100",
-        title: 'КИРПИЧ PLINFA "Iron 2804"',
-        price: "цена 168 руб 94 коп",
-        desc: "Полнотелый ригельный кирпич ручной формовки. Идеален для заборов, каминов и фасадов премиум-класса.",
-        size: "270х85х50 мм",
-        format: "Полнотелый ригель",
-        frost: "100 циклов (F100)",
-        water: "до 6%",
-        surface: "фактурная ручная",
-        img: "img/plinfa-7.webp"
-    },
-    {
-        id: 51,
-        category: "plinfa",
-        meta: "Полнотелый • М300 • F100",
-        title: 'КИРПИЧ PLINFA "Iron 2302"',
-        price: "цена 179 руб 75 коп",
-        desc: "Тяжёлый полнотелый кирпич ручной работы с уникальным клеймом русских мастеров.",
-        size: "270х85х50 мм",
-        format: "Полнотелый ригель",
-        frost: "100 циклов (F100)",
-        water: "до 6%",
-        surface: "фактурная ручная",
-        img: "img/plinfa-8.webp"
-    },
-    {
-        id: 52,
-        category: "plinfa",
-        meta: "Облицовочный • М300 • F100",
-        title: 'КИРПИЧ PLINFA "Iron 2306"',
-        price: "цена 127 руб 54 коп",
-        desc: "Классический формат 1 НФ в премиальном исполнении ручной формовки бренда PLINFA.",
-        size: "215х102х65 мм",
-        format: "1 NF Одинарный",
-        frost: "100 циклов (F100)",
-        water: "до 7%",
-        surface: "рельефная ручная",
-        img: "img/plinfa-9.webp"
-    },
-   // --- "tsegla" ---
-    {
-        id: 53,
-        category: "tsegla",
-        meta: "Клинкерная плитка • М500 • Ручная формовка",
-        title: "КЛИНКЕРНАЯ ПЛИТКА TSEGLA — КОЛЛЕКЦИЯ 2",
-        price: "цена от 4800 руб/кв.м",
-        desc: "Экологически чистый продукт ручной формовки. Уникальная фактура поверхности как отпечаток пальцев.",
-        size: "210х50х12 мм",
-        format: "Клинкерная плитка",
-        frost: "300 циклов",
-        water: "до 3%",
-        surface: "фактурная ручная",
-        img: "img/tsegla-1.webp"
-    },
-    {
-        id: 54,
-        category: "tsegla",
-        meta: "Клинкерная плитка • М500 • Ручная формовка",
-        title: "КЛИНКЕРНАЯ ПЛИТКА TSEGLA — КОЛЛЕКЦИЯ 4",
-        price: "цена от 4800 руб/кв.м",
-        desc: "Изготавливается на основе элитной глины и немецких минеральных пигментов. Не выгорает на солнце.",
-        size: "205х50х12 мм",
-        format: "Клинкерная плитка",
-        frost: "300 циклов",
-        water: "до 3%",
-        surface: "фактурная ручная",
-        img: "img/tsegla-2.webp"
-    },
-    {
-        id: 55,
-        category: "tsegla",
-        meta: "Клинкерная плитка • М500 • Ручная формовка",
-        title: "КЛИНКЕРНАЯ ПЛИТКА TSEGLA — КОЛЛЕКЦИЯ 4 ЛОФТ",
-        price: "цена от 4800 руб/кв.м",
-        desc: "Стильная лофтовая серия с брутальным нагаром. Каждая плитка уникальна и не повторяет рисунок.",
-        size: "205х50х12 мм",
-        format: "Клинкерная плитка",
-        frost: "300 циклов",
-        water: "до 3%",
-        surface: "лофт фактура",
-        img: "img/tsegla-3.webp"
-    },
-    {
-        id: 56,
-        category: "tsegla",
-        meta: "Клинкерная плитка • М500 • Ручная формовка",
-        title: "КЛИНКЕРНАЯ ПЛИТКА TSEGLA — КОЛЛЕКЦИЯ 2/1",
-        price: "цена от 4800 руб/кв.м",
-        desc: "Высококачественные материалы из Белоруссии. Плитка не трескается и не рассыпается со временем.",
-        size: "245х50х15 мм",
-        format: "Клинкерная плитка",
-        frost: "300 циклов",
-        water: "до 3%",
-        surface: "фактурная ручная",
-        img: "img/tsegla-4.webp"
-    },
-    {
-        id: 57,
-        category: "tsegla",
-        meta: "Клинкерная плитка • М500 • Ручная формовка",
-        title: "КЛИНКЕРНАЯ ПЛИТКА TSEGLA — КОЛЛЕКЦИЯ 2/2",
-        price: "цена от 4800 руб/кв.м",
-        desc: "Премиальная ручная работа. Обладает высокой маркой прочности М500 и устойчивостью к сибирским морозам.",
-        size: "245х50х15 мм",
-        format: "Клинкерная плитка",
-        frost: "300 циклов",
-        water: "до 3%",
-        surface: "фактурная ручная",
-        img: "img/tsegla-5.webp"
-    },
-    {
-        id: 58,
-        category: "tsegla",
-        meta: "Клинкерная плитка • М500 • Ручная формовка",
-        title: "КЛИНКЕРНАЯ ПЛИТКА TSEGLA — КОЛЛЕКЦИЯ 3 АНТИК ТАЙЛ",
-        price: "цена от 4800 руб/кв.м",
-        desc: "Эксклюзивная состаренная серия Антик Тайл. Поверхность имитирует старинную европейскую кладку.",
-        size: "305х52х15 мм",
-        format: "Клинкерная плитка",
-        frost: "300 циклов",
-        water: "до 3%",
-        surface: "состаренная антик",
-        img: "img/tsegla-6.webp"
-    },
-    {
-        id: 59,
-        category: "tsegla",
-        meta: "Клинкерная плитка • М500 • Ручная формовка",
-        title: "КЛИНКЕРНАЯ ПЛИТКА TSEGLA — КОЛЛЕКЦИЯ 3/1",
-        price: "цена от 4800 руб/кв.м",
-        desc: "Благородный светлый оттенок. Немецкие минеральные пигменты обеспечивают вековую стойкость цвета.",
-        size: "245х50х15 мм",
-        format: "Клинкерная плитка",
-        frost: "300 циклов",
-        water: "до 3%",
-        surface: "фактурная ручная",
-        img: "img/tsegla-7.webp"
-    },
-    {
-        id: 60,
-        category: "tsegla",
-        meta: "Клинкерная плитка • М500 • Ручная формовка",
-        title: "КЛИНКЕРНАЯ ПЛИТКА TSEGLA — КОЛЛЕКЦИЯ 2/3",
-        price: "цена от 4800 руб/кв.м",
-        desc: "Насыщенный меланжевый переход тонов обжига. Идеально подходит для элитной отделки цоколей и фасадов.",
-        size: "245х50х15 мм",
-        format: "Клинкерная плитка",
-        frost: "300 циклов",
-        water: "до 3%",
-        surface: "фактурная ручная",
-        img: "img/tsegla-8.webp"
-    },
-    {
-        id: 61,
-        category: "tsegla",
-        meta: "Клинкерная плитка • М500 • Ручная формовка",
-        title: "КЛИНКЕРНАЯ ПЛИТКА TSEGLA — КОЛЛЕКЦИЯ АНТИК ТАЙЛ",
-        price: "цена от 4800 руб/кв.м",
-        desc: "Удлиненный формат серии Антик Тайл. Живописный рельеф ручной работы для дизайнерских интерьеров и фасадов.",
-        size: "305х52х15 мм",
-        format: "Клинкерная плитка",
-        frost: "300 циклов",
-        water: "до 3%",
-        surface: "состаренная антик",
-        img: "img/tsegla-9.webp"
-    },
-    {
-        id: 62,
-        category: "tsegla",
-        meta: "Клинкерная плитка • М500 • Ручная формовка",
-        title: "КЛИНКЕРНАЯ ПЛИТКА TSEGLA — КОЛЛЕКЦИЯ 2/4",
-        price: "цена от 4800 руб/кв.м",
-        desc: "Глубокая рельефная фактура. Полная устойчивость к высолам, влаге, грибкам и агрессивной внешней среде.",
-        size: "245х50х15 мм",
-        format: "Клинкерная плитка",
-        frost: "300 циклов",
-        water: "до 3%",
-        surface: "фактурная ручная",
-        img: "img/tsegla-10.webp"
-    },
-    {
-        id: 63,
-        category: "tsegla",
-        meta: "Клинкерная плитка • М500 • Ручная формовка",
-        title: "КЛИНКЕРНАЯ ПЛИТКА TSEGLA — КОЛЛЕКЦИЯ 2 ЛОФТ",
-        price: "цена от 4800 руб/кв.м",
-        desc: "Контрастный лофтовый отжиг со светлыми вкраплениями. Идеальная имитация старинных стен европейских мануфактур.",
-        size: "245х50х15 мм",
-        format: "Клинкерная плитка",
-        frost: "300 циклов",
-        water: "до 3%",
-        surface: "лофт фактура",
-        img: "img/tsegla-11.webp"
-    },
-    {
-        id: 64,
-        category: "tsegla",
-        meta: "Клинкерная плитка • М500 • Ручная формовка",
-        title: "КЛИНКЕРНАЯ ПЛИТКА TSEGLA — КОЛЛЕКЦИЯ 1",
-        price: "цена от 4800 руб/кв.м",
-        desc: "Классическая базовая коллекция плитки ручной формовки. Максимальная прочность М500.",
-        size: "205х50х12 мм",
-        format: "Клинкерная плитка",
-        frost: "300 циклов",
-        water: "до 3%",
-        surface: "фактурная ручная",
-        img: "img/tsegla-12.webp"
-    },
-    {
-        id: 65,
-        category: "tsegla",
-        meta: "Клинкерная плитка • М500 • Ручная формовка",
-        title: "КЛИНКЕРНАЯ ПЛИТКА TSEGLA — ГРАФИТ",
-        price: "цена от 4800 руб/кв.м",
-        desc: "Элитный глубокий графитовый оттенок. Строгий монохромный дизайн для современной архитектуры хай-тек.",
-        size: "205х50х12 мм",
-        format: "Клинкерная плитка",
-        frost: "300 циклов",
-        water: "до 3%",
-        surface: "матовая графит",
-        img: "img/tsegla-13.webp"
-    },
-    // --- КАТЕГОРИЯ: кирпич флэш ---
-     {
-        id: 86,
-        category: "flash",
-        meta: "Облицовочный • М150 • 1 НФ",
-        title: 'КИРПИЧ "ФЛЭШ" ГРАФИТ ВАВИЛОН 1НФ',
-        price: "цена 69 руб 83 коп",
-        desc: "Выгодное решение для застройщиков. Облицовочный одинарный кирпич в глубоком графитовом оттенке Вавилон.",
-        size: "250х120х65 мм",
-        format: "1 NF Одинарный",
-        frost: "50 циклов",
-        water: "8-10%",
-        surface: "гладкая флэш",
-        img: "img/flash-1.webp"
-    }
-];
 // БЛОК 2: СКОРОСТНОЙ РОБОТ-РЕНДЕР КАРТОЧЕК ЧЕРЕЗ DOCUMENT FRAGMENT
 // ==========================================================================
+function formatPriceRuble(price) {
+    const rubles = Math.floor(price);
+    const kopecks = Math.round((price - rubles) * 100);
+    return `цена ${rubles} руб ${kopecks.toString().padStart(2, '0')} коп`;
+}
 function getNumericPrice(priceString) {
     if (!priceString) return 0;
 
@@ -968,7 +36,7 @@ function renderCatalogCards(products) {
                 <div class="showcase-info">
                     <span class="showcase-meta">${brick.meta}</span>
                     <h3>${brick.title}</h3>
-                    <div class="catalog-brick-price-tag">${brick.price}</div>
+                    <div class="catalog-brick-price-tag">${formatPriceRuble(brick.price)}</div>
                     <p class="showcase-short-desc">${brick.desc}</p>
                     <div class="showcase-detailed-specs">
                         <div class="spec-row"><span>Размер:</span> <strong>${brick.size}</strong></div>
@@ -985,8 +53,6 @@ function renderCatalogCards(products) {
 // ======================================================
 document.addEventListener("DOMContentLoaded", () => {
     
-    renderCatalogCards(BRICKS_DATABASE);
-
     const calcModal = document.getElementById('calcModal');
     const openCalcBtn = document.getElementById('open-calc-trigger'); 
     const closeCalc = document.getElementById('closeCalc');
@@ -994,23 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const totalSum = document.getElementById("totalSum");
     const leadModal = document.getElementById("leadModal");
     const brickSelect = document.getElementById("brickSelect");
-     if (brickSelect && BRICKS_DATABASE) {
-
-    brickSelect.innerHTML =
-    '<option value="" disabled selected hidden>— Нажмите, чтобы выбрать кирпич —</option>';
-
-BRICKS_DATABASE.forEach(brick => {
-
-    const option = document.createElement("option");
-
-    option.value = getNumericPrice(brick.price);
-    option.textContent = brick.title;
-
-    brickSelect.appendChild(option);
-
-});
-
-}
+    
     const basePriceTag = document.getElementById("calcBasePriceTag");
     const calcSubmitBtn = document.getElementById("calcSubmitBtn");
 
@@ -1019,19 +69,46 @@ BRICKS_DATABASE.forEach(brick => {
     const selectContainer = document.getElementById('calcSelectContainer');
     const inputLabel = document.getElementById('calcInputLabel');
 
-    // Кнопки нашего нового переключателя
+    // Кнопки переключателя штук и квадратных метров Аюра
     const modeBtnPcs = document.getElementById('modeBtnPcs');
     const modeBtnSqm = document.getElementById('modeBtnSqm');
 
-    const leadBrickSelect = document.getElementById("lead-brick-select");
+    const leadInput = document.getElementById("lead-brick-select");
+    const leadSubmitBtn = document.getElementById("lead-submit-btn");
+
+    // Элементы финальной формы контактов
     const leadQuantityTitle = document.getElementById("lead-quantity-title");
     const leadQuantityValue = document.getElementById("lead-quantity-value");
-    const leadFinalPrice = document.getElementById("lead-final-price");
+    const leadQuantityBlock = document.getElementById("lead-quantity-display");
+    
+    const leadPcsBlock = document.getElementById("lead-pcs-display");
+    const leadPcsValue = document.getElementById("lead-pcs-value");
+    
+    const leadPriceTag = document.getElementById("lead-final-price");
+    const leadSumBlock = document.getElementById("lead-sum-display");
 
     const exactReckePrice = 82.35; 
     let isAreaMode = false; // false = штуки, true = кв.м.
 
-    // ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ИНТЕРФЕЙСА ТУМБЛЕРОМ
+    // 🔥 ИСПРАВЛЕНО ДЛЯ 1С: Выпадающий список кирпичей теперь считывает products.json напрямую!
+    if (brickSelect) {
+        brickSelect.innerHTML = '<option value="" disabled selected hidden>— Нажмите, чтобы выбрать кирпич —</option>';
+
+        fetch('products.json')
+            .then(response => response.json())
+            .then(bricksData => {
+                if (Array.isArray(bricksData)) {
+                    bricksData.forEach(brick => {
+                        const option = document.createElement("option");
+                        option.value = brick.price; // Чистое число цены для точного счета калькулятора!
+                        option.textContent = brick.title;
+                        brickSelect.appendChild(option);
+                    });
+                }
+            })
+            .catch(error => console.error("Ошибка загрузки списка кирпичей в калькулятор:", error));
+    }
+    // ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ИНТЕРФЕЙСА ТУМБЛЕРОМ (Твой родной чистый код)
     function setCalculatorMode(toAreaMode) {
         isAreaMode = toAreaMode;
 
@@ -1057,23 +134,24 @@ BRICKS_DATABASE.forEach(brick => {
     if (modeBtnPcs) modeBtnPcs.addEventListener('click', () => setCalculatorMode(false));
     if (modeBtnSqm) modeBtnSqm.addEventListener('click', () => setCalculatorMode(true));
 
-    // УНИВЕРСАЛЬНАЯ ЛИНЕЙНАЯ МАТЕМАТИКА РАСЧЕТА
+    // УНИВЕРСАЛЬНАЯ ЛИНЕЙНАЯ МАТЕМАТИКА РАСЧЕТА (Твой родной чистый код)
     function calculateTotal() {
         if (!brickQuantity || !totalSum) return;
         
         const inputValue = parseFloat(brickQuantity.value) || 0;
         if (inputValue <= 0) { totalSum.textContent = "0 ₽"; return; }
 
+        // Забираем чистую цену из селекта (она подгрузилась числом из JSON)
+        const currentPrice = brickSelect ? (parseFloat(brickSelect.value) || exactReckePrice) : exactReckePrice;
+
         if (isAreaMode) {
             // Магия квадратуры: 60 шт на кв.м.
-            const currentPrice = brickSelect ? (parseFloat(brickSelect.value) || exactReckePrice) : exactReckePrice;
             const totalPieces = Math.ceil(inputValue * 60); 
             const finalCost = Math.ceil(totalPieces * currentPrice);
             
             totalSum.innerHTML = `${finalCost.toLocaleString('ru-RU')} ₽ <br><span style="font-size:12px; color:#64748b; font-weight:600; display:block; margin-top:4px;">(Объем заказа: ${totalPieces.toLocaleString('ru-RU')} шт.)</span>`;
         } else {
             // Стандартный поштучный расчет
-            const currentPrice = brickSelect ? (parseFloat(brickSelect.value) || exactReckePrice) : exactReckePrice;
             const finalCost = Math.ceil(inputValue * currentPrice);
             totalSum.textContent = `${finalCost.toLocaleString("ru-RU")} ₽`;
         }
@@ -1087,88 +165,75 @@ BRICKS_DATABASE.forEach(brick => {
             calculateTotal();
         });
     }
-
     // ==========================================================================
-    // СИСТЕМА ПРИЕМА СИГНАЛА АВТОПИЛОТА (ИЗ КАРТОЧКИ ТОВАРА)
+    // СИСТЕМА ПРИЕМА СИГНАЛА АВТОПИЛОТА (ИЗ КАРТОЧКИ ТОВАРА - Твой родной код)
     // ==========================================================================
     const savedBrick = localStorage.getItem('selectedBrick');
-    const savedBrickPrice = localStorage.getItem('selectedBrickPrice'); // 🔥 Забираем чистую цену из памяти!
+    const savedBrickID = localStorage.getItem('selectedBrickID');
 
     if (savedBrick && calcModal) {
         isAreaMode = true; 
         calcModal.classList.add('active');
         document.body.style.overflow = "hidden";
-        selectedBrickName = savedBrick;
 
         if (calcTitle) calcTitle.innerHTML = `Расчет сметы:<br><span style="color:#e11d48; font-size:18px;">${savedBrick}</span>`;
-        
         if (selectContainer) selectContainer.style.setProperty('display', 'none', 'important'); 
         
-        // 🔥 МАГИЯ АЮРА: Передаем цену калькулятору, чтобы отклинить 82.35!
-         const brickSelect = document.getElementById("brickSelect");
-        const priceTag = document.getElementById("calcBasePriceTag");
-        
-        if (brickSelect && savedBrickPrice) {
-            // 1. Записываем чистую цену в селект для внутренней математики расчёта
-            brickSelect.value = savedBrickPrice; 
-            
-            // 2. 🔥 ЖЕЛЕЗНО: Выводим правильную цену прямо в твой родной тег на экране!
-            if (priceTag) {
-                priceTag.innerHTML = `${savedBrickPrice} <span style="font-size: 11px; color: #64748b; font-weight: 700;">₽/ШТ.</span>`;
-            }
+        // 🔥 НАМЕРТВО СВЯЗЫВАЕМ СЕЛЕКТ: Перебираем все пункты списка и находим точное имя!
+        if (brickSelect) {
+            // Маленькая задержка, чтобы fetch('products.json') успел забить селект данными
+            setTimeout(() => {
+                for (let i = 0; i < brickSelect.options.length; i++) {
+                    if (brickSelect.options[i].text.trim().toUpperCase() === savedBrick.trim().toUpperCase()) {
+                        brickSelect.selectedIndex = i; // Насильно включаем именно выбранный кирпич!
+                        
+                        // Выводим его чистую цену на тег сэндвича на экране
+                        if (basePriceTag) {
+                            const currentPrice = parseFloat(brickSelect.value) || exactReckePrice;
+                            basePriceTag.innerHTML = `${currentPrice.toLocaleString('ru-RU', { minimumFractionDigits: 2 })} <span style="font-size: 11px; color: #64748b; font-weight: 700;">₽/ШТ.</span>`;
+                        }
+                        break;
+                    }
+                }
+                calculateTotal(); // Пинаем калькулятор для точного пересчета сметы
+            }, 300);
         }
         
-        // 3. Пинаем калькулятор каталога через его родную математику, чтобы цифры обновились сразу
-        if (typeof updateCalculations === 'function') {
-            updateCalculations();
-        } else if (typeof calculateTotal === 'function') {
-            calculateTotal();
-        } else {
-            // Если функции называются иначе, симулируем ввод встроенными силами браузера
-            brickSelect.dispatchEvent(new Event('change'));
-            const brickQuantity = document.getElementById("brickQuantity");
-            if (brickQuantity) brickQuantity.dispatchEvent(new Event('input'));
-        }
-        
-        // Вычищаем память, чтобы при обычном заходе калькулятор не путался
+        // Вычищаем оперативную память
         localStorage.removeItem('selectedBrick');
-        localStorage.removeItem('selectedBrickPrice');
+        localStorage.removeItem('selectedBrickID');
     }
 
+    // КНОПКА ОТКРЫТИЯ С СТРАНИЦЫ КАРТОЧКИ ТОВАРА (Фикс поиска по JSON вместо старой базы)
     const productBtn = document.querySelector('.product-order-submit');
     if (productBtn) {
         productBtn.addEventListener('click', function(e) {
             e.preventDefault(); 
-            
             const productTitleElement = document.querySelector('h1');
             const productTitle = productTitleElement ? productTitleElement.textContent.trim() : "КИРПИЧ РИГЕЛЬНЫЙ ЖЕЛЕЗНОГОРСКИЙ КРАФТ";
             
-            let cleanPrice = "82.35"; // Дефолт-страховка
-            
-            if (typeof BRICKS_DATABASE !== 'undefined' && Array.isArray(BRICKS_DATABASE)) {
-                const foundBrick = BRICKS_DATABASE.find(b => b.title.trim().toUpperCase() === productTitle.toUpperCase());
-                if (foundBrick && foundBrick.price) {
-                    // 🔥 УМНАЯ ВЫГРУЗКА АЮРА: Вытаскиваем только чистые группы цифр из строки "цена 67 руб 17 коп"
-                    const digits = foundBrick.price.match(/\d+/g); // Находит отдельно ['67', '17']
-                    
-                    if (digits && digits.length >= 2) {
-                        // Если нашли и рубли, и копейки — склеиваем их через правильную точку!
-                        cleanPrice = `${digits[0]}.${digits[1]}`; // Получится строго "67.17"
-                    } else if (digits && digits.length === 1) {
-                        // Если копеек нет (например, ровно "цена 45 руб") — оставляем просто рубли
-                        cleanPrice = digits[0];
+            fetch('products.json')
+                .then(response => response.json())
+                .then(bricksData => {
+                    let cleanPrice = exactReckePrice;
+                    if (Array.isArray(bricksData)) {
+                        const foundBrick = bricksData.find(b => b.title.trim().toUpperCase() === productTitle.toUpperCase());
+                        if (foundBrick) cleanPrice = foundBrick.price;
                     }
-                }
-            }
-            
-            localStorage.setItem('selectedBrick', productTitle);
-            localStorage.setItem('selectedBrickPrice', cleanPrice); // Теперь в память летят честные 67.17!
-            window.location.href = "index.html"; 
+                    localStorage.setItem('selectedBrick', productTitle);
+                    localStorage.setItem('selectedBrickPrice', cleanPrice);
+                    window.location.href = "index.html"; 
+                })
+                .catch(() => {
+                    localStorage.setItem('selectedBrick', productTitle);
+                    localStorage.setItem('selectedBrickPrice', exactReckePrice);
+                    window.location.href = "index.html";
+                });
         });
     }
 
-    // КНОПКА ФИКСАЦИИ СМЕТЫ И ПЕРЕХОДА К КОНТАКТАМ
-    if (calcSubmitBtn) {
+    // КНОПКА ФИКСАЦИИ СМЕТЫ И ПЕРЕХОДА К КОНТАКТАМ (Твой родной чистый код)
+     if (calcSubmitBtn) {
         calcSubmitBtn.addEventListener("click", function (e) {
             e.preventDefault();
             const quantity = parseFloat(brickQuantity.value) || 0;
@@ -1178,135 +243,90 @@ BRICKS_DATABASE.forEach(brick => {
                 return;
             }
 
-            // 1. Закрываем окно калькулятора (убираем твой класс active)
-            if (calcModal) {
-                calcModal.classList.remove("active");
-                document.body.style.overflow = ""; // Возвращаем прокрутку страницы
-            }
-            
-            // 2. 🔥 ИСПРАВЛЕНО: Вместо всплывающего окна плавно летим вниз к нашей готовой форме!
-            // Скрипт ищет наш новый класс заголовка формы custom-form-header
-             const targetForm = document.querySelector(".custom-form-header");
-            
-            if (targetForm) {
-                // Высчитываем точную позицию заголовка с учетом высоты фиксированной шапки сайта
-                const headerOffset = 100; // Отступ в 100 пикселей, чтобы шапка не перекрывала текст
-                const elementPosition = targetForm.getBoundingClientRect().top;
-                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                // Запускаем мягкий, идеальный полет, который остановится точно перед заголовком
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: "smooth"
-                });
-            }
-
-            // 2. 🔥 ПЕРЕДАЧА ДАННЫХ: Связываем кирпич из калькулятора с формой заявки
-            // Находим селект калькулятора (из которого человек только что выбрал кирпич)
-            const calcSelect = document.getElementById("brickSelect");
-            const calcQuantity = document.getElementById("brickQuantity");
-            const calcTotalSumElement = document.getElementById("totalSum"); 
-            
-            const leadInput = document.getElementById("lead-brick-select");
-            const leadSubmitBtn = document.getElementById("lead-submit-btn");
-
-            // Твои родные элементы из HTML
-            const leadQuantityTitle = document.getElementById("lead-quantity-title");
-            const leadQuantityValue = document.getElementById("lead-quantity-value");
-            const leadQuantityBlock = document.getElementById("lead-quantity-display");
-            
-            const leadPcsBlock = document.getElementById("lead-pcs-display");
-            const leadPcsValue = document.getElementById("lead-pcs-value");
-            
-            const leadPriceTag = document.getElementById("lead-final-price");
-            const leadSumBlock = document.getElementById("lead-sum-display");
-
-            if (calcSelect && calcQuantity && calcTotalSumElement && leadInput && leadSubmitBtn) {
+            // 🔥 ИСПРАВЛЕНО НАМЕРТВО: Заменили calcSelect на brickSelect, чтобы убрать ошибку!
+            if (leadInput && leadSubmitBtn) {
+                let fullBrickName = brickSelect ? brickSelect.options[brickSelect.selectedIndex].text : '';
+leadInput.value = fullBrickName.toUpperCase();
+leadInput.style.setProperty('text-overflow', 'clip', 'important');
+// Вычищаем глобальную переменную, чтобы при следующем открытии ничего не двоилось
+if (typeof selectedBrickName !== 'undefined') {
+    selectedBrickName = '';
+}
                 
-                // 1. СТРОКА 1: НАИМЕНОВАНИЕ КИРПИЧА БЕЗ ОБРЕЗОК
-                let fullBrickName = (typeof selectedBrickName !== 'undefined' && selectedBrickName) ? selectedBrickName : calcSelect.options[calcSelect.selectedIndex].text;
-                leadInput.value = fullBrickName.toUpperCase();
-                
-                // Извлекаем текстовые строчки из калькулятора
-                const rawSumText = calcTotalSumElement.innerText || calcTotalSumElement.textContent;
+                const rawSumText = totalSum.innerText || totalSum.textContent;
                 const lines = rawSumText.split('\n');
-                
-                // 2. СТРОКА 2: ВЫВОД ПЛОЩАДИ ИЛИ ШТУК
-                const quantityValue = parseFloat(calcQuantity.value || 0).toLocaleString("ru-RU");
+                const quantityValue = parseFloat(brickQuantity.value || 0).toLocaleString("ru-RU");
                 
                 if (isAreaMode) {
-
-    leadQuantityTitle.textContent = "ПЛОЩАДЬ:";
-    leadQuantityValue.textContent = quantityValue + " М²";
-    leadQuantityBlock.style.display = "block";
-
-    const totalPieces = Math.ceil(parseFloat(calcQuantity.value) * 60);
-
-    leadPcsValue.textContent = totalPieces.toLocaleString("ru-RU") + " ШТ.";
-    leadPcsBlock.style.display = "block";
-
-} else {
-
-    leadQuantityTitle.textContent = "КОЛИЧЕСТВО:";
-    leadQuantityValue.textContent = quantityValue + " ШТ.";
-    leadQuantityBlock.style.display = "block";
-
-    leadPcsBlock.style.display = "none";
-
-}
-                if (leadQuantityBlock) {
-                    leadQuantityBlock.style.display = "block";
+                    if (leadQuantityTitle) leadQuantityTitle.textContent = "ПЛОЩАДЬ:";
+                    if (leadQuantityValue) leadQuantityValue.textContent = quantityValue + " М²";
+                    const totalPieces = Math.ceil(parseFloat(brickQuantity.value) * 60);
+                    if (leadPcsValue) leadPcsValue.textContent = totalPieces.toLocaleString("ru-RU") + " ШТ.";
+                    if (leadPcsBlock) leadPcsBlock.style.display = "block";
+                } else {
+                    if (leadQuantityTitle) leadQuantityTitle.textContent = "КОЛИЧЕСТВО:";
+                    if (leadQuantityValue) leadQuantityValue.textContent = quantityValue + " ШТ.";
+                    if (leadPcsBlock) leadPcsBlock.style.display = "none";
                 }
+                
+                if (leadQuantityBlock) leadQuantityBlock.style.display = "block";
 
-                // 3. СТРОКА 3: ВЫВОД ПЕРЕСЧИТАННЫХ ШТУК (Только для режима площади)
                 if (isAreaMode && leadPcsBlock && leadPcsValue) {
                     const pcsLine = lines.find(line => line.toLowerCase().includes("объем заказа:"));
                     if (pcsLine) {
                         const cleanPcs = pcsLine.replace(/объем заказа:/i, '').replace(/[\(\):]/g, '').trim().toUpperCase();
-                        leadPcsValue.textContent = cleanPcs; // Записываем чистые штуки
-                        leadPcsBlock.style.display = "block"; // Показываем строчку штук
+                        leadPcsValue.textContent = cleanPcs;
                     }
-                } else if (leadPcsBlock) {
-                    leadPcsBlock.style.display = "none";
                 }
 
-                // 4. СТРОКА 4: ВЫВОД ИТОГОВОЙ СУММЫ СМЕТЫ
-                 if (leadPriceTag && leadSumBlock) {
-                    // Берём первую строчку (где только рубли) и аккуратно убираем пробелы по краям
+                if (leadPriceTag && leadSumBlock) {
                     const cleanPrice = lines[0] ? lines[0].trim() : "0 ₽"; 
-                    
-                    // Вставляем рубли в твой родной красный тег
                     leadPriceTag.textContent = cleanPrice; 
-                    
-                    // 🔥 ТЕПЕРЬ ОНО СРАБОТАЕТ: Принудительно включаем показ блока суммы на экране
                     leadSumBlock.style.setProperty('display', 'block', 'important'); 
                 }
                 
-                // Текст кнопки
                 leadSubmitBtn.textContent = "ОТПРАВИТЬ РАСЧЁТ МЕНЕДЖЕРУ";
+
+                // Мягко закрываем окно калькулятора
+                if (calcModal) {
+                    calcModal.classList.remove("active");
+                    document.body.style.overflow = ""; 
+                }
+                
+                // Плавно летим вниз к форме контактов
+                const targetForm = document.querySelector(".custom-form-header");
+                if (targetForm) {
+                    const headerOffset = 100; 
+                    const elementPosition = targetForm.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                }
+            } else {
+                // Если мы тестируем калькулятор в каталоге или карточке товара — запоминаем объём и летим на главную!
+                let currentBrickName = (typeof selectedBrickName !== 'undefined' && selectedBrickName) ? selectedBrickName : (brickSelect ? brickSelect.options[brickSelect.selectedIndex].text : '');
+                
+                localStorage.setItem('selectedBrick', currentBrickName);
+                localStorage.setItem('selectedBrickPrice', brickSelect ? brickSelect.value : exactReckePrice);
+                
+                // Перенаправляем человека на главную страницу прямо к форме контактов!
+                window.location.href = "index.html#booking";
             }
         });
     }
-
-    // УПРАВЛЕНИЕ ОКНАМИ (ОТКРЫТИЕ С ГЛАВНОЙ)
+    // УПРАВЛЕНИЕ ОКНАМИ (ОТКРЫТИЕ С ГЛАВНОЙ СТРАНИЦЫ - Твой родной чистый код)
     if (openCalcBtn && calcModal) {
         openCalcBtn.addEventListener('click', (e) => {
             e.preventDefault(); 
             e.stopPropagation(); 
             if (selectContainer) selectContainer.style.setProperty('display', 'block', 'important'); 
-            
             setCalculatorMode(false);
-            
             calcModal.classList.add('active');
             document.body.style.overflow = "hidden";
-
-            setTimeout(() => {
-                if (brickQuantity) brickQuantity.focus();
-            }, 250);
+            setTimeout(() => { if (brickQuantity) brickQuantity.focus(); }, 250);
         });
     }
 
-    // Закрытие окон (крестики и фоны)
+    // Закрытие по крестику
     if (closeCalc && calcModal) {
         closeCalc.addEventListener('click', (e) => {
             e.preventDefault();
@@ -1315,6 +335,7 @@ BRICKS_DATABASE.forEach(brick => {
         });
     }
 
+    // Закрытие по клику мимо окна на темный фон
     if (calcModal) {
         calcModal.addEventListener("click", function (e) {
             if (e.target === calcModal) {
@@ -1324,11 +345,13 @@ BRICKS_DATABASE.forEach(brick => {
         });
     }
 
+    // Защита от закрытия при клике на само тело калькулятора
     const calcBody = calcModal ? calcModal.querySelector(".calc-box-content") : null;
     if (calcBody) {
         calcBody.addEventListener("click", function (e) { e.stopPropagation(); });
     }
 
+    // Железобетонное закрытие по кнопке Escape с клавиатуры компьютерщика
     document.addEventListener("keydown", function (e) {
         if (e.key === "Escape") {
             if (calcModal) calcModal.classList.remove("active");
@@ -1336,7 +359,8 @@ BRICKS_DATABASE.forEach(brick => {
             document.body.style.overflow = "";
         }
     });
-});
+}); // 🔥 КОНЕЦ ДОКУМЕНТА! ЭТИ СКОБКИ ЗАКРЫВАЮТ СЛУШАТЕЛЬ DOMContentLoaded И ВСЮ НАШУ ИНЖЕНЕРИЮ АЮРА!
+
 // ======================================================
 //   3.ДВИЖОК ПОИСКА И ФИЛЬТРАЦИИ
 // ======================================================
@@ -1596,7 +620,6 @@ document.addEventListener("DOMContentLoaded", () => {
   
 });
 
-
 // ==========================================================================
 //  УМНАЯ КНОПКА "НАВЕРХ" С ПЛАВНЫМ СКРОЛЛОМ 
 // ==========================================================================
@@ -1742,3 +765,228 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 });
+
+// ==========================================================================
+// 🧱 АВТОМАТИЧЕСКИЙ ВЫВОД КАТАЛОГА ИЗ PRODUCTS.JSON
+// ==========================================================================
+function loadCatalog() {
+    const catalogContainer = document.querySelector('.catalog-grid') || document.querySelector('.products-container');
+    if (!catalogContainer) return; // Если мы не на странице каталога, просто выходим
+
+    // Читаем наш 1С-файл данных
+    fetch('products.json')
+        .then(response => response.json())
+        .then(products => {
+            catalogContainer.innerHTML = ''; // Очищаем контейнер от старого мусора
+
+            products.forEach(product => {
+                // Создаём карточку товара на лету
+                const card = document.createElement('div');
+                card.className = `product-card ${product.category}`; // Класс категории для фильтров!
+                
+                // Проверяем остаток из 1С для плашки наличия
+                const stockStatus = product.stock > 0 
+                    ? `<span class="stock-badge in-stock">В наличии: ${product.stock.toLocaleString('ru-RU')} шт.</span>`
+                    : `<span class="stock-badge out-of-stock">Под заказ (завод)</span>`;
+
+                // 🔥 ЖЕЛЕЗОБЕТОННЫЙ РАСЧЕТ АЮРА: Разбиваем цену 1С на рубли и копейки без говнокода
+                const rubles = Math.floor(product.price); 
+                const kopecks = Math.round((product.price - rubles) * 100); 
+                const formattedPrice = `цена ${rubles} руб ${kopecks.toString().padStart(2, '0')} коп`;
+
+                // Забиваем твою родную вёрстку карточки
+                card.innerHTML = `
+                    <div class="product-img-box">
+                        <img src="${product.img}" alt="${product.title}" loading="lazy">
+                        ${stockStatus}
+                    </div>
+                    <div class="product-info">
+                        <span class="product-meta">${product.meta}</span>
+                        <h3 class="product-title">${product.title}</h3>
+                        <p class="product-desc">${product.desc}</p>
+                        <div class="product-specs">
+                            <span><b>Размер:</b> ${product.size}</span>
+                            <span><b>Формат:</b> ${product.format}</span>
+                            <span><b>Поверхность:</b> ${product.surface}</span>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-price-block">
+                                <span class="price-label">Цена за шт:</span>
+                                <!-- 🔥 ИСПРАВЛЕНО: Выводится красивый текст Аюра "руб коп" без лишних значков ₽ -->
+                                <span class="product-price-val">${formattedPrice}</span>
+                            </div>
+                            <!-- 🔥 ЧИСТОТА: data-price передает чистую цифру (например 82.35) прямо в калькулятор! -->
+                            <button class="product-order-submit" data-title="${product.title}" data-price="${product.price}">Рассчитать смету</button>
+                        </div>
+                    </div>
+                `;
+                catalogContainer.appendChild(card);
+            });
+
+            // Навешиваем клик на новые созданные кнопки расчета
+            initCatalogButtons();
+        })
+        .catch(error => console.error('Ошибка загрузки каталога товаров:', error));
+}
+
+
+// Запускаем загрузку при старте страницы
+document.addEventListener('DOMContentLoaded', loadCatalog);
+
+function initCatalogButtons() {
+    const catalogContainer = document.querySelector('.catalog-grid') || document.querySelector('.products-container');
+    if (!catalogContainer) return;
+
+    catalogContainer.addEventListener('click', function(e) {
+        const btn = e.target.closest('.product-order-submit');
+        if (!btn) return;
+        
+        e.preventDefault();
+        const productTitle = btn.getAttribute('data-title');
+        const productPrice = btn.getAttribute('data-price');
+
+        // Мгновенно запоминаем в память чистые данные и летим на главную!
+        localStorage.setItem('selectedBrick', productTitle);
+        localStorage.setItem('selectedBrickPrice', productPrice);
+        window.location.href = "index.html";
+    });
+}
+
+
+function renderSingleProductPage() {
+    const prodTitle = document.getElementById("prodTitle");
+    if (!prodTitle) return; // Безопасный выход, если мы не на этой странице
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const productId = parseInt(urlParams.get('id'));
+
+    if (isNaN(productId)) return;
+
+    // Читаем наш чистый 1С-файл данных
+    fetch('products.json')
+        .then(response => response.json())
+        .then(bricksData => {
+            if (!Array.isArray(bricksData)) return;
+
+            const currentProduct = bricksData.find(item => item.id === productId);
+
+            if (currentProduct) {
+                // Раскладываем характеристики (Твой прошлый код)
+                document.getElementById('prodMeta').textContent = currentProduct.meta;
+                document.getElementById('prodTitle').textContent = currentProduct.title;
+                document.getElementById('prodDesc').textContent = currentProduct.desc;
+                document.getElementById('prodSize').textContent = currentProduct.size;
+                document.getElementById('prodFormat').textContent = currentProduct.format;
+                document.getElementById('prodFrost').textContent = currentProduct.frost;
+                document.getElementById('prodWater').textContent = currentProduct.water;
+                document.getElementById('prodSurface').textContent = currentProduct.surface;
+                
+                const prodPrice = document.getElementById('prodPrice');
+                if (prodPrice) prodPrice.textContent = `${currentProduct.price.toLocaleString('ru-RU', { minimumFractionDigits: 2 })} ₽/ШТ.`;
+
+                const imgElement = document.getElementById('prodImg');
+                if (imgElement && currentProduct.img) {
+                    imgElement.src = currentProduct.img;
+                    imgElement.alt = currentProduct.title;
+                    imgElement.style.display = 'block';
+                }
+
+                document.title = currentProduct.title + " | Центр Кирпича";
+
+                // 1. 🔥 ЖЕЛЕЗОБЕТОННЫЙ КЛИК МИМО КАРТОЧКИ ДЛЯ ЗАКРЫТИЯ СБОКУ
+                const overlay = document.getElementById('productPageOverlay');
+                if (overlay) {
+                    overlay.addEventListener('click', (e) => {
+                        if (e.target === overlay || e.target.classList.contains('product-page-wrapper')) {
+                            window.location.href = 'catalog.html'; 
+                        }
+                    });
+                }
+
+        }
+        })
+        .catch(error => console.error("Ошибка рендеринга страницы:", error));
+}
+
+// 4. 🔥 ДАТЧИК СТРЕЛОЧКИ НАВЕРХ (Плавное появление при скролле и мягкий подъем)
+function initScrollUpButton() {
+    const scrollBtn = document.getElementById('scrollUpBtn');
+    if (!scrollBtn) return;
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+            scrollBtn.classList.add('visible'); // Показываем стрелочку
+        } else {
+            scrollBtn.classList.remove('visible'); // Прячем стрелочку
+        }
+    });
+
+    scrollBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' }); // Мягкий Pro-подъем вверх!
+    });
+}
+
+// Запускаем всю инженерию Аюра в общем загрузчике
+document.addEventListener("DOMContentLoaded", () => {
+    renderSingleProductPage();
+    initScrollUpButton();
+});
+
+// ==========================================================================
+//  ВЫВОД ВИТРИНЫНА ГЛАВНОЙ СТРАНИЦЕ 
+// ==========================================================================
+function renderMainPageShowcase() {
+    // Ювелирно находим твой родной контейнер сетки на главной странице
+    const showcaseContainer = document.getElementById('catalogRenderBox');
+    if (!showcaseContainer) return; // Безопасный выход, если мы на другой странице
+
+    // Читаем наш чистый 1С JSON-файл данных products.json
+    fetch('products.json')
+        .then(response => response.json())
+        .then(products => {
+            showcaseContainer.innerHTML = ''; // Вычищаем кашу с экрана
+
+            // Откусываем ровно первые 4 сочных кирпича Recke для парадной витрины
+            const featuredProducts = products.slice(0, 4);
+
+            featuredProducts.forEach(product => {
+                const card = document.createElement('div');
+                
+                // 🔥 Возвращаем твои родные люксовые классы карточки!
+                card.className = `showcase-card ${product.category}`; 
+                
+                // 🔥 ИСПРАВЛЕНО НАМЕРТВО: Передаем данные строго в твоих родных атрибутах,
+                // которые ищет твой калькулятор для открытия всплывающих окон!
+                card.setAttribute('data-title', product.title);
+                card.setAttribute('data-price', product.price);
+
+                // Автоматически переводим чистую цену 1С в красивый русский формат "руб коп"
+                const rubles = Math.floor(product.price); 
+                const kopecks = Math.round((product.price - rubles) * 100); 
+                const formattedPrice = `цена ${rubles} руб ${kopecks.toString().padStart(2, '0')} коп`;
+
+                // 🔥 ТВОЯ ИСТИННАЯ ВЁРСТКА СТЕНЫ ИЗ CSS: Кристальная чистота и объем
+                card.innerHTML = `
+                    <div class="showcase-img-box">
+                        <div class="brick-texture-overlay"></div>
+                        <img src="${product.img}" alt="${product.title}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; z-index: 2; position: relative;">
+                    </div>
+                    <div class="showcase-info">
+                        <span class="showcase-meta">${product.meta}</span>
+                        <h3>${product.title}</h3>
+                        <span class="catalog-brick-price-tag">${formattedPrice}</span>
+                        <p>${product.desc}</p>
+                    </div>
+                `;
+                showcaseContainer.appendChild(card);
+            });
+
+            // 🔥 ТОТАЛЬНЫЙ ФИКС: Мы убрали отсюда всю мою кастомную логику кликов!
+            // Теперь карточки просто создались в HTML, а твой родной калькулятор 
+            // автоматически увидит их по атрибутам data-title/data-price и откроет окна как обычно!
+        })
+        .catch(error => console.error('Ошибка рендеринга безопасной витрины:', error));
+}
+
+// Запускаем безопасный рендер при загрузке главной страницы
+document.addEventListener('DOMContentLoaded', renderMainPageShowcase);

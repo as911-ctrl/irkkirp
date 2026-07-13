@@ -56,12 +56,12 @@
           <button class="filter-tag-btn" data-target="recke">"RECKE BRICKEREI"</button>
           <button class="filter-tag-btn" data-target="modformat">Modformat</button>
           <button class="filter-tag-btn" data-target="zhelez">ЖЕЛЕЗНОГОРСКИЙ КИРПИЧ</button>
-          <button class="filter-tag-btn" data-target="star-oskol">Старооскольский кирпич</button>
+          <button class="filter-tag-btn" data-target="oskol">Старооскольский кирпич</button>
           <button class="filter-tag-btn" data-target="akbars">Ригельный 500</button>
           <button class="filter-tag-btn" onclick="window.open('https://xn----gtbdjcdjxigwf.xn--p1ai/klinkerniy-kirpich/', '_blank');">"ДОНСКИЕ ЗОРИ" РУЧНАЯ ФОРМОВКА</button>
-          <button class="filter-tag-btn" data-target="bavaria">Баварская кладка "Пятый Элемент"</button>
+          <button class="filter-tag-btn" data-target="bavar">Баварская кладка "Пятый Элемент"</button>
           <button class="filter-tag-btn" data-target="plinfa">Plinfa</button>
-          <button class="filter-tag-btn" data-target="flash-graphite">Флэш Графит</button>
+          <button class="filter-tag-btn" data-target="flash">Флэш Графит</button>
           <button class="filter-tag-btn" data-target="tsegla">Плитка "Tsegla"</button>
      </div>
      <!-- БАННЕР ХРАНЕНИЯ  -->
@@ -84,12 +84,21 @@
     <script src="script.js"></script>
    <!-- Правильный скрипт для каталога: заставляет робота нарисовать сетку товаров -->
       <!-- 2. Короткий управляющий скрипт СТРОГО для каталога -->
-    <script>
+     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // Проверяем, что робот-рендер из script.js загрузился
-            if (typeof renderCatalogCards === 'function' && typeof BRICKS_DATABASE !== 'undefined') {
-                // Заставляем его нарисовать ВСЕ 8-1000 кирпичей на этой странице
-                renderCatalogCards(BRICKS_DATABASE);
+            // Проверяем, что функция-рендер в общем script.js существует
+            if (typeof renderCatalogCards === 'function') {
+                // Пулей читаем наш 1С-файл данных products.json
+                fetch('products.json')
+                    .then(response => {
+                        if (!response.ok) throw new Error('Файл products.json не найден на сервере!');
+                        return response.json();
+                    })
+                    .then(bricksData => {
+                        // Заставляем робота нарисовать все 156 кирпичей из базы!
+                        renderCatalogCards(bricksData);
+                    })
+                    .catch(error => console.error("Ошибка загрузки базы каталога:", error));
             }
         });
     </script>
