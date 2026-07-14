@@ -57,21 +57,6 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     text-decoration: none !important;
     position: relative !important;
 }
-
-.logo {
-    font-size: 24px !important;
-    font-weight: 800 !important;
-    color: #ffffff !important;
-    letter-spacing: 2px !important;
-    text-transform: uppercase;
-    margin: 0 !important;
-}
-.logo span {
-    color: #a23131 !important;
-    font-weight: 300 !important;
-    margin-left: 4px;
-}
-
 /* слово ИРКУТСК под названием */
 .logo-city {
     font-size: 12px !important; 
@@ -364,11 +349,6 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     transition: background-position 0.1s ease-out !important;
 }
 
-/* Скрываем старый контейнер видео раз и навсегда, чтобы не ломал верстку */
-.video-bg-container {
-    display: none !important;
-}
-
 /* АНИМАЦИЯ: Живой перелив флэш-обжига по швам и граням */
 @keyframes brickFlash3D {
     0% { 
@@ -384,17 +364,6 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
         background-position: 0px 0px, 0px 0px, 0px 0px, 0px 0px, 100% 50%; 
         filter: contrast(1) brightness(1); 
     }
-}
-
-.hero-overlay-content {
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between !important;
-    align-items: center !important;
-    width: 100% !important;
-    max-width: 1400px !important;
-    margin: 80px auto 0 auto !important; /* Увеличили зазор от шапки */
-    gap: 40px !important;
 }
 
 /*ВСТРОЕННЫЙ ПРЕМИУМ-ДОМ С КЛИНКЕРНЫМ ОТСВЕЧИВАНИЕМ */
@@ -1099,26 +1068,6 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     white-space: nowrap !important; /* Держим текст строго в одну аккуратную линию */
 }
 
-/* Горизонтальная строка с объёмом и итоговой сметой */
-.lead-summary-block {
-    text-align: center !important;
-    font-size: 13px !important;
-    color: #94a3b8 !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-    letter-spacing: 1px !important;
-    margin: 20px 0 25px 0 !important;
-    line-height: 1.6 !important;
-    display: none; /* JavaScript раскроет этот блок при клике на расчет */
-}
-
-/* Стиль для неонового ценника с рублем внутри строки */
-#lead-final-price {
-    color: #e11d48 !important;
-    font-size: 16px !important;
-    font-weight: 900 !important;
-    text-shadow: 0 0 15px rgba(225, 29, 72, 0.4) !important;
-}
 
 .premium-booking input:focus {
     background: rgba(15, 23, 42, 0.8) !important;
@@ -1162,11 +1111,6 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     animation: liquidWater 4s ease-in-out infinite alternate !important;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
     margin-top: 15px !important;
-}
-#lead-brick-select.lead-readonly-input {
-    color: #ffffff !important;
-    font-weight: 700 !important;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1) !important;
 }
 
 /* 2. НАЗВАНИЯ РАЗДЕЛОВ: 🔥 ИСПРАВЛЕНО! Заменили display: block на display: none, чтобы скрыть нули до расчета */
@@ -1260,12 +1204,12 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
 
 /* СЕТКА: Выстраивает 4 элемента ровными блоками по 2 в ряд */
 .premium-contacts-grid {
-     display: flex !important;
+    display: flex !important;
     flex-direction: row !important;
-    flex-wrap: nowrap !important; /* Запрещаем перенос на второй этаж на ПК */
+    flex-wrap: nowrap !important;
     justify-content: center !important;
     align-items: stretch !important;
-    gap: 15px !important; /* Компактное расстояние между плитками */
+    gap: 15px !important;
     width: 100% !important;
     max-width: 1400px !important;
     margin: 0 auto 30px auto !important;
@@ -1273,14 +1217,13 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
 
 .contact-brick-item {
     display: flex !important;
-    align-items: center !important;
+    align-items: flex-start !important;   /* было: center — теперь все иконки стартуют с одной линии */
     gap: 20px !important;
     text-align: left !important;
-    
-    /* Дополнительное центрирование самих элементов внутри ячеек */
-    justify-content: flex-start !important; 
-    background: rgba(255, 255, 255, 0.01) !important; /* Легкая матовая подложка */
-    padding: 10px 15px !important;
+    justify-content: flex-start !important;
+    flex: 1 1 0 !important;                /* НОВОЕ — все 4 карточки становятся равной ширины */
+    background: rgba(255, 255, 255, 0.01) !important;
+    padding: 14px 15px !important;         /* было 10px 15px — чуть больше воздуха сверху/снизу под выравнивание */
     border-radius: 14px !important;
 }
 
@@ -1470,7 +1413,7 @@ body { margin: 0; font-family: 'Plus Jakarta Sans', sans-serif; background: #0b0
     font-weight: 800 !important;
     font-size: 14px !important;
 }
-/* ЦЕНТРИРОВАНИЕ ФУТЕРА СТРОГО НА ГЛАВНОЙ СТРАНИЦЕ */
+/* ЦЕНТРИРОВАНИЕ ФУТЕРА */
 #index-page .footer-row,
 body:not([class*="-page"]) .footer-row {
     justify-content: center !important; /* Ставит логотип и текст строго по центру */
@@ -2032,8 +1975,38 @@ body:not([class*="-page"]) .footer-row {
     padding: 45px !important;
     gap: 50px !important;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5) !important;
+    position: relative;
+}
+.product-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
+    z-index: 10;
 }
 
+.product-close-btn:hover {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+#prodStock.in-stock {
+    color: #4ade80;
+}
+#prodStock.out-of-stock {
+    color: #f59e0b;
+}
 /* Левое фото кирпича */
 .product-visual-side {
     flex: 0 0 45% !important;
@@ -2296,12 +2269,6 @@ body:not([class*="-page"]) .footer-row {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.15) !important;
 }
 
-/* Выделяем копейки или валюту ярким клинкерным цветом */
-.catalog-brick-price-tag::after {
-    color: #e11d48 !important; /* Слово загорится легким огненным акцентом */
-    font-size: 16px !important;
-    font-weight: 600;
-}
 /* ======================================================
    СТИЛИЗАЦИЯ ФОТОГРАФИИ ВНУТРИ КАРТОЧКИ ТОВАРА
 ====================================================== */

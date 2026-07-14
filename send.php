@@ -1,20 +1,23 @@
 <?php
 // ==========================================================================
-// 🧱 ЖЕЛЕЗОБЕТОННАЯ ОТПРАВКА СМЕТЫ НА НАСТОЯЩУЮ ПОЧТУ ИННЫ ИЗ ФУТЕРА
+// 🧱 ОТПРАВКА СМЕТЫ НА НАСТОЯЩУЮ ПОЧТУ ИННЫ ИЗ ФУТЕРА
 // ==========================================================================
-
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    exit('Method Not Allowed');
+}
 $to = "inna@centrk.ru"; // 🔥 ИСПРАВЛЕНО НАМЕРТВО: Твоя реальная почта со скриншота!
 $subject = "🔔 Новая смета с калькулятора (Центр Кирпича)";
 
 // Забираем данные, которые прислал нам JavaScript
-$brick = isset($_POST['brick']) ? htmlspecialchars($_POST['brick']) : 'Не выбран';
+$brick = isset($_POST['brick']) ? strip_tags(trim($_POST['brick'])) : 'Не выбран';
 $quantity_title = isset($_POST['q_title']) ? htmlspecialchars($_POST['q_title']) : 'Объем:';
 $quantity_val = isset($_POST['q_val']) ? htmlspecialchars($_POST['q_val']) : '0';
 $pcs_val = isset($_POST['pcs_val']) ? htmlspecialchars($_POST['pcs_val']) : '0';
 $pcs_active = isset($_POST['pcs_active']) ? $_POST['pcs_active'] : 'false';
 $total_price = isset($_POST['price']) ? htmlspecialchars($_POST['price']) : '0 ₽';
-$name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : 'Не указано';
-$phone = isset($_POST['phone']) ? htmlspecialchars($_POST['phone']) : 'Не указано';
+$name = (!empty($_POST['name'])) ? strip_tags(trim($_POST['name'])) : 'Не указано';
+$phone = (!empty($_POST['phone'])) ? strip_tags(trim($_POST['phone'])) : 'Не указано';
 
 // Формируем красивый текстовый чек для почты Инны
 $message = "ЗАЯВКА С КАЛЬКУЛЯТОРА СТОИМОСТИ\n\n";

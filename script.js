@@ -90,25 +90,27 @@ document.addEventListener("DOMContentLoaded", () => {
     const exactReckePrice = 82.35; 
     let isAreaMode = false; // false = штуки, true = кв.м.
 
-    // 🔥 ИСПРАВЛЕНО ДЛЯ 1С: Выпадающий список кирпичей теперь считывает products.json напрямую!
-    if (brickSelect) {
-        brickSelect.innerHTML = '<option value="" disabled selected hidden>— Нажмите, чтобы выбрать кирпич —</option>';
+    // Выпадающий список кирпичей теперь считывает products.json напрямую!
+  if (brickSelect) {
+    brickSelect.innerHTML = '<option value="" disabled selected hidden>— Нажмите, чтобы выбрать кирпич —</option>';
 
-        fetch('products.json')
-            .then(response => response.json())
-            .then(bricksData => {
-                if (Array.isArray(bricksData)) {
-                    bricksData.forEach(brick => {
-                        const option = document.createElement("option");
-                        option.value = brick.price; // Чистое число цены для точного счета калькулятора!
-                        option.textContent = brick.title;
-                        brickSelect.appendChild(option);
-                    });
-                }
-            })
-            .catch(error => console.error("Ошибка загрузки списка кирпичей в калькулятор:", error));
-    }
-    // ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ИНТЕРФЕЙСА ТУМБЛЕРОМ (Твой родной чистый код)
+    fetch('products.json')
+        .then(response => response.json())
+        .then(bricksData => {
+            if (Array.isArray(bricksData)) {
+                bricksData.forEach(brick => {
+                    const option = document.createElement("option");
+                    option.value = brick.price;
+                    option.textContent = brick.title;
+                    option.dataset.size = brick.size || '';
+                    option.dataset.priceUnit = brick.category === 'tsegla' ? 'sqm' : 'piece'; // 🔥 НОВОЕ
+                    brickSelect.appendChild(option);
+                });
+            }
+        })
+        .catch(error => console.error("Ошибка загрузки списка кирпичей в калькулятор:", error));
+}
+    // ФУНКЦИЯ ПЕРЕКЛЮЧЕНИЯ ИНТЕРФЕЙСА ТУМБЛЕРОМ 
     function setCalculatorMode(toAreaMode) {
         isAreaMode = toAreaMode;
 
@@ -134,28 +136,59 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modeBtnPcs) modeBtnPcs.addEventListener('click', () => setCalculatorMode(false));
     if (modeBtnSqm) modeBtnSqm.addEventListener('click', () => setCalculatorMode(true));
 
-    // УНИВЕРСАЛЬНАЯ ЛИНЕЙНАЯ МАТЕМАТИКА РАСЧЕТА (Твой родной чистый код)
-    function calculateTotal() {
-        if (!brickQuantity || !totalSum) return;
-        
-        const inputValue = parseFloat(brickQuantity.value) || 0;
-        if (inputValue <= 0) { totalSum.textContent = "0 ₽"; return; }
+    function getPiecesPerSqm(sizeStr) {
+    if (!sizeStr) return 60; // запасной вариант, если у кирпича почему-то нет размера
 
-        // Забираем чистую цену из селекта (она подгрузилась числом из JSON)
-        const currentPrice = brickSelect ? (parseFloat(brickSelect.value) || exactReckePrice) : exactReckePrice;
+    const nums = sizeStr.replace(',', '.').match(/[\d.]+/g);
+    if (!nums || nums.length < 3) return 60;
 
-        if (isAreaMode) {
-            // Магия квадратуры: 60 шт на кв.м.
-            const totalPieces = Math.ceil(inputValue * 60); 
-            const finalCost = Math.ceil(totalPieces * currentPrice);
-            
-            totalSum.innerHTML = `${finalCost.toLocaleString('ru-RU')} ₽ <br><span style="font-size:12px; color:#64748b; font-weight:600; display:block; margin-top:4px;">(Объем заказа: ${totalPieces.toLocaleString('ru-RU')} шт.)</span>`;
-        } else {
-            // Стандартный поштучный расчет
+    const lengthMm = parseFloat(nums[0]); // длина
+    const heightMm = parseFloat(nums[2]); // высота (3-е число)
+
+    const jointMm = 10; // толщина шва кладки
+    const faceWidthM = (lengthMm + jointMm) / 1000;
+    const faceHeightM = (heightMm + jointMm) / 1000;
+
+    return 1 / (faceWidthM * faceHeightM);
+}
+
+    // УНИВЕРСАЛЬНАЯ ЛИНЕЙНАЯ МАТЕМАТИКА РАСЧЕТА 
+   function calculateTotal() {
+    if (!brickQuantity || !totalSum) return;
+
+    const inputValue = parseFloat(brickQuantity.value) || 0;
+    if (inputValue <= 0) { totalSum.textContent = "0 ₽"; return; }
+
+    const currentPrice = brickSelect ? (parseFloat(brickSelect.value) || exactReckePrice) : exactReckePrice;
+
+    const selectedOption = brickSelect ? brickSelect.options[brickSelect.selectedIndex] : null;
+    const isSqmPrice = selectedOption ? selectedOption.dataset.priceUnit === 'sqm' : false;
+    const piecesPerSqm = selectedOption ? getPiecesPerSqm(selectedOption.dataset.size) : 60;
+
+    if (isAreaMode) {
+        if (isSqmPrice) {
+            // Цена уже за кв.м — площадь просто умножаем на цену
             const finalCost = Math.ceil(inputValue * currentPrice);
-            totalSum.textContent = `${finalCost.toLocaleString("ru-RU")} ₽`;
+            const approxPieces = Math.ceil(inputValue * piecesPerSqm);
+            totalSum.innerHTML = `${finalCost.toLocaleString('ru-RU')} ₽ <br><span style="font-size:12px; color:#64748b; font-weight:600; display:block; margin-top:4px;">(Объем заказа: ≈${approxPieces.toLocaleString('ru-RU')} шт.)</span>`;
+        } else {
+            // Цена за штуку — считаем количество штук из размера, потом умножаем
+            const totalPieces = Math.ceil(inputValue * piecesPerSqm);
+            const finalCost = Math.ceil(totalPieces * currentPrice);
+            totalSum.innerHTML = `${finalCost.toLocaleString('ru-RU')} ₽ <br><span style="font-size:12px; color:#64748b; font-weight:600; display:block; margin-top:4px;">(Объем заказа: ${totalPieces.toLocaleString('ru-RU')} шт.)</span>`;
+        }
+    } else {
+        if (isSqmPrice) {
+            // Ввели штуки, но цена за кв.м — переводим штуки в площадь
+            const areaM2 = inputValue / piecesPerSqm;
+            const finalCost = Math.ceil(areaM2 * currentPrice);
+            totalSum.textContent = `${finalCost.toLocaleString('ru-RU')} ₽`;
+        } else {
+            const finalCost = Math.ceil(inputValue * currentPrice);
+            totalSum.textContent = `${finalCost.toLocaleString('ru-RU')} ₽`;
         }
     }
+}
 
     if (brickQuantity) brickQuantity.addEventListener("input", calculateTotal);
 
@@ -166,7 +199,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
     // ==========================================================================
-    // СИСТЕМА ПРИЕМА СИГНАЛА АВТОПИЛОТА (ИЗ КАРТОЧКИ ТОВАРА - Твой родной код)
+    // СИСТЕМА ПРИЕМА СИГНАЛА АВТОПИЛОТА (ИЗ КАРТОЧКИ ТОВАРА )
     // ==========================================================================
     const savedBrick = localStorage.getItem('selectedBrick');
     const savedBrickID = localStorage.getItem('selectedBrickID');
@@ -179,7 +212,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (calcTitle) calcTitle.innerHTML = `Расчет сметы:<br><span style="color:#e11d48; font-size:18px;">${savedBrick}</span>`;
         if (selectContainer) selectContainer.style.setProperty('display', 'none', 'important'); 
         
-        // 🔥 НАМЕРТВО СВЯЗЫВАЕМ СЕЛЕКТ: Перебираем все пункты списка и находим точное имя!
         if (brickSelect) {
             // Маленькая задержка, чтобы fetch('products.json') успел забить селект данными
             setTimeout(() => {
@@ -243,8 +275,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // 🔥 ИСПРАВЛЕНО НАМЕРТВО: Заменили calcSelect на brickSelect, чтобы убрать ошибку!
-            if (leadInput && leadSubmitBtn) {
+                       if (leadInput && leadSubmitBtn) {
                 let fullBrickName = brickSelect ? brickSelect.options[brickSelect.selectedIndex].text : '';
 leadInput.value = fullBrickName.toUpperCase();
 leadInput.style.setProperty('text-overflow', 'clip', 'important');
@@ -262,11 +293,17 @@ if (typeof selectedBrickName !== 'undefined') {
                     if (leadQuantityValue) leadQuantityValue.textContent = quantityValue + " М²";
                     const totalPieces = Math.ceil(parseFloat(brickQuantity.value) * 60);
                     if (leadPcsValue) leadPcsValue.textContent = totalPieces.toLocaleString("ru-RU") + " ШТ.";
-                    if (leadPcsBlock) leadPcsBlock.style.display = "block";
+                    if (leadPcsBlock) {
+                        leadPcsBlock.style.display = "block";
+                        leadPcsBlock.classList.add("active");
+                    }
                 } else {
                     if (leadQuantityTitle) leadQuantityTitle.textContent = "КОЛИЧЕСТВО:";
                     if (leadQuantityValue) leadQuantityValue.textContent = quantityValue + " ШТ.";
-                    if (leadPcsBlock) leadPcsBlock.style.display = "none";
+                    if (leadPcsBlock) {
+    leadPcsBlock.style.display = "none";
+    leadPcsBlock.classList.remove("active"); // 
+}
                 }
                 
                 if (leadQuantityBlock) leadQuantityBlock.style.display = "block";
@@ -359,7 +396,7 @@ if (typeof selectedBrickName !== 'undefined') {
             document.body.style.overflow = "";
         }
     });
-}); // 🔥 КОНЕЦ ДОКУМЕНТА! ЭТИ СКОБКИ ЗАКРЫВАЮТ СЛУШАТЕЛЬ DOMContentLoaded И ВСЮ НАШУ ИНЖЕНЕРИЮ АЮРА!
+}); 
 
 // ======================================================
 //   3.ДВИЖОК ПОИСКА И ФИЛЬТРАЦИИ
@@ -871,7 +908,16 @@ function renderSingleProductPage() {
             const currentProduct = bricksData.find(item => item.id === productId);
 
             if (currentProduct) {
-                // Раскладываем характеристики (Твой прошлый код)
+                const prodStock = document.getElementById('prodStock');
+    if (prodStock) {
+        if (currentProduct.stock > 0) {
+            prodStock.textContent = `${currentProduct.stock.toLocaleString('ru-RU')} шт.`;
+            prodStock.classList.add('in-stock');
+        } else {
+            prodStock.textContent = 'Под заказ (завод)';
+            prodStock.classList.add('out-of-stock');
+        }
+    }
                 document.getElementById('prodMeta').textContent = currentProduct.meta;
                 document.getElementById('prodTitle').textContent = currentProduct.title;
                 document.getElementById('prodDesc').textContent = currentProduct.desc;
@@ -894,11 +940,25 @@ function renderSingleProductPage() {
                 document.title = currentProduct.title + " | Центр Кирпича";
 
                 // 1. 🔥 ЖЕЛЕЗОБЕТОННЫЙ КЛИК МИМО КАРТОЧКИ ДЛЯ ЗАКРЫТИЯ СБОКУ
-                const overlay = document.getElementById('productPageOverlay');
+                 const overlay = document.getElementById('productPageOverlay');
                 if (overlay) {
                     overlay.addEventListener('click', (e) => {
-                        if (e.target === overlay || e.target.classList.contains('product-page-wrapper')) {
-                            window.location.href = 'catalog.html'; 
+                        if (e.target === overlay) {
+                            closeProductOverlay();
+                        }
+                    });
+
+                    // 2. Крестик закрытия
+                    const closeBtn = document.getElementById('productCloseBtn');
+                    if (closeBtn) {
+                        closeBtn.addEventListener('click', closeProductOverlay);
+                    }
+
+                    // 3. Закрытие по Escape
+                    document.addEventListener('keydown', function escHandler(e) {
+                        if (e.key === 'Escape') {
+                            document.removeEventListener('keydown', escHandler);
+                            closeProductOverlay();
                         }
                     });
                 }
@@ -906,6 +966,10 @@ function renderSingleProductPage() {
         }
         })
         .catch(error => console.error("Ошибка рендеринга страницы:", error));
+}
+
+function closeProductOverlay() {
+    window.location.href = 'catalog.html';
 }
 
 // 4. 🔥 ДАТЧИК СТРЕЛОЧКИ НАВЕРХ (Плавное появление при скролле и мягкий подъем)
@@ -926,7 +990,7 @@ function initScrollUpButton() {
     });
 }
 
-// Запускаем всю инженерию Аюра в общем загрузчике
+// Запускаем всю инженерию в общем загрузчике
 document.addEventListener("DOMContentLoaded", () => {
     renderSingleProductPage();
     initScrollUpButton();
@@ -965,7 +1029,7 @@ function renderMainPageShowcase() {
                 const kopecks = Math.round((product.price - rubles) * 100); 
                 const formattedPrice = `цена ${rubles} руб ${kopecks.toString().padStart(2, '0')} коп`;
 
-                // 🔥 ТВОЯ ИСТИННАЯ ВЁРСТКА СТЕНЫ ИЗ CSS: Кристальная чистота и объем
+                // ВЁРСТКА СТЕНЫ ИЗ CSS: 
                 card.innerHTML = `
                     <div class="showcase-img-box">
                         <div class="brick-texture-overlay"></div>
@@ -981,12 +1045,14 @@ function renderMainPageShowcase() {
                 showcaseContainer.appendChild(card);
             });
 
-            // 🔥 ТОТАЛЬНЫЙ ФИКС: Мы убрали отсюда всю мою кастомную логику кликов!
-            // Теперь карточки просто создались в HTML, а твой родной калькулятор 
-            // автоматически увидит их по атрибутам data-title/data-price и откроет окна как обычно!
+            
         })
         .catch(error => console.error('Ошибка рендеринга безопасной витрины:', error));
 }
 
 // Запускаем безопасный рендер при загрузке главной страницы
-document.addEventListener('DOMContentLoaded', renderMainPageShowcase);
+document.addEventListener('DOMContentLoaded', () => {
+    if (!window.location.href.includes('catalog.html')) {
+        renderMainPageShowcase();
+    }
+});
